@@ -1,1 +1,1 @@
-"use strict";function debounce(u,n){var o;return function(){var e=this,t=arguments;clearTimeout(o),o=setTimeout(function(){u.apply(e,t)},n)}}module.exports=debounce;
+"use strict";function test(){console.log("test")}function debounce(o,n){var u;return function(){var t=this,e=arguments;clearTimeout(u),u=setTimeout(function(){o.apply(t,e)},n)}}test(),module.exports=debounce;

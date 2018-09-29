@@ -6,6 +6,10 @@
  * @return {Function}
  */
 
+import test from './common/test'
+
+test()
+
 export default function (fn, delay) {
   let last
 

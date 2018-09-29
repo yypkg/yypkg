@@ -1,1 +1,1 @@
-"use strict";function throttle(n,r){var u,l,o,a,i=0,c=function(){i=new Date,o=null,a=n.apply(u,l)};return function(){var t=new Date,e=r-(t-i);return u=this,l=arguments,e<=0?(clearTimeout(o),o=null,i=t,a=n.apply(u,l)):o||(o=setTimeout(c,e)),a}}module.exports=throttle;
+"use strict";function test(){console.log("test")}function throttle(n,o){var l,u,r,s,i=0,a=function(){i=new Date,r=null,s=n.apply(l,u)};return function(){var t=new Date,e=o-(t-i);return l=this,u=arguments,e<=0?(clearTimeout(r),r=null,i=t,s=n.apply(l,u)):r||(r=setTimeout(a,e)),s}}test(),module.exports=throttle;
