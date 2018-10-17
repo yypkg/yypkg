@@ -3,12 +3,12 @@
 常用工具库集合，包括
 
 - [x] 基于 [axios](https://github.com/axios/axios) 的 API 管理模块（[详细](./docs/api.md)）
-- [x] 去抖 `debounce`（[详细](./core/debounce.md)）
-- [x] 节流 `throttle`（[详细](./core/throttle.md)）
-- [x] `sleep`（[详细](./core/sleep.md)）
-- [x] 获取 URL 上参数 `getUrlParam`（[详细](./core/get-url-param.md)）
-- [x] 动态加载 JS 脚本 `loadScript`（[详细](./core/load-script.md)）
-- [x] 动态加载 Style 样式 `loadStyle`（[详细](./core/load-style.md)）
+- [x] 去抖 `debounce`（[详细](./core/debounce.js)）
+- [x] 节流 `throttle`（[详细](./core/throttle.js)）
+- [x] `sleep`（[详细](./core/sleep.js)）
+- [x] 获取 URL 上参数 `getUrlParam`（[详细](./core/get-url-param.js)）
+- [x] 动态加载 JS 脚本 `loadScript`（[详细](./core/load-script.js)）
+- [x] 动态加载 Style 样式 `loadStyle`（[详细](./core/load-style.js)）
 - [x] 获取 URL 绝对路径 `getAbsoluteUrl`
 - [x] 获取 navigator appVersion `getAppVersion`
 - [x] 获取 IE 浏览器版本号 `getIEVersion`
@@ -20,7 +20,7 @@
 - [x] 判断是否黑莓设备 `isBlackberry`
 - [x] 判断是否 Chrome 浏览器 `isChrome`
 - [x] 判断是否 Edge 浏览器 `isEdge`
-- [x] 判断是否 IE 浏览器 `isIE`（[详细](./core/is-ie.md)）
+- [x] 判断是否 IE 浏览器 `isIE`（[详细](./core/is-ie.js)）
 - [x] 判断是否 iOS 设备 `isiOS`
 - [x] 判断是否 iPad `isiPad`
 - [x] 判断是否 iPhone `isiPhone`
