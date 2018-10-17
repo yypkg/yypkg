@@ -1,20 +1,12 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
 /**
  * 检测当前环境是否为 iPad
  *
  * @return {boolean} true|false
  */
-var userAgent = require('./get-userAgent');
+const userAgent = require('./get-userAgent')
 
-function isiPad() {
-  return /ipad/i.test(userAgent);
+function isiPad () {
+  return /ipad/i.test(userAgent)
 }
 
-var _default = isiPad;
-exports.default = _default;
+export default isiPad

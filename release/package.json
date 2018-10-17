@@ -1,10 +1,10 @@
 {
   "name": "yypkg",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "concurrently --kill-others \"webpack --config ./scripts/webpack.test.config.js\" \"node ./scripts/http-server.js\"",
+    "test": "concurrently --kill-others \"webpack --config ./scripts/webpack.config.js --env.test\" \"node ./scripts/http-server.js\"",
     "release": "node ./scripts/release.js"
   },
   "repository": {
@@ -30,6 +30,7 @@
     "concurrently": "^4.0.1",
     "del": "^3.0.0",
     "glob": "^7.1.3",
+    "moment": "^2.22.2",
     "shelljs": "^0.8.2",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2"

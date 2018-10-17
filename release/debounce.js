@@ -1,10 +1,3 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
 /**
  * 函数去抖
  *
@@ -12,17 +5,19 @@ exports.default = void 0;
  * @param {number} delay 等待 wait 毫秒之后才执行
  * @return {Function}
  */
-var debounce = function debounce(fn, delay) {
-  var last;
-  return function () {
-    var ctx = this;
-    var args = arguments;
-    clearTimeout(last);
-    last = setTimeout(function () {
-      fn.apply(ctx, args);
-    }, delay);
-  };
-};
+const debounce = function (fn, delay) {
+  let last
 
-var _default = debounce;
-exports.default = _default;
+  return function () {
+    const ctx = this
+    const args = arguments
+
+    clearTimeout(last)
+
+    last = setTimeout(function () {
+      fn.apply(ctx, args)
+    }, delay)
+  }
+}
+
+export default debounce

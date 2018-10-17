@@ -1,33 +1,25 @@
-"use strict";
-
-var _axios = _interopRequireDefault(require("axios"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 /**
  * JSONP for axios
  */
-var count = 0;
-var encode = window.encodeURIComponent;
-var jsonp = {
+import axios from 'axios'
+
+let count = 0
+let encode = window.encodeURIComponent
+let jsonp = {
   // 对象转URI
-  objectToURI: function objectToURI(obj) {
-    if (!obj) return '';
-    var data, key, value;
-
-    data = function () {
-      var results;
-      results = [];
-
+  objectToURI (obj) {
+    if (!obj) return ''
+    let data, key, value
+    data = (function () {
+      let results
+      results = []
       for (key in obj) {
-        value = obj[key];
-        results.push(encode(key) + '=' + encode(value));
+        value = obj[key]
+        results.push(encode(key) + '=' + encode(value))
       }
-
-      return results;
-    }();
-
-    return data.join('&');
+      return results
+    })()
+    return data.join('&')
   },
 
   /**
@@ -43,77 +35,84 @@ var jsonp = {
    * @param {Object|Function} optional options / callback
    * @param {Function} optional callback
    */
-  getRequest: function getRequest(url, opts, fn) {
+  getRequest (url, opts, fn) {
     if (typeof opts === 'function') {
-      fn = opts;
-      opts = {};
+      fn = opts
+      opts = {}
     }
+    if (!opts) opts = {}
 
-    if (!opts) opts = {};
-    var prefix = opts.prefix || 'jsonp';
-    var id = opts.name || prefix + count++;
-    var param = opts.param || 'callback';
-    var timeout = opts.timeout != null ? opts.timeout : 30000;
-    var enc = encodeURIComponent;
-    var target = document.getElementsByTagName('script')[0] || document.head;
-    var script;
-    var timer;
+    let prefix = opts.prefix || 'jsonp'
+
+    let id = opts.name || (prefix + (count++))
+
+    let param = opts.param || 'callback'
+    let timeout = opts.timeout != null ? opts.timeout : 30000
+    let enc = encodeURIComponent
+    let target = document.getElementsByTagName('script')[0] || document.head
+    let script
+    let timer
 
     if (timeout) {
       timer = setTimeout(function () {
-        cleanup();
-        if (fn) fn(new Error('请求超时'));
-      }, timeout);
+        cleanup()
+        if (fn) fn(new Error('请求超时'))
+      }, timeout)
     }
 
-    function cleanup() {
-      if (script.parentNode) script.parentNode.removeChild(script);
-      window[id] = noop;
-      if (timer) clearTimeout(timer);
+    function cleanup () {
+      if (script.parentNode) script.parentNode.removeChild(script)
+      window[id] = noop
+      if (timer) clearTimeout(timer)
     }
 
-    function cancel() {
+    function cancel () {
       if (window[id]) {
-        cleanup();
+        cleanup()
       }
     }
 
     window[id] = function (data) {
       // console.log('jsonp got', data);
-      cleanup();
-      if (fn) fn(null, data);
-    }; // add qs component
+      cleanup()
+      if (fn) fn(null, data)
+    }
 
+    // add qs component
+    url += (~url.indexOf('?') ? '&' : '?') + param + '=' + enc(id)
+    url = url.replace('?&', '?')
 
-    url += (~url.indexOf('?') ? '&' : '?') + param + '=' + enc(id);
-    url = url.replace('?&', '?'); // console.log('jsonp req "%s"', url);
+    // console.log('jsonp req "%s"', url);
+
     // create script
+    script = document.createElement('script')
+    script.src = url
+    target.parentNode.insertBefore(script, target)
 
-    script = document.createElement('script');
-    script.src = url;
-    target.parentNode.insertBefore(script, target);
-    return cancel;
+    return cancel
   },
+
   // Promise
-  init: function init(url) {
-    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-    return new Promise(function (resolve, reject) {
-      var data = jsonp.objectToURI(options.data);
-      var params = jsonp.objectToURI(options.params);
-      if (data) params += data;
-      if (params) url += '?' + params;
-      if (!options.timeout) options.timeout = 30000;
-      jsonp.getRequest(url, options, function (err, data) {
+  init (url, options = { }) {
+    return new Promise((resolve, reject) => {
+      let data = jsonp.objectToURI(options.data)
+      let params = jsonp.objectToURI(options.params)
+
+      if (data) params += data
+      if (params) url += '?' + params
+
+      if (!options.timeout) options.timeout = 30000
+      jsonp.getRequest(url, options, (err, data) => {
         if (err) {
-          reject(err);
+          reject(err)
         } else {
-          resolve(data);
+          resolve(data)
         }
-      });
-    });
+      })
+    })
   }
-};
+}
 
-function noop() {}
+function noop () {}
 
-_axios.default.jsonp = jsonp.init;
+axios.jsonp = jsonp.init
