@@ -16,8 +16,8 @@ const Sender = function (key, url, $options, $function, $history) {
 
   if (isMock && url.mock) {
     url = url.mock
-  } else if (url.real) {
-    url = url.real
+  } else if (url.url) {
+    url = url.url
   }
 
   url = !URL_REG.test(url) && baseURL ? `${baseURL}${url}` : url
