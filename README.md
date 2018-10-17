@@ -6,6 +6,34 @@
 - [x] 去抖 `debounce`
 - [x] 节流 `throttle`
 - [x] `sleep`
+- [x] 获取 URL 上参数 `getUrlParam`
+- [x] 动态加载 JS 脚本 `loadScript`
+- [x] 动态加载 Style 样式 `loadStyle`
+- [x] 获取 URL 绝对路径 `getAbsoluteUrl`
+- [x] 获取 navigator appVersion `getAppVersion`
+- [x] 获取 IE 浏览器版本号 `getIEVersion`
+- [x] 获取 navigator userAgent `getUserAgent`
+- [x] 获取 navigator vendor `getVendor`
+- [x] 判断是否安卓手机 `isAndroidPhone`
+- [x] 判断是否安卓平板 `isAndroidTablet`
+- [x] 判断是否安卓设备 `isAndroid`
+- [x] 判断是否黑莓设备 `isBlackberry`
+- [x] 判断是否 Chrome 浏览器 `isChrome`
+- [x] 判断是否 Edge 浏览器 `isEdge`
+- [x] 判断是否 IE 浏览器 `isIE`
+- [x] 判断是否 iOS 设备 `isiOS`
+- [x] 判断是否 iPad `isiPad`
+- [x] 判断是否 iPhone `isiPhone`
+- [x] 判断是否 iPod `isiPod`
+- [x] 判断是否手机设备 `isMobile`
+- [x] 判断是否平板设备 `isTablet`
+- [x] 判断是否 Safari 浏览器 `isSafari`
+- [x] 判断是否 Windows 手机 `isWindowsPhone`
+- [x] 判断是否 Windows 平板 `isWindowsTablet`
+- [x] 判断是否 Windows 设备 `isWindows`
+- [x] 判断是否微信浏览器 `isWechatBrowser`
+- [x] 判断是否 QQ 浏览器 `isQQBrowser`
+- [x] 判断是否微博浏览器 `isWeiboBrowser`
 
 ## 安装
 
@@ -31,9 +59,11 @@ import { sleep } from 'yypkg'
 import sleep from 'yypkg/sleep'
 ```
 
-通过该方式引入模块，可大大减少引用体积，但注意，需要把安装后的 node_modules/yypkg 加入 工作流 Babel 编译 include 范围内。
+通过该方式引入模块，可大大减少引用体积。
 
-若你正在使用 [LegoFlow](https://legoflow.com/) 工作流，可配置在 `webpack.include.exnext` 选项内
+但注意，需要把安装后的 `node_modules/yypkg` 包含在工作流 Babel 编译 include 范围内。
+
+若你正在使用 [LegoFlow](https://legoflow.com/) 工作流，可配置在 `webpack.include.exnext` 选项 ↓
 
 ```yml
 webpack:
