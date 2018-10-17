@@ -1,11 +1,11 @@
 /**
  * 函数去抖
  *
- * @param {Function} fn 回调函数
+ * @param {Function} func 回调函数
  * @param {number} delay 等待 wait 毫秒之后才执行
  * @return {Function}
  */
-const debounce = function (fn, delay) {
+const debounce = function (func, delay) {
   let last
 
   return function () {
@@ -15,7 +15,7 @@ const debounce = function (fn, delay) {
     clearTimeout(last)
 
     last = setTimeout(function () {
-      fn.apply(ctx, args)
+      func.apply(ctx, args)
     }, delay)
   }
 }

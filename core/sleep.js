@@ -1,7 +1,7 @@
 /**
  * 睡眠指定时间
  *
- * @return {fucntion}
+ * @return {Promise}
  */
 const sleep = delay => new Promise(resolve => setTimeout(resolve, delay))
 
