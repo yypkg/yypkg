@@ -5,12 +5,7 @@
  * @param {number} time 每隔多长时间执行一次
  * @return {Function}
  */
-
-import test from './common/test'
-
-test()
-
-export default function (fn, time) {
+const throttle = function (fn, time) {
   let context, args, timeout, result
   let previous = 0
 
@@ -39,3 +34,5 @@ export default function (fn, time) {
     return result
   }
 }
+
+export default throttle

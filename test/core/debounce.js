@@ -1,1 +1,0 @@
-"use strict";function test(){console.log("test")}function debounce(o,n){var u;return function(){var t=this,e=arguments;clearTimeout(u),u=setTimeout(function(){o.apply(t,e)},n)}}test(),module.exports=debounce;

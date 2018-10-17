@@ -1,2 +1,9 @@
-export { default as debounce } from './debounce'
-export { default as throttle } from './throttle'
+import API from './api'
+import debounce from './debounce'
+import throttle from './throttle'
+
+export default {
+  API,
+  debounce,
+  throttle
+}

@@ -1,1 +1,3 @@
-npm
+dist
+tests/yypkg.js
+release

@@ -5,12 +5,7 @@
  * @param {number} delay 等待 wait 毫秒之后才执行
  * @return {Function}
  */
-
-import test from './common/test'
-
-test()
-
-export default function (fn, delay) {
+const debounce = function (fn, delay) {
   let last
 
   return function () {
@@ -24,3 +19,5 @@ export default function (fn, delay) {
     }, delay)
   }
 }
+
+export default debounce

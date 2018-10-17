@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>test API</title>
+</head>
+<body>
+  <script src="./yypkg.js"></script>
+  <script>
+  const { API } = YYPKG
+
+  const urls = {
+    test: {
+      method: 'JSONP',
+      real: '/mock/a3e67a40-863c-11e7-9085-0ba4558c07dc',
+      mock: 'https://legox.org/mock/a3e67a40-863c-11e7-9085-0ba4558c07dc',
+    },
+    testCustomMethod: {
+      real: '/mock/a3e67a40-863c-11e7-9085-0ba4558c07dc',
+      isMock: false,
+      method: 'SDK'
+    },
+    testError: 'https://google.com/',
+  }
+
+  const options = {
+    method: 'POST',
+    isMock: true,
+    isRecordHistory: true,
+    baseURL: 'https://legox.org',
+  }
+
+  const api = new API(urls, options)
+
+  api.$method('SDK', (options) => {
+    return new Promise(resolve => {
+      setTimeout(() => resolve({code: 1}), 2000)
+    })
+  })
+
+  api.$on('interceptor:before', (options) => {
+    console.log('interceptor:before', options)
+  })
+
+  api.$on('interceptor:after', (options, response) => {
+    console.log('interceptor:after', response)
+  })
+
+  api.$on('error', (error) => {
+    console.log('error', error)
+  })
+
+  ;(async () => {
+    console.log(await api.test())
+    console.log(await api.testCustomMethod())
+    console.log(api.$history)
+    console.log(await api.testError())
+  })()
+  </script>
+</body>
+</html>
