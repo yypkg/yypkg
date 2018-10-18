@@ -6,6 +6,8 @@
 <body>
   <script src="./yypkg.js"></script>
   <script>
+  const $history = []
+
   const { API } = YYPKG
 
   const urls = {
@@ -29,7 +31,7 @@
     baseURL: 'https://legox.org',
   }
 
-  const api = new API(urls, options)
+  const api = new API(urls, options, $history)
 
   api.$method('SDK', (options) => {
     return new Promise(resolve => {
@@ -53,6 +55,7 @@
     console.log(await api.test())
     console.log(await api.testCustomMethod())
     console.log(api.$history)
+    console.log($history)
     console.log(await api.testError())
   })()
   </script>

@@ -2,6 +2,10 @@ import axios from 'axios'
 
 const URL_REG = /(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-.,@?^=%&:/~+#]*[\w\-@?^=%&/~+#])?/
 
+const ensureAbsolutePath = (baseURL, url) => {
+  return !URL_REG.test(url) && baseURL ? (baseURL[baseURL.length - 1] === '/' && url[0] === '/' ? `${baseURL.substr(0, baseURL.length - 1)}${url}` : `${baseURL}${url}`) : url
+}
+
 const Sender = function (key, url, $options, $function, $history) {
   let options = JSON.parse(JSON.stringify($options))
 
@@ -16,11 +20,12 @@ const Sender = function (key, url, $options, $function, $history) {
 
   if (isMock && url.mock) {
     url = url.mock
+    options.realURL = url.url && ensureAbsolutePath(baseURL, url.url)
   } else if (url.url) {
     url = url.url
   }
 
-  url = !URL_REG.test(url) && baseURL ? `${baseURL}${url}` : url
+  url = ensureAbsolutePath(baseURL, url)
 
   options.url = url
   options.key = key
@@ -50,7 +55,7 @@ const Sender = function (key, url, $options, $function, $history) {
           $history.unshift(recorder)
         }
 
-        errorHandler && errorHandler(error)
+        errorHandler && errorHandler(error, options)
       }
 
       const successCallback = async (response) => {

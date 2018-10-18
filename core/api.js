@@ -2,7 +2,7 @@ import './api-core/jsonp'
 import Sender from './api-core/Sender.js'
 
 class API {
-  constructor (urls, options) {
+  constructor (urls, options, $history) {
     this.$options = options
 
     !this.$options.method && (this.$options.method = 'POST')
@@ -16,7 +16,7 @@ class API {
       error: void 0
     }
 
-    this.$history = []
+    this.$history = $history || []
 
     for (let key in urls) {
       this[key] = Sender(key, urls[key], this.$options, this.$function, this.$history)

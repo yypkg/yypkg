@@ -1,8 +1,8 @@
 /*!
  * yypkg.min.js
  * 
- * Version: 0.0.2
- * Time: 2018-10-17 17:52
+ * Version: 0.0.4
+ * Time: 2018-10-18 09:29
  * Document: https://github.com/yypkg/yypkg
  * (c) 2018 YY.PKG
  * Released under the MIT License.
@@ -113,7 +113,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _iterator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/symbol/iterator */ \"./node_modules/@babel/runtime-corejs2/core-js/symbol/iterator.js\"));\n\nvar _symbol = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/symbol */ \"./node_modules/@babel/runtime-corejs2/core-js/symbol.js\"));\n\nvar _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/regenerator */ \"./node_modules/@babel/runtime-corejs2/regenerator/index.js\"));\n\nvar _promise = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/promise */ \"./node_modules/@babel/runtime-corejs2/core-js/promise.js\"));\n\nvar _assign = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/object/assign */ \"./node_modules/@babel/runtime-corejs2/core-js/object/assign.js\"));\n\nvar _stringify = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/json/stringify */ \"./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js\"));\n\nvar _axios = _interopRequireDefault(__webpack_require__(/*! axios */ \"./node_modules/axios/index.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { _promise.default.resolve(value).then(_next, _throw); } }\n\nfunction _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new _promise.default(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"next\", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"throw\", err); } _next(undefined); }); }; }\n\nfunction _typeof(obj) { if (typeof _symbol.default === \"function\" && typeof _iterator.default === \"symbol\") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof _symbol.default === \"function\" && obj.constructor === _symbol.default && obj !== _symbol.default.prototype ? \"symbol\" : typeof obj; }; } return _typeof(obj); }\n\nvar URL_REG = /(http|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-.,@?^=%&:/~+#]*[\\w\\-@?^=%&/~+#])?/;\n\nvar Sender = function Sender(key, url, $options, $function, $history) {\n  var options = JSON.parse((0, _stringify.default)($options));\n  _typeof(url) === 'object' && (options = (0, _assign.default)(options, url));\n  var _options = options,\n      method = _options.method,\n      isMock = _options.isMock,\n      isRecordHistory = _options.isRecordHistory,\n      baseURL = _options.baseURL;\n  var recorder = isRecordHistory ? {} : void 0;\n  var isCustomMethod = !_axios.default[method.toLowerCase()];\n  !isCustomMethod && (method = method.toLowerCase());\n\n  if (isMock && url.mock) {\n    url = url.mock;\n  } else if (url.url) {\n    url = url.url;\n  }\n\n  url = !URL_REG.test(url) && baseURL ? \"\".concat(baseURL).concat(url) : url;\n  options.url = url;\n  options.key = key;\n  return function (data) {\n    if (recorder) {\n      recorder.key = key;\n      recorder.url = url;\n      recorder.startTime = new Date().getTime();\n    }\n\n    var errorHandler = $function.error,\n        customMethods = $function.methods;\n    var interceptorBefore = $function['interceptor:before'];\n    var interceptorAfter = $function['interceptor:after'];\n    data && (options.data = data);\n    return new _promise.default(\n    /*#__PURE__*/\n    function () {\n      var _ref = _asyncToGenerator(\n      /*#__PURE__*/\n      _regenerator.default.mark(function _callee3(resolve, reject) {\n        var errorCallback, successCallback, response;\n        return _regenerator.default.wrap(function _callee3$(_context3) {\n          while (1) {\n            switch (_context3.prev = _context3.next) {\n              case 0:\n                _context3.t0 = interceptorBefore;\n\n                if (!_context3.t0) {\n                  _context3.next = 4;\n                  break;\n                }\n\n                _context3.next = 4;\n                return interceptorBefore(options);\n\n              case 4:\n                errorCallback = function errorCallback(error) {\n                  if (recorder) {\n                    recorder.error = JSON.parse((0, _stringify.default)(error));\n                    recorder.responseTime = new Date().getTime();\n                    recorder.responseSpendTime = recorder.responseTime - recorder.startTime;\n                    $history.unshift(recorder);\n                  }\n\n                  errorHandler && errorHandler(error);\n                };\n\n                successCallback =\n                /*#__PURE__*/\n                function () {\n                  var _ref2 = _asyncToGenerator(\n                  /*#__PURE__*/\n                  _regenerator.default.mark(function _callee(response) {\n                    return _regenerator.default.wrap(function _callee$(_context) {\n                      while (1) {\n                        switch (_context.prev = _context.next) {\n                          case 0:\n                            _context.t0 = interceptorAfter;\n\n                            if (!_context.t0) {\n                              _context.next = 4;\n                              break;\n                            }\n\n                            _context.next = 4;\n                            return interceptorAfter(options, response);\n\n                          case 4:\n                            if (recorder) {\n                              recorder.response = JSON.parse((0, _stringify.default)(response));\n                              recorder.responseTime = new Date().getTime();\n                              recorder.responseSpendTime = recorder.responseTime - recorder.startTime;\n                              $history.unshift(recorder);\n                            }\n\n                          case 5:\n                          case \"end\":\n                            return _context.stop();\n                        }\n                      }\n                    }, _callee, this);\n                  }));\n\n                  return function successCallback(_x3) {\n                    return _ref2.apply(this, arguments);\n                  };\n                }();\n\n                if (isCustomMethod) {\n                  _context3.next = 10;\n                  break;\n                }\n\n                (method !== 'jsonp' ? (0, _axios.default)(options) : _axios.default.jsonp(options.url)).then(\n                /*#__PURE__*/\n                function () {\n                  var _ref3 = _asyncToGenerator(\n                  /*#__PURE__*/\n                  _regenerator.default.mark(function _callee2(response) {\n                    return _regenerator.default.wrap(function _callee2$(_context2) {\n                      while (1) {\n                        switch (_context2.prev = _context2.next) {\n                          case 0:\n                            _context2.next = 2;\n                            return successCallback(response);\n\n                          case 2:\n                            resolve(method !== 'jsonp' ? response.data : response);\n\n                          case 3:\n                          case \"end\":\n                            return _context2.stop();\n                        }\n                      }\n                    }, _callee2, this);\n                  }));\n\n                  return function (_x4) {\n                    return _ref3.apply(this, arguments);\n                  };\n                }()).catch(function (error) {\n                  return errorCallback(error);\n                });\n                _context3.next = 26;\n                break;\n\n              case 10:\n                if (!customMethods[method]) {\n                  _context3.next = 25;\n                  break;\n                }\n\n                _context3.prev = 11;\n                _context3.next = 14;\n                return customMethods[method](options);\n\n              case 14:\n                response = _context3.sent;\n                _context3.next = 17;\n                return successCallback(response);\n\n              case 17:\n                resolve(response);\n                _context3.next = 23;\n                break;\n\n              case 20:\n                _context3.prev = 20;\n                _context3.t1 = _context3[\"catch\"](11);\n                errorCallback(_context3.t1);\n\n              case 23:\n                _context3.next = 26;\n                break;\n\n              case 25:\n                throw new Error(\"custom method [\".concat(method, \"] not found\"));\n\n              case 26:\n              case \"end\":\n                return _context3.stop();\n            }\n          }\n        }, _callee3, this, [[11, 20]]);\n      }));\n\n      return function (_x, _x2) {\n        return _ref.apply(this, arguments);\n      };\n    }());\n  };\n};\n\nvar _default = Sender;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/api-core/Sender.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _iterator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/symbol/iterator */ \"./node_modules/@babel/runtime-corejs2/core-js/symbol/iterator.js\"));\n\nvar _symbol = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/symbol */ \"./node_modules/@babel/runtime-corejs2/core-js/symbol.js\"));\n\nvar _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/regenerator */ \"./node_modules/@babel/runtime-corejs2/regenerator/index.js\"));\n\nvar _promise = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/promise */ \"./node_modules/@babel/runtime-corejs2/core-js/promise.js\"));\n\nvar _assign = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/object/assign */ \"./node_modules/@babel/runtime-corejs2/core-js/object/assign.js\"));\n\nvar _stringify = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/json/stringify */ \"./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js\"));\n\nvar _axios = _interopRequireDefault(__webpack_require__(/*! axios */ \"./node_modules/axios/index.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { _promise.default.resolve(value).then(_next, _throw); } }\n\nfunction _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new _promise.default(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"next\", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"throw\", err); } _next(undefined); }); }; }\n\nfunction _typeof(obj) { if (typeof _symbol.default === \"function\" && typeof _iterator.default === \"symbol\") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof _symbol.default === \"function\" && obj.constructor === _symbol.default && obj !== _symbol.default.prototype ? \"symbol\" : typeof obj; }; } return _typeof(obj); }\n\nvar URL_REG = /(http|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-.,@?^=%&:/~+#]*[\\w\\-@?^=%&/~+#])?/;\n\nvar ensureAbsolutePath = function ensureAbsolutePath(baseURL, url) {\n  return !URL_REG.test(url) && baseURL ? baseURL[baseURL.length - 1] === '/' && url[0] === '/' ? \"\".concat(baseURL.substr(0, baseURL.length - 1)).concat(url) : \"\".concat(baseURL).concat(url) : url;\n};\n\nvar Sender = function Sender(key, url, $options, $function, $history) {\n  var options = JSON.parse((0, _stringify.default)($options));\n  _typeof(url) === 'object' && (options = (0, _assign.default)(options, url));\n  var _options = options,\n      method = _options.method,\n      isMock = _options.isMock,\n      isRecordHistory = _options.isRecordHistory,\n      baseURL = _options.baseURL;\n  var recorder = isRecordHistory ? {} : void 0;\n  var isCustomMethod = !_axios.default[method.toLowerCase()];\n  !isCustomMethod && (method = method.toLowerCase());\n\n  if (isMock && url.mock) {\n    url = url.mock;\n    options.realURL = url.url && ensureAbsolutePath(baseURL, url.url);\n  } else if (url.url) {\n    url = url.url;\n  }\n\n  url = ensureAbsolutePath(baseURL, url);\n  options.url = url;\n  options.key = key;\n  return function (data) {\n    if (recorder) {\n      recorder.key = key;\n      recorder.url = url;\n      recorder.startTime = new Date().getTime();\n    }\n\n    var errorHandler = $function.error,\n        customMethods = $function.methods;\n    var interceptorBefore = $function['interceptor:before'];\n    var interceptorAfter = $function['interceptor:after'];\n    data && (options.data = data);\n    return new _promise.default(\n    /*#__PURE__*/\n    function () {\n      var _ref = _asyncToGenerator(\n      /*#__PURE__*/\n      _regenerator.default.mark(function _callee3(resolve, reject) {\n        var errorCallback, successCallback, response;\n        return _regenerator.default.wrap(function _callee3$(_context3) {\n          while (1) {\n            switch (_context3.prev = _context3.next) {\n              case 0:\n                _context3.t0 = interceptorBefore;\n\n                if (!_context3.t0) {\n                  _context3.next = 4;\n                  break;\n                }\n\n                _context3.next = 4;\n                return interceptorBefore(options);\n\n              case 4:\n                errorCallback = function errorCallback(error) {\n                  if (recorder) {\n                    recorder.error = JSON.parse((0, _stringify.default)(error));\n                    recorder.responseTime = new Date().getTime();\n                    recorder.responseSpendTime = recorder.responseTime - recorder.startTime;\n                    $history.unshift(recorder);\n                  }\n\n                  errorHandler && errorHandler(error, options);\n                };\n\n                successCallback =\n                /*#__PURE__*/\n                function () {\n                  var _ref2 = _asyncToGenerator(\n                  /*#__PURE__*/\n                  _regenerator.default.mark(function _callee(response) {\n                    return _regenerator.default.wrap(function _callee$(_context) {\n                      while (1) {\n                        switch (_context.prev = _context.next) {\n                          case 0:\n                            _context.t0 = interceptorAfter;\n\n                            if (!_context.t0) {\n                              _context.next = 4;\n                              break;\n                            }\n\n                            _context.next = 4;\n                            return interceptorAfter(options, response);\n\n                          case 4:\n                            if (recorder) {\n                              recorder.response = JSON.parse((0, _stringify.default)(response));\n                              recorder.responseTime = new Date().getTime();\n                              recorder.responseSpendTime = recorder.responseTime - recorder.startTime;\n                              $history.unshift(recorder);\n                            }\n\n                          case 5:\n                          case \"end\":\n                            return _context.stop();\n                        }\n                      }\n                    }, _callee, this);\n                  }));\n\n                  return function successCallback(_x3) {\n                    return _ref2.apply(this, arguments);\n                  };\n                }();\n\n                if (isCustomMethod) {\n                  _context3.next = 10;\n                  break;\n                }\n\n                (method !== 'jsonp' ? (0, _axios.default)(options) : _axios.default.jsonp(options.url)).then(\n                /*#__PURE__*/\n                function () {\n                  var _ref3 = _asyncToGenerator(\n                  /*#__PURE__*/\n                  _regenerator.default.mark(function _callee2(response) {\n                    return _regenerator.default.wrap(function _callee2$(_context2) {\n                      while (1) {\n                        switch (_context2.prev = _context2.next) {\n                          case 0:\n                            _context2.next = 2;\n                            return successCallback(response);\n\n                          case 2:\n                            resolve(method !== 'jsonp' ? response.data : response);\n\n                          case 3:\n                          case \"end\":\n                            return _context2.stop();\n                        }\n                      }\n                    }, _callee2, this);\n                  }));\n\n                  return function (_x4) {\n                    return _ref3.apply(this, arguments);\n                  };\n                }()).catch(function (error) {\n                  return errorCallback(error);\n                });\n                _context3.next = 26;\n                break;\n\n              case 10:\n                if (!customMethods[method]) {\n                  _context3.next = 25;\n                  break;\n                }\n\n                _context3.prev = 11;\n                _context3.next = 14;\n                return customMethods[method](options);\n\n              case 14:\n                response = _context3.sent;\n                _context3.next = 17;\n                return successCallback(response);\n\n              case 17:\n                resolve(response);\n                _context3.next = 23;\n                break;\n\n              case 20:\n                _context3.prev = 20;\n                _context3.t1 = _context3[\"catch\"](11);\n                errorCallback(_context3.t1);\n\n              case 23:\n                _context3.next = 26;\n                break;\n\n              case 25:\n                throw new Error(\"custom method [\".concat(method, \"] not found\"));\n\n              case 26:\n              case \"end\":\n                return _context3.stop();\n            }\n          }\n        }, _callee3, this, [[11, 20]]);\n      }));\n\n      return function (_x, _x2) {\n        return _ref.apply(this, arguments);\n      };\n    }());\n  };\n};\n\nvar _default = Sender;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/api-core/Sender.js?");
 
 /***/ }),
 
@@ -137,7 +137,7 @@ eval("\n\nvar _promise = _interopRequireDefault(__webpack_require__(/*! @babel/r
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _defineProperty = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ \"./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js\"));\n\n__webpack_require__(/*! ./api-core/jsonp */ \"./core/api-core/jsonp.js\");\n\nvar _Sender = _interopRequireDefault(__webpack_require__(/*! ./api-core/Sender.js */ \"./core/api-core/Sender.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; (0, _defineProperty.default)(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\nvar API =\n/*#__PURE__*/\nfunction () {\n  function API(urls, options) {\n    _classCallCheck(this, API);\n\n    this.$options = options;\n    !this.$options.method && (this.$options.method = 'POST');\n    !this.$options.isMock && (this.$options.isMock = false);\n    !this.$options.isRecordHistory && (this.$options.isRecordHistory = false);\n    this.$function = {\n      'interceptor:before': void 0,\n      'interceptor:after': void 0,\n      methods: {},\n      error: void 0\n    };\n    this.$history = [];\n\n    for (var key in urls) {\n      this[key] = (0, _Sender.default)(key, urls[key], this.$options, this.$function, this.$history);\n    }\n  }\n\n  _createClass(API, [{\n    key: \"$method\",\n    value: function $method(key, func) {\n      this.$function.methods[key] = func;\n    }\n  }, {\n    key: \"$on\",\n    value: function $on(key, func) {\n      this.$function[key] = func;\n    }\n  }]);\n\n  return API;\n}();\n\nvar _default = API;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/api.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _defineProperty = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ \"./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js\"));\n\n__webpack_require__(/*! ./api-core/jsonp */ \"./core/api-core/jsonp.js\");\n\nvar _Sender = _interopRequireDefault(__webpack_require__(/*! ./api-core/Sender.js */ \"./core/api-core/Sender.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; (0, _defineProperty.default)(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\nvar API =\n/*#__PURE__*/\nfunction () {\n  function API(urls, options, $history) {\n    _classCallCheck(this, API);\n\n    this.$options = options;\n    !this.$options.method && (this.$options.method = 'POST');\n    !this.$options.isMock && (this.$options.isMock = false);\n    !this.$options.isRecordHistory && (this.$options.isRecordHistory = false);\n    this.$function = {\n      'interceptor:before': void 0,\n      'interceptor:after': void 0,\n      methods: {},\n      error: void 0\n    };\n    this.$history = $history || [];\n\n    for (var key in urls) {\n      this[key] = (0, _Sender.default)(key, urls[key], this.$options, this.$function, this.$history);\n    }\n  }\n\n  _createClass(API, [{\n    key: \"$method\",\n    value: function $method(key, func) {\n      this.$function.methods[key] = func;\n    }\n  }, {\n    key: \"$on\",\n    value: function $on(key, func) {\n      this.$function[key] = func;\n    }\n  }]);\n\n  return API;\n}();\n\nvar _default = API;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/api.js?");
 
 /***/ }),
 
@@ -149,7 +149,79 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\n/**\n * 函数去抖\n *\n * @param {Function} fn 回调函数\n * @param {number} delay 等待 wait 毫秒之后才执行\n * @return {Function}\n */\nvar debounce = function debounce(fn, delay) {\n  var last;\n  return function () {\n    var ctx = this;\n    var args = arguments;\n    clearTimeout(last);\n    last = setTimeout(function () {\n      fn.apply(ctx, args);\n    }, delay);\n  };\n};\n\nvar _default = debounce;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/debounce.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\n/**\n * 函数去抖\n *\n * @param {Function} func 回调函数\n * @param {number} delay 等待 wait 毫秒之后才执行\n * @return {Function}\n */\nvar debounce = function debounce(func, delay) {\n  var last;\n  return function () {\n    var ctx = this;\n    var args = arguments;\n    clearTimeout(last);\n    last = setTimeout(function () {\n      func.apply(ctx, args);\n    }, delay);\n  };\n};\n\nvar _default = debounce;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/debounce.js?");
+
+/***/ }),
+
+/***/ "./core/get-absolute-url.js":
+/*!**********************************!*\
+  !*** ./core/get-absolute-url.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\n/**\n * 根据相对路径获取绝对路径\n *\n * @param {string} url 相对路径\n * @return {string} 绝对路径\n */\nfunction getAbsoluteUrl(url) {\n  var a = document.createElement('a');\n  a.href = url;\n  return a.href;\n}\n\nvar _default = getAbsoluteUrl;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/get-absolute-url.js?");
+
+/***/ }),
+
+/***/ "./core/get-appVersion.js":
+/*!********************************!*\
+  !*** ./core/get-appVersion.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\n/**\n * 获取 app 版本\n *\n * @return {string} app 版本号\n */\nvar APP_VERSION = window.navigator.appVersion.toLowerCase() || '';\nvar _default = APP_VERSION;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/get-appVersion.js?");
+
+/***/ }),
+
+/***/ "./core/get-ie-version.js":
+/*!********************************!*\
+  !*** ./core/get-ie-version.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _parseFloat2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/parse-float */ \"./node_modules/@babel/runtime-corejs2/core-js/parse-float.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * 获取IE版本\n *\n * @return {number} IE版本号，例如 IE6 则返回 6\n */\nfunction getIEVersion() {\n  var UA = navigator.userAgent;\n  var version = -1;\n\n  if (navigator.appName === 'Microsoft Internet Explorer' && new RegExp('MSIE ([0-9]{1,}[.0-9]{0,})').exec(UA) != null) {\n    version = (0, _parseFloat2.default)(RegExp.$1);\n  } else if (navigator.appName === 'Netscape' && new RegExp('Trident/.*rv:([0-9]{1,}[.0-9]{0,})').exec(UA) != null) {\n    // for IE 11\n    version = (0, _parseFloat2.default)(RegExp.$1);\n  }\n\n  return version;\n}\n\nvar _default = getIEVersion;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/get-ie-version.js?");
+
+/***/ }),
+
+/***/ "./core/get-url-param.js":
+/*!*******************************!*\
+  !*** ./core/get-url-param.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\n/**\n * 获取 url 中指定参数的值\n *\n * @param {string} name 需要获取的参数名\n * @param {string} url 需要被处理的 url，默认为当前 url\n * @return {string} 对应的参数值\n */\nfunction getUrlParam(name, url) {\n  var paramReg = new RegExp('[\\\\?&#]' + name + '=([^&#]+)', 'gi');\n  var paramMatch = decodeURIComponent(url || window.location.href).match(paramReg);\n\n  if (paramMatch && paramMatch.length > 0) {\n    var paramResult = paramMatch[paramMatch.length - 1].split('=');\n\n    if (paramResult && paramResult.length > 1) {\n      return paramResult[1];\n    }\n\n    return undefined;\n  }\n\n  return undefined;\n}\n\nvar _default = getUrlParam;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/get-url-param.js?");
+
+/***/ }),
+
+/***/ "./core/get-userAgent.js":
+/*!*******************************!*\
+  !*** ./core/get-userAgent.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\n/**\n * 获取 userAgent\n *\n * @return {string} userAgent\n */\nvar USER_AGENT = window.navigator.userAgent.toLowerCase() || '';\nvar _default = USER_AGENT;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/get-userAgent.js?");
+
+/***/ }),
+
+/***/ "./core/get-vendor.js":
+/*!****************************!*\
+  !*** ./core/get-vendor.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\n/**\n * 获取 vendor\n *\n * @return {string} vendor\n */\nvar vendor = window.navigator.vendor && window.navigator.vendor.toLowerCase() || '';\nvar _default = vendor;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/get-vendor.js?");
 
 /***/ }),
 
@@ -161,7 +233,283 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _api = _interopRequireDefault(__webpack_require__(/*! ./api */ \"./core/api.js\"));\n\nvar _debounce = _interopRequireDefault(__webpack_require__(/*! ./debounce */ \"./core/debounce.js\"));\n\nvar _throttle = _interopRequireDefault(__webpack_require__(/*! ./throttle */ \"./core/throttle.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar _default = {\n  API: _api.default,\n  debounce: _debounce.default,\n  throttle: _throttle.default\n};\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/index.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _api = _interopRequireDefault(__webpack_require__(/*! ./api */ \"./core/api.js\"));\n\nvar _debounce = _interopRequireDefault(__webpack_require__(/*! ./debounce */ \"./core/debounce.js\"));\n\nvar _throttle = _interopRequireDefault(__webpack_require__(/*! ./throttle */ \"./core/throttle.js\"));\n\nvar _sleep = _interopRequireDefault(__webpack_require__(/*! ./sleep */ \"./core/sleep.js\"));\n\nvar _getUrlParam = _interopRequireDefault(__webpack_require__(/*! ./get-url-param */ \"./core/get-url-param.js\"));\n\nvar _loadScript = _interopRequireDefault(__webpack_require__(/*! ./load-script */ \"./core/load-script.js\"));\n\nvar _loadStyle = _interopRequireDefault(__webpack_require__(/*! ./load-style */ \"./core/load-style.js\"));\n\nvar _getAbsoluteUrl = _interopRequireDefault(__webpack_require__(/*! ./get-absolute-url */ \"./core/get-absolute-url.js\"));\n\nvar _getAppVersion = _interopRequireDefault(__webpack_require__(/*! ./get-appVersion */ \"./core/get-appVersion.js\"));\n\nvar _getIeVersion = _interopRequireDefault(__webpack_require__(/*! ./get-ie-version */ \"./core/get-ie-version.js\"));\n\nvar _getUserAgent = _interopRequireDefault(__webpack_require__(/*! ./get-userAgent */ \"./core/get-userAgent.js\"));\n\nvar _getVendor = _interopRequireDefault(__webpack_require__(/*! ./get-vendor */ \"./core/get-vendor.js\"));\n\nvar _isAndroidPhone = _interopRequireDefault(__webpack_require__(/*! ./is-android-phone */ \"./core/is-android-phone.js\"));\n\nvar _isAndroidTablet = _interopRequireDefault(__webpack_require__(/*! ./is-android-tablet */ \"./core/is-android-tablet.js\"));\n\nvar _isAndroid = _interopRequireDefault(__webpack_require__(/*! ./is-android */ \"./core/is-android.js\"));\n\nvar _isBlackberry = _interopRequireDefault(__webpack_require__(/*! ./is-blackberry */ \"./core/is-blackberry.js\"));\n\nvar _isChrome = _interopRequireDefault(__webpack_require__(/*! ./is-chrome */ \"./core/is-chrome.js\"));\n\nvar _isEdge = _interopRequireDefault(__webpack_require__(/*! ./is-edge */ \"./core/is-edge.js\"));\n\nvar _isIe = _interopRequireDefault(__webpack_require__(/*! ./is-ie */ \"./core/is-ie.js\"));\n\nvar _isIOS = _interopRequireDefault(__webpack_require__(/*! ./is-iOS */ \"./core/is-iOS.js\"));\n\nvar _isIPad = _interopRequireDefault(__webpack_require__(/*! ./is-iPad */ \"./core/is-iPad.js\"));\n\nvar _isIPhone = _interopRequireDefault(__webpack_require__(/*! ./is-iPhone */ \"./core/is-iPhone.js\"));\n\nvar _isIPod = _interopRequireDefault(__webpack_require__(/*! ./is-iPod */ \"./core/is-iPod.js\"));\n\nvar _isMobile = _interopRequireDefault(__webpack_require__(/*! ./is-mobile */ \"./core/is-mobile.js\"));\n\nvar _isSafari = _interopRequireDefault(__webpack_require__(/*! ./is-safari */ \"./core/is-safari.js\"));\n\nvar _isTablet = _interopRequireDefault(__webpack_require__(/*! ./is-tablet */ \"./core/is-tablet.js\"));\n\nvar _isWechatBrowser = _interopRequireDefault(__webpack_require__(/*! ./is-wechat-browser */ \"./core/is-wechat-browser.js\"));\n\nvar _isWindowsPhone = _interopRequireDefault(__webpack_require__(/*! ./is-windows-phone */ \"./core/is-windows-phone.js\"));\n\nvar _isWindowsTablet = _interopRequireDefault(__webpack_require__(/*! ./is-windows-tablet */ \"./core/is-windows-tablet.js\"));\n\nvar _isWindows = _interopRequireDefault(__webpack_require__(/*! ./is-windows */ \"./core/is-windows.js\"));\n\nvar _isQqBrowser = _interopRequireDefault(__webpack_require__(/*! ./is-qq-browser */ \"./core/is-qq-browser.js\"));\n\nvar _isWeiboBrowser = _interopRequireDefault(__webpack_require__(/*! ./is-weibo-browser */ \"./core/is-weibo-browser.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar _default = {\n  API: _api.default,\n  debounce: _debounce.default,\n  throttle: _throttle.default,\n  sleep: _sleep.default,\n  getUrlParam: _getUrlParam.default,\n  loadScript: _loadScript.default,\n  loadStyle: _loadStyle.default,\n  getAbsoluteUrl: _getAbsoluteUrl.default,\n  getAppVersion: _getAppVersion.default,\n  getIEVersion: _getIeVersion.default,\n  getUserAgent: _getUserAgent.default,\n  getVendor: _getVendor.default,\n  isAndroidPhone: _isAndroidPhone.default,\n  isAndroidTablet: _isAndroidTablet.default,\n  isAndroid: _isAndroid.default,\n  isBlackberry: _isBlackberry.default,\n  isChrome: _isChrome.default,\n  isEdge: _isEdge.default,\n  isIE: _isIe.default,\n  isiOS: _isIOS.default,\n  isiPad: _isIPad.default,\n  isiPhone: _isIPhone.default,\n  isiPod: _isIPod.default,\n  isMobile: _isMobile.default,\n  isSafari: _isSafari.default,\n  isTablet: _isTablet.default,\n  isWechatBrowser: _isWechatBrowser.default,\n  isWindowsPhone: _isWindowsPhone.default,\n  isWindowsTablet: _isWindowsTablet.default,\n  isWindows: _isWindows.default,\n  isQQBrowser: _isQqBrowser.default,\n  isWeiboBrowser: _isWeiboBrowser.default\n};\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/index.js?");
+
+/***/ }),
+
+/***/ "./core/is-android-phone.js":
+/*!**********************************!*\
+  !*** ./core/is-android-phone.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _getUserAgent = _interopRequireDefault(__webpack_require__(/*! ./get-userAgent */ \"./core/get-userAgent.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * 检测当前环境是否为 Android 手机\n *\n * @return {boolean} true|false\n */\nfunction isAndroidPhone() {\n  return /android/i.test(_getUserAgent.default) && /mobile/i.test(_getUserAgent.default);\n}\n\nvar _default = isAndroidPhone;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/is-android-phone.js?");
+
+/***/ }),
+
+/***/ "./core/is-android-tablet.js":
+/*!***********************************!*\
+  !*** ./core/is-android-tablet.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _getUserAgent = _interopRequireDefault(__webpack_require__(/*! ./get-userAgent */ \"./core/get-userAgent.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * 检测当前环境是否为 Android 平板\n *\n * @return {boolean} true|false\n */\nfunction isAndroidTablet() {\n  return /android/i.test(_getUserAgent.default) && !/mobile/i.test(_getUserAgent.default);\n}\n\nvar _default = isAndroidTablet;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/is-android-tablet.js?");
+
+/***/ }),
+
+/***/ "./core/is-android.js":
+/*!****************************!*\
+  !*** ./core/is-android.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\n/**\n * 检测当前环境是否为 Android\n *\n * @return {boolean} true|false\n */\nvar userAgent = __webpack_require__(/*! ./get-userAgent */ \"./core/get-userAgent.js\");\n\nfunction isAndroid() {\n  return /android/i.test(userAgent);\n}\n\nvar _default = isAndroid;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/is-android.js?");
+
+/***/ }),
+
+/***/ "./core/is-blackberry.js":
+/*!*******************************!*\
+  !*** ./core/is-blackberry.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _getUserAgent = _interopRequireDefault(__webpack_require__(/*! ./get-userAgent */ \"./core/get-userAgent.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * 检测当前环境是否为黑莓\n *\n * @return {boolean} true|false\n */\nfunction isBlackberry() {\n  return /blackberry/i.test(_getUserAgent.default) || /BB10/i.test(_getUserAgent.default);\n}\n\nvar _default = isBlackberry;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/is-blackberry.js?");
+
+/***/ }),
+
+/***/ "./core/is-chrome.js":
+/*!***************************!*\
+  !*** ./core/is-chrome.js ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _getUserAgent = _interopRequireDefault(__webpack_require__(/*! ./get-userAgent */ \"./core/get-userAgent.js\"));\n\nvar _getVendor = _interopRequireDefault(__webpack_require__(/*! ./get-vendor */ \"./core/get-vendor.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * 检测当前浏览器是否为 Chrome\n *\n * @return {boolean} true|false\n */\nfunction isChrome() {\n  return /chrome|chromium|gecko/i.test(_getUserAgent.default) && /google inc/.test(_getVendor.default);\n}\n\nvar _default = isChrome;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/is-chrome.js?");
+
+/***/ }),
+
+/***/ "./core/is-edge.js":
+/*!*************************!*\
+  !*** ./core/is-edge.js ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _getUserAgent = _interopRequireDefault(__webpack_require__(/*! ./get-userAgent */ \"./core/get-userAgent.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * 检测当前浏览器是否为 Edge\n *\n * @return {boolean} true|false\n */\nfunction isEdge() {\n  return /edge/i.test(_getUserAgent.default);\n}\n\nvar _default = isEdge;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/is-edge.js?");
+
+/***/ }),
+
+/***/ "./core/is-iOS.js":
+/*!************************!*\
+  !*** ./core/is-iOS.js ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _isIPhone = _interopRequireDefault(__webpack_require__(/*! ./is-iPhone */ \"./core/is-iPhone.js\"));\n\nvar _isIPad = _interopRequireDefault(__webpack_require__(/*! ./is-iPad */ \"./core/is-iPad.js\"));\n\nvar _isIPod = _interopRequireDefault(__webpack_require__(/*! ./is-iPod */ \"./core/is-iPod.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * 检测当前环境是否为 iOS\n *\n * @return {boolean} true|false\n */\nfunction isiOS() {\n  return (0, _isIPhone.default)() || (0, _isIPad.default)() || (0, _isIPod.default)();\n}\n\nvar _default = isiOS;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/is-iOS.js?");
+
+/***/ }),
+
+/***/ "./core/is-iPad.js":
+/*!*************************!*\
+  !*** ./core/is-iPad.js ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\n/**\n * 检测当前环境是否为 iPad\n *\n * @return {boolean} true|false\n */\nvar userAgent = __webpack_require__(/*! ./get-userAgent */ \"./core/get-userAgent.js\");\n\nfunction isiPad() {\n  return /ipad/i.test(userAgent);\n}\n\nvar _default = isiPad;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/is-iPad.js?");
+
+/***/ }),
+
+/***/ "./core/is-iPhone.js":
+/*!***************************!*\
+  !*** ./core/is-iPhone.js ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\n/**\n * 检测当前环境是否为 iPhone\n *\n * @return {boolean} true|false\n */\nvar userAgent = __webpack_require__(/*! ./get-userAgent */ \"./core/get-userAgent.js\");\n\nfunction isiPhone() {\n  return /iphone/i.test(userAgent);\n}\n\nvar _default = isiPhone;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/is-iPhone.js?");
+
+/***/ }),
+
+/***/ "./core/is-iPod.js":
+/*!*************************!*\
+  !*** ./core/is-iPod.js ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\n/**\n * 检测当前环境是否为iPod\n *\n * @return {boolean} true|false\n */\nvar userAgent = __webpack_require__(/*! ./get-userAgent */ \"./core/get-userAgent.js\");\n\nfunction isiPod() {\n  return /ipod/i.test(userAgent);\n}\n\nvar _default = isiPod;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/is-iPod.js?");
+
+/***/ }),
+
+/***/ "./core/is-ie.js":
+/*!***********************!*\
+  !*** ./core/is-ie.js ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _getUserAgent = _interopRequireDefault(__webpack_require__(/*! ./get-userAgent */ \"./core/get-userAgent.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * 检测当前浏览器是否为IE\n * edge 也属于IE\n *\n * @param {number} version 版本号\n * @return {boolean} true|false\n */\nfunction isIE(version) {\n  if (!version) {\n    return /msie/i.test(_getUserAgent.default) || 'ActiveXObject' in window;\n  }\n\n  if (version >= 11) {\n    return 'ActiveXObject' in window;\n  }\n\n  return new RegExp('msie ' + version).test(_getUserAgent.default);\n}\n\nvar _default = isIE;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/is-ie.js?");
+
+/***/ }),
+
+/***/ "./core/is-mobile.js":
+/*!***************************!*\
+  !*** ./core/is-mobile.js ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _isIPhone = _interopRequireDefault(__webpack_require__(/*! ./is-iPhone */ \"./core/is-iPhone.js\"));\n\nvar _isIPod = _interopRequireDefault(__webpack_require__(/*! ./is-iPod */ \"./core/is-iPod.js\"));\n\nvar _isAndroidPhone = _interopRequireDefault(__webpack_require__(/*! ./is-android-phone */ \"./core/is-android-phone.js\"));\n\nvar _isBlackberry = _interopRequireDefault(__webpack_require__(/*! ./is-blackberry */ \"./core/is-blackberry.js\"));\n\nvar _isWindowsPhone = _interopRequireDefault(__webpack_require__(/*! ./is-windows-phone */ \"./core/is-windows-phone.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * 检测当前环境是否为移动手机\n *\n * @return {boolean} true|false\n */\nfunction isMobile() {\n  return (0, _isIPhone.default)() || (0, _isIPod.default)() || (0, _isAndroidPhone.default)() || (0, _isBlackberry.default)() || (0, _isWindowsPhone.default)();\n}\n\nvar _default = isMobile;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/is-mobile.js?");
+
+/***/ }),
+
+/***/ "./core/is-qq-browser.js":
+/*!*******************************!*\
+  !*** ./core/is-qq-browser.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _getUserAgent = _interopRequireDefault(__webpack_require__(/*! ./get-userAgent */ \"./core/get-userAgent.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * 检测是否在 QQ 浏览器中\n *\n * @return {boolean} true|false\n */\nfunction isQQBrowser() {\n  return /QQ/i.test(_getUserAgent.default);\n}\n\nvar _default = isQQBrowser;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/is-qq-browser.js?");
+
+/***/ }),
+
+/***/ "./core/is-safari.js":
+/*!***************************!*\
+  !*** ./core/is-safari.js ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _getUserAgent = _interopRequireDefault(__webpack_require__(/*! ./get-userAgent */ \"./core/get-userAgent.js\"));\n\nvar _getVendor = _interopRequireDefault(__webpack_require__(/*! ./get-vendor */ \"./core/get-vendor.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * 检测当前浏览器是否为safari\n *\n * @return {boolean} true|false\n */\nfunction isSafari() {\n  return /safari/i.test(_getUserAgent.default) && /apple computer/i.test(_getVendor.default);\n}\n\nvar _default = isSafari;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/is-safari.js?");
+
+/***/ }),
+
+/***/ "./core/is-tablet.js":
+/*!***************************!*\
+  !*** ./core/is-tablet.js ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _isIPad = _interopRequireDefault(__webpack_require__(/*! ./is-iPad */ \"./core/is-iPad.js\"));\n\nvar _isAndroidTablet = _interopRequireDefault(__webpack_require__(/*! ./is-android-tablet */ \"./core/is-android-tablet.js\"));\n\nvar _isWindowsTablet = _interopRequireDefault(__webpack_require__(/*! ./is-windows-tablet */ \"./core/is-windows-tablet.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * 检测当前环境是否为平板\n *\n * @return {boolean} true|false\n */\nfunction isTablet() {\n  return (0, _isIPad.default)() || (0, _isAndroidTablet.default)() || (0, _isWindowsTablet.default)();\n}\n\nvar _default = isTablet;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/is-tablet.js?");
+
+/***/ }),
+
+/***/ "./core/is-wechat-browser.js":
+/*!***********************************!*\
+  !*** ./core/is-wechat-browser.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _getUserAgent = _interopRequireDefault(__webpack_require__(/*! ./get-userAgent */ \"./core/get-userAgent.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * 检测是否在微信浏览器中\n *\n * @return {boolean} true|false\n */\nfunction isWechatBrowser() {\n  return /micromessenger/i.test(_getUserAgent.default);\n}\n\nvar _default = isWechatBrowser;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/is-wechat-browser.js?");
+
+/***/ }),
+
+/***/ "./core/is-weibo-browser.js":
+/*!**********************************!*\
+  !*** ./core/is-weibo-browser.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _getUserAgent = _interopRequireDefault(__webpack_require__(/*! ./get-userAgent */ \"./core/get-userAgent.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * 检测是否在 QQ 浏览器中\n *\n * @return {boolean} true|false\n */\nfunction isWeiboBrowser() {\n  return /WeiBo/i.test(_getUserAgent.default);\n}\n\nvar _default = isWeiboBrowser;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/is-weibo-browser.js?");
+
+/***/ }),
+
+/***/ "./core/is-windows-phone.js":
+/*!**********************************!*\
+  !*** ./core/is-windows-phone.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _getUserAgent = _interopRequireDefault(__webpack_require__(/*! ./get-userAgent */ \"./core/get-userAgent.js\"));\n\nvar _isWindows = _interopRequireDefault(__webpack_require__(/*! ./is-windows */ \"./core/is-windows.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * 检测当前环境是否为 windows 手机\n *\n * @return {boolean} true|false\n */\nfunction isWindowsPhone() {\n  return (0, _isWindows.default)() && /phone/i.test(_getUserAgent.default);\n}\n\nvar _default = isWindowsPhone;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/is-windows-phone.js?");
+
+/***/ }),
+
+/***/ "./core/is-windows-tablet.js":
+/*!***********************************!*\
+  !*** ./core/is-windows-tablet.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _getUserAgent = _interopRequireDefault(__webpack_require__(/*! ./get-userAgent */ \"./core/get-userAgent.js\"));\n\nvar _isWindows = _interopRequireDefault(__webpack_require__(/*! ./is-windows */ \"./core/is-windows.js\"));\n\nvar _isWindowsPhone = _interopRequireDefault(__webpack_require__(/*! ./is-windows-phone */ \"./core/is-windows-phone.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * 检测当前环境是否为 windows 平板\n *\n * @return {boolean} true|false\n */\nfunction isWindowsTablet() {\n  return (0, _isWindows.default)() && (0, _isWindowsPhone.default)() && /touch/i.test(_getUserAgent.default);\n}\n\nvar _default = isWindowsTablet;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/is-windows-tablet.js?");
+
+/***/ }),
+
+/***/ "./core/is-windows.js":
+/*!****************************!*\
+  !*** ./core/is-windows.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _getAppVersion = _interopRequireDefault(__webpack_require__(/*! ./get-appVersion */ \"./core/get-appVersion.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * 检测当前环境是否为 windows\n *\n * @return {boolean} true|false\n */\nfunction isWindows() {\n  return /win/i.test(_getAppVersion.default);\n}\n\nvar _default = isWindows;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/is-windows.js?");
+
+/***/ }),
+
+/***/ "./core/load-script.js":
+/*!*****************************!*\
+  !*** ./core/load-script.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _promise = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/promise */ \"./node_modules/@babel/runtime-corejs2/core-js/promise.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * 动态加载脚本\n *\n * @param {string} url\n * @return {promise}\n */\nvar loadScript = function loadScript(url) {\n  return new _promise.default(function (resolve, reject) {\n    var script = document.createElement('script');\n    script.src = url;\n    script.onload = resolve;\n    script.onerror = reject;\n    window.document.appendChild(script);\n  });\n};\n\nvar _default = loadScript;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/load-script.js?");
+
+/***/ }),
+
+/***/ "./core/load-style.js":
+/*!****************************!*\
+  !*** ./core/load-style.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _promise = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/promise */ \"./node_modules/@babel/runtime-corejs2/core-js/promise.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * 动态加载样式\n *\n * @param {string} url\n * @return {promise}\n */\nvar loadStyle = function loadStyle(url) {\n  return new _promise.default(function (resolve, reject) {\n    var link = document.createElement('link');\n    link.rel = 'stylesheet';\n    link.type = 'text/css';\n    link.href = url;\n    link.onload = resolve;\n    link.onerror = reject;\n    window.document.appendChild(link);\n  });\n};\n\nvar _default = loadStyle;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/load-style.js?");
+
+/***/ }),
+
+/***/ "./core/sleep.js":
+/*!***********************!*\
+  !*** ./core/sleep.js ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\nvar _promise = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/promise */ \"./node_modules/@babel/runtime-corejs2/core-js/promise.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * 睡眠指定时间\n *\n * @return {Promise}\n */\nvar sleep = function sleep(delay) {\n  return new _promise.default(function (resolve) {\n    return setTimeout(resolve, delay);\n  });\n};\n\nvar _default = sleep;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/sleep.js?");
 
 /***/ }),
 
@@ -173,7 +521,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\n/**\n * 函数节流\n *\n * @param {Function} fn 回调函数\n * @param {number} time 每隔多长时间执行一次\n * @return {Function}\n */\nvar throttle = function throttle(fn, time) {\n  var context, args, timeout, result;\n  var previous = 0;\n\n  var later = function later() {\n    previous = new Date();\n    timeout = null;\n    result = fn.apply(context, args);\n  };\n\n  return function () {\n    var now = new Date();\n    var remaining = time - (now - previous);\n    context = this;\n    args = arguments;\n\n    if (remaining <= 0) {\n      clearTimeout(timeout);\n      timeout = null;\n      previous = now;\n      result = fn.apply(context, args);\n    } else if (!timeout) {\n      timeout = setTimeout(later, remaining);\n    }\n\n    return result;\n  };\n};\n\nvar _default = throttle;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/throttle.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n\n/**\n * 函数节流\n *\n * @param {Function} func 回调函数\n * @param {number} time 每隔多长时间执行一次\n * @return {Function}\n */\nvar throttle = function throttle(func, time) {\n  var context, args, timeout, result;\n  var previous = 0;\n\n  var later = function later() {\n    previous = new Date();\n    timeout = null;\n    result = func.apply(context, args);\n  };\n\n  return function () {\n    var now = new Date();\n    var remaining = time - (now - previous);\n    context = this;\n    args = arguments;\n\n    if (remaining <= 0) {\n      clearTimeout(timeout);\n      timeout = null;\n      previous = now;\n      result = func.apply(context, args);\n    } else if (!timeout) {\n      timeout = setTimeout(later, remaining);\n    }\n\n    return result;\n  };\n};\n\nvar _default = throttle;\nexports.default = _default;\n\n//# sourceURL=webpack://YYPKG/./core/throttle.js?");
 
 /***/ }),
 
@@ -207,6 +555,17 @@ eval("module.exports = __webpack_require__(/*! core-js/library/fn/object/assign 
 /***/ (function(module, exports, __webpack_require__) {
 
 eval("module.exports = __webpack_require__(/*! core-js/library/fn/object/define-property */ \"./node_modules/core-js/library/fn/object/define-property.js\");\n\n//# sourceURL=webpack://YYPKG/./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js?");
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/parse-float.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/parse-float.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__(/*! core-js/library/fn/parse-float */ \"./node_modules/core-js/library/fn/parse-float.js\");\n\n//# sourceURL=webpack://YYPKG/./node_modules/@babel/runtime-corejs2/core-js/parse-float.js?");
 
 /***/ }),
 
@@ -583,6 +942,17 @@ eval("__webpack_require__(/*! ../../modules/es6.object.assign */ \"./node_module
 /***/ (function(module, exports, __webpack_require__) {
 
 eval("__webpack_require__(/*! ../../modules/es6.object.define-property */ \"./node_modules/core-js/library/modules/es6.object.define-property.js\");\n\nvar $Object = __webpack_require__(/*! ../../modules/_core */ \"./node_modules/core-js/library/modules/_core.js\").Object;\n\nmodule.exports = function defineProperty(it, key, desc) {\n  return $Object.defineProperty(it, key, desc);\n};\n\n//# sourceURL=webpack://YYPKG/./node_modules/core-js/library/fn/object/define-property.js?");
+
+/***/ }),
+
+/***/ "./node_modules/core-js/library/fn/parse-float.js":
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/library/fn/parse-float.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("__webpack_require__(/*! ../modules/es6.parse-float */ \"./node_modules/core-js/library/modules/es6.parse-float.js\");\n\nmodule.exports = __webpack_require__(/*! ../modules/_core */ \"./node_modules/core-js/library/modules/_core.js\").parseFloat;\n\n//# sourceURL=webpack://YYPKG/./node_modules/core-js/library/fn/parse-float.js?");
 
 /***/ }),
 
@@ -1162,6 +1532,17 @@ eval("exports.f = {}.propertyIsEnumerable;\n\n//# sourceURL=webpack://YYPKG/./no
 
 /***/ }),
 
+/***/ "./node_modules/core-js/library/modules/_parse-float.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/core-js/library/modules/_parse-float.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var $parseFloat = __webpack_require__(/*! ./_global */ \"./node_modules/core-js/library/modules/_global.js\").parseFloat;\n\nvar $trim = __webpack_require__(/*! ./_string-trim */ \"./node_modules/core-js/library/modules/_string-trim.js\").trim;\n\nmodule.exports = 1 / $parseFloat(__webpack_require__(/*! ./_string-ws */ \"./node_modules/core-js/library/modules/_string-ws.js\") + '-0') !== -Infinity ? function parseFloat(str) {\n  var string = $trim(String(str), 3);\n  var result = $parseFloat(string);\n  return result === 0 && string.charAt(0) == '-' ? -0 : result;\n} : $parseFloat;\n\n//# sourceURL=webpack://YYPKG/./node_modules/core-js/library/modules/_parse-float.js?");
+
+/***/ }),
+
 /***/ "./node_modules/core-js/library/modules/_perform.js":
 /*!**********************************************************!*\
   !*** ./node_modules/core-js/library/modules/_perform.js ***!
@@ -1281,6 +1662,28 @@ eval("// 7.3.20 SpeciesConstructor(O, defaultConstructor)\nvar anObject = __webp
 /***/ (function(module, exports, __webpack_require__) {
 
 eval("var toInteger = __webpack_require__(/*! ./_to-integer */ \"./node_modules/core-js/library/modules/_to-integer.js\");\n\nvar defined = __webpack_require__(/*! ./_defined */ \"./node_modules/core-js/library/modules/_defined.js\"); // true  -> String#at\n// false -> String#codePointAt\n\n\nmodule.exports = function (TO_STRING) {\n  return function (that, pos) {\n    var s = String(defined(that));\n    var i = toInteger(pos);\n    var l = s.length;\n    var a, b;\n    if (i < 0 || i >= l) return TO_STRING ? '' : undefined;\n    a = s.charCodeAt(i);\n    return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff ? TO_STRING ? s.charAt(i) : a : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;\n  };\n};\n\n//# sourceURL=webpack://YYPKG/./node_modules/core-js/library/modules/_string-at.js?");
+
+/***/ }),
+
+/***/ "./node_modules/core-js/library/modules/_string-trim.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/core-js/library/modules/_string-trim.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var $export = __webpack_require__(/*! ./_export */ \"./node_modules/core-js/library/modules/_export.js\");\n\nvar defined = __webpack_require__(/*! ./_defined */ \"./node_modules/core-js/library/modules/_defined.js\");\n\nvar fails = __webpack_require__(/*! ./_fails */ \"./node_modules/core-js/library/modules/_fails.js\");\n\nvar spaces = __webpack_require__(/*! ./_string-ws */ \"./node_modules/core-js/library/modules/_string-ws.js\");\n\nvar space = '[' + spaces + ']';\nvar non = '\\u200b\\u0085';\nvar ltrim = RegExp('^' + space + space + '*');\nvar rtrim = RegExp(space + space + '*$');\n\nvar exporter = function (KEY, exec, ALIAS) {\n  var exp = {};\n  var FORCE = fails(function () {\n    return !!spaces[KEY]() || non[KEY]() != non;\n  });\n  var fn = exp[KEY] = FORCE ? exec(trim) : spaces[KEY];\n  if (ALIAS) exp[ALIAS] = fn;\n  $export($export.P + $export.F * FORCE, 'String', exp);\n}; // 1 -> String#trimLeft\n// 2 -> String#trimRight\n// 3 -> String#trim\n\n\nvar trim = exporter.trim = function (string, TYPE) {\n  string = String(defined(string));\n  if (TYPE & 1) string = string.replace(ltrim, '');\n  if (TYPE & 2) string = string.replace(rtrim, '');\n  return string;\n};\n\nmodule.exports = exporter;\n\n//# sourceURL=webpack://YYPKG/./node_modules/core-js/library/modules/_string-trim.js?");
+
+/***/ }),
+
+/***/ "./node_modules/core-js/library/modules/_string-ws.js":
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/library/modules/_string-ws.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = '\\x09\\x0A\\x0B\\x0C\\x0D\\x20\\xA0\\u1680\\u180E\\u2000\\u2001\\u2002\\u2003' + '\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200A\\u202F\\u205F\\u3000\\u2028\\u2029\\uFEFF';\n\n//# sourceURL=webpack://YYPKG/./node_modules/core-js/library/modules/_string-ws.js?");
 
 /***/ }),
 
@@ -1469,6 +1872,17 @@ eval("var $export = __webpack_require__(/*! ./_export */ \"./node_modules/core-j
 /***/ (function(module, exports) {
 
 eval("\n\n//# sourceURL=webpack://YYPKG/./node_modules/core-js/library/modules/es6.object.to-string.js?");
+
+/***/ }),
+
+/***/ "./node_modules/core-js/library/modules/es6.parse-float.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/core-js/library/modules/es6.parse-float.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var $export = __webpack_require__(/*! ./_export */ \"./node_modules/core-js/library/modules/_export.js\");\n\nvar $parseFloat = __webpack_require__(/*! ./_parse-float */ \"./node_modules/core-js/library/modules/_parse-float.js\"); // 18.2.4 parseFloat(string)\n\n\n$export($export.G + $export.F * (parseFloat != $parseFloat), {\n  parseFloat: $parseFloat\n});\n\n//# sourceURL=webpack://YYPKG/./node_modules/core-js/library/modules/es6.parse-float.js?");
 
 /***/ }),
 
