@@ -23,10 +23,13 @@ for (let file of files) {
   fs.copyFileSync(file, distFile)
 }
 
-fs.copyFileSync(path.resolve(rootPath, 'package.json'), path.resolve(dist, 'package.json'))
+const packageJson = path.resolve(rootPath, 'package.json')
+const packageJsonData = fs.readJSONSync(packageJson)
+delete packageJsonData.private
+fs.writeFileSync(path.resolve(dist, 'package.json'), JSON.stringify(packageJsonData, null, 2), 'utf8')
 
 if (shell.exec('webpack --config ./scripts/webpack.config.js').code === 0) {
   shell.cd(dist)
 
-  shell.exec('npm publish')
+  shell.exec('npm publish').code === 0 && console.log('>>> finish <<<')
 }
