@@ -30,19 +30,20 @@ const Sender = function (key, url, $options, $function, $history) {
   options.url = url
   options.key = key
 
-  return (data) => {
-    if (recorder) {
-      recorder.key = key
-      recorder.url = url
-      recorder.startTime = (new Date()).getTime()
-    }
-
+  return (_options_) => {
     const { error: errorHandler, methods: customMethods } = $function
 
     const interceptorBefore = $function['interceptor:before']
     const interceptorAfter = $function['interceptor:after']
 
-    data && data.data ? (options = Object.assign(options, data)) : (options.data = data)
+    _options_ && (options = Object.assign(options, _options_))
+
+    if (recorder) {
+      recorder.key = key
+      recorder.url = url
+      recorder.options = JSON.parse(JSON.stringify(options))
+      recorder.startTime = (new Date()).getTime()
+    }
 
     return new Promise(async (resolve, reject) => {
       interceptorBefore && await interceptorBefore(options)

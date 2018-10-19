@@ -73,6 +73,18 @@ await api.test()
 
 如果请求接口没有配置 `mock 地址` 则请求真实地址
 
+## 设置请求时配置参数
+
+```js
+import API from 'yypkg/api'
+
+const api = new API({
+  test: 'https://legox.org/mock/a3e67a40-863c-11e7-9085-0ba4558c07dc'
+})
+
+await api.test({method: 'GET', data: {code: 1}})
+```
+
 ## 拦截器
 
 ```js
