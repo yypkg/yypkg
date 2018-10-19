@@ -42,7 +42,7 @@ const Sender = function (key, url, $options, $function, $history) {
     const interceptorBefore = $function['interceptor:before']
     const interceptorAfter = $function['interceptor:after']
 
-    data && (options.data = data)
+    data && data.data ? (options = Object.assign(options, data)) : (options.data = data)
 
     return new Promise(async (resolve, reject) => {
       interceptorBefore && await interceptorBefore(options)
