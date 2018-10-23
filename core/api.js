@@ -1,5 +1,5 @@
 import './api-core/jsonp'
-import Sender from './api-core/Sender.js'
+import Sender from './api-core/sender.js'
 
 class API {
   constructor (urls, options, $history) {
