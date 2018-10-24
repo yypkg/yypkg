@@ -3,7 +3,7 @@
  *
  * @return {boolean} true|false
  */
-const userAgent = require('./get-userAgent')
+import userAgent from './get-userAgent'
 
 function isiPhone () {
   return /iphone/i.test(userAgent)

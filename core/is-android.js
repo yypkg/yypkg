@@ -4,7 +4,7 @@
  *
  * @return {boolean} true|false
  */
-const userAgent = require('./get-userAgent')
+import userAgent from './get-userAgent'
 
 function isAndroid () {
   return /android/i.test(userAgent)
