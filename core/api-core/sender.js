@@ -6,14 +6,9 @@ const ensureAbsolutePath = (baseURL, url) => {
   return !URL_REG.test(url) && baseURL ? (baseURL[baseURL.length - 1] === '/' && url[0] === '/' ? `${baseURL.substr(0, baseURL.length - 1)}${url}` : `${baseURL}${url}`) : url
 }
 
-const Sender = function (key, url, $options, $function, $history) {
-  let options = JSON.parse(JSON.stringify($options))
+const resolveOptions = (key, url, options) => {
+  let { method, isMock, baseURL } = options
 
-  typeof url === 'object' && (options = Object.assign(options, url))
-
-  let { method, isMock, isRecordHistory, baseURL } = options
-
-  const recorder = isRecordHistory ? {} : void 0
   const isCustomMethod = !axios[method.toLowerCase()]
 
   !isCustomMethod && (method = method.toLowerCase())
@@ -29,6 +24,19 @@ const Sender = function (key, url, $options, $function, $history) {
 
   options.url = url
   options.key = key
+  options.isCustomMethod = isCustomMethod
+
+  return options
+}
+
+const Sender = function (key, url, $options, $function, $history) {
+  let options = JSON.parse(JSON.stringify($options))
+
+  typeof url === 'object' && (options = Object.assign(options, url))
+
+  let { isRecordHistory } = options
+
+  const recorder = isRecordHistory ? {} : void 0
 
   return (_options_) => {
     const { error: errorHandler, methods: customMethods } = $function
@@ -37,6 +45,10 @@ const Sender = function (key, url, $options, $function, $history) {
     const interceptorAfter = $function['interceptor:after']
 
     _options_ && (options = Object.assign(options, _options_))
+
+    options = resolveOptions(key, url, options)
+
+    const { isCustomMethod, method } = options
 
     if (recorder) {
       recorder.key = key
@@ -48,7 +60,7 @@ const Sender = function (key, url, $options, $function, $history) {
     return new Promise(async (resolve, reject) => {
       interceptorBefore && await interceptorBefore(options)
 
-      const errorCallback = (error) => {
+      const errorCallback = error => {
         if (recorder) {
           recorder.error = JSON.parse(JSON.stringify(error))
           recorder.responseTime = (new Date()).getTime()
