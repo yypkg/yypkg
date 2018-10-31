@@ -13,7 +13,7 @@ const loadScript = function (url) {
     script.onload = resolve
     script.onerror = reject
 
-    window.document.appendChild(script)
+    window.document.head.appendChild(script)
   })
 }
 

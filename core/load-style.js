@@ -15,7 +15,7 @@ const loadStyle = function (url) {
     link.onload = resolve
     link.onerror = reject
 
-    window.document.appendChild(link)
+    window.document.head.appendChild(link)
   })
 }
 
