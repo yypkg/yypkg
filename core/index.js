@@ -20,6 +20,7 @@ import isIE from './is-ie'
 import isiOS from './is-iOS'
 import isiPad from './is-iPad'
 import isiPhone from './is-iPhone'
+import isiPhoneX from './is-iPhoneX'
 import isiPod from './is-iPod'
 import isMobile from './is-mobile'
 import isSafari from './is-safari'
@@ -54,6 +55,7 @@ export default {
   isiOS,
   isiPad,
   isiPhone,
+  isiPhoneX,
   isiPod,
   isMobile,
   isSafari,
