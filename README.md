@@ -24,6 +24,7 @@
 - [x] 判断是否 iOS 设备 `isiOS`
 - [x] 判断是否 iPad `isiPad`
 - [x] 判断是否 iPhone `isiPhone`
+- [x] 判断是否 iPhoneX+ `isiPhoneX`（[详细](./core/is-iPhoneX.js)）
 - [x] 判断是否 iPod `isiPod`
 - [x] 判断是否手机设备 `isMobile`
 - [x] 判断是否平板设备 `isTablet`
