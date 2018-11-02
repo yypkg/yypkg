@@ -65,18 +65,6 @@ import sleep from 'yypkg/sleep'
 
 但注意，需要把安装后的 `node_modules/yypkg` 包含在工作流 Babel 编译 include 范围内。
 
-若你正在使用 [LegoFlow](https://legoflow.com/) 工作流，可配置在 `webpack.include.exnext` 选项 ↓
-
-**计划 lf 2.2.0 版本开始无需在额外配置，默认支持 YY.PKG**
-
-```yml
-webpack:
-  include:
-    esnext:
-      - ./node_modules/yypkg
-```
-
-
 ## 发布版本
 
 ```sh
