@@ -37,6 +37,10 @@
 - [x] 判断是否微博浏览器 `isWeiboBrowser`
 - [x] 生成唯一标识码 `uuid`
 
+## 更新日志
+
+[CHANGELOG](./CHANGELOG.md)
+
 ## 安装
 
 ```sh
