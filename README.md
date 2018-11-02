@@ -35,6 +35,7 @@
 - [x] 判断是否微信浏览器 `isWechatBrowser`
 - [x] 判断是否 QQ 浏览器 `isQQBrowser`
 - [x] 判断是否微博浏览器 `isWeiboBrowser`
+- [x] 生成唯一标识码 `uuid`
 
 ## 安装
 

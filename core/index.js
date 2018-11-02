@@ -31,6 +31,7 @@ import isWindowsTablet from './is-windows-tablet'
 import isWindows from './is-windows'
 import isQQBrowser from './is-qq-browser'
 import isWeiboBrowser from './is-weibo-browser'
+import uuid from './uuid'
 
 export default {
   API,
@@ -65,5 +66,6 @@ export default {
   isWindowsTablet,
   isWindows,
   isQQBrowser,
-  isWeiboBrowser
+  isWeiboBrowser,
+  uuid
 }
