@@ -14,6 +14,7 @@ del.sync(dist)
 
 fs.mkdirSync(dist)
 
+// copy core file
 for (let file of files) {
   const distFile = file.replace(corePath, dist)
   const distFolder = path.dirname(distFile)
@@ -23,8 +24,17 @@ for (let file of files) {
   fs.copyFileSync(file, distFile)
 }
 
+// move other file
+const movefile = ['README.md', 'CHANGELOG.md']
+
+for (let file of movefile) {
+  fs.copyFileSync(path.resolve(rootPath, file), path.resolve(dist, file))
+}
+
+// reset package.json
 const packageJson = path.resolve(rootPath, 'package.json')
 const packageJsonData = fs.readJSONSync(packageJson)
+
 delete packageJsonData.private
 fs.writeFileSync(path.resolve(dist, 'package.json'), JSON.stringify(packageJsonData, null, 2), 'utf8')
 
