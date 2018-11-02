@@ -2,7 +2,7 @@
   "name": "yypkg",
   "version": "1.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "yypkg.min.js",
   "private": true,
   "scripts": {
     "test": "concurrently --kill-others \"webpack --config ./scripts/webpack.config.js --env.test\" \"node ./scripts/http-server.js\"",
