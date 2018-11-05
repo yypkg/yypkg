@@ -36,6 +36,8 @@
 - [x] 判断是否 QQ 浏览器 `isQQBrowser`
 - [x] 判断是否微博浏览器 `isWeiboBrowser`
 - [x] 生成唯一标识码 `uuid`
+- [x] 深拷贝 `clone`（[详细](./core/clone.js)）
+- [x] 准确的类型检测 `uuid`（[详细](./core/type.js)）
 
 ## 更新日志
 
