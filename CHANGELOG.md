@@ -1,3 +1,9 @@
+# 1.4.1
+
+## 修复
+
+* `yypkg/thousandsDot` number 参数无效问题
+
 # 1.4.0
 
 ## 增加
