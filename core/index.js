@@ -35,6 +35,7 @@ import uuid from './uuid'
 import type from './type'
 import clone from './clone'
 import dateFormat from './date-format'
+import thousandsDot from './thousands-dot'
 
 export default {
   API,
@@ -73,5 +74,6 @@ export default {
   uuid,
   type,
   clone,
-  dateFormat
+  dateFormat,
+  thousandsDot
 }
