@@ -40,6 +40,13 @@
 - [x] 准确的类型检测 `type`（[详细](./core/type.js)）
 - [x] 简单格式化日期 `dateFormat`（[详细](./core/date-format.js)）
 - [x] 千分位逗号 `thousandsDot`（[详细](./core/thousands-dot.js)）
+- [ ] 字符串裁去空格
+- [ ] 判断某个 DOM 元素是否为另一元素的父元素
+- [ ] 随机颜色值
+- [ ] 简单对比版本号
+- [ ] 原生字符串转为 DOM 元素
+- [ ] 前缀补充零位
+- [ ] NodeJS 获取目录下文件夹
 
 ## 更新日志
 
