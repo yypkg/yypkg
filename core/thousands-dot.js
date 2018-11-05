@@ -6,6 +6,6 @@
  *
  * 例如转为 1,234,567,890
  */
-const thousandsDot = str => str.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+const thousandsDot = number => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
 export default thousandsDot
