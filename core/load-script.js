@@ -1,8 +1,8 @@
 /**
  * 动态加载脚本
  *
- * @param {string} url
- * @return {promise}
+ * @param {String} url
+ * @return {Promise}
  */
 const loadScript = function (url) {
   return new Promise((resolve, reject) => {

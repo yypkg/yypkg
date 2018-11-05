@@ -1,3 +1,10 @@
+# 1.4.0
+
+## 增加
+
+* `yypkg/dateFormat` 简单格式化日期
+* `yypkg/thousandsDot` 千分位逗号
+
 # 1.3.0
 
 ## 增加

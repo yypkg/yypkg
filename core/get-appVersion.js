@@ -1,7 +1,7 @@
 /**
  * 获取 app 版本
  *
- * @return {string} app 版本号
+ * @return {String} app 版本号
  */
 const APP_VERSION = window.navigator.appVersion.toLowerCase() || ''
 

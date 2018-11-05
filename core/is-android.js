@@ -2,7 +2,7 @@
 /**
  * 检测当前环境是否为 Android
  *
- * @return {boolean} true|false
+ * @return {Boolean} true|false
  */
 import userAgent from './get-userAgent'
 

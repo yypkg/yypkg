@@ -1,9 +1,9 @@
 /**
  * 获取 url 中指定参数的值
  *
- * @param {string} name 需要获取的参数名
- * @param {string} url 需要被处理的 url，默认为当前 url
- * @return {string} 对应的参数值
+ * @param {String} name 需要获取的参数名
+ * @param {String} url 需要被处理的 url，默认为当前 url
+ * @return {String} 对应的参数值
  */
 function getUrlParam (name, url) {
   const paramReg = new RegExp('[\\?&#]' + name + '=([^&#]+)', 'gi')

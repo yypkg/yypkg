@@ -2,7 +2,7 @@
  * 函数节流
  *
  * @param {Function} func 回调函数
- * @param {number} time 每隔多长时间执行一次
+ * @param {Number} time 每隔多长时间执行一次
  * @return {Function}
  */
 const throttle = function (func, time) {

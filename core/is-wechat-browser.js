@@ -1,7 +1,7 @@
 /**
  * 检测是否在微信浏览器中
  *
- * @return {boolean} true|false
+ * @return {Boolean} true|false
  */
 import userAgent from './get-userAgent'
 

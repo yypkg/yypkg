@@ -1,7 +1,7 @@
 /**
  * 检测当前环境是否为移动手机
  *
- * @return {boolean} true|false
+ * @return {Boolean} true|false
  */
 import isiPhone from './is-iPhone'
 import isiPod from './is-iPod'

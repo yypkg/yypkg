@@ -2,8 +2,8 @@
  * 检测当前浏览器是否为IE
  * edge 也属于IE
  *
- * @param {number} version 版本号
- * @return {boolean} true|false
+ * @param {Number} version 版本号
+ * @return {Boolean} true|false
  */
 import userAgent from './get-userAgent'
 

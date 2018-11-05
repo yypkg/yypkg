@@ -1,7 +1,7 @@
 /**
  * 获取 vendor
  *
- * @return {string} vendor
+ * @return {String} vendor
  */
 const vendor = (window.navigator.vendor && window.navigator.vendor.toLowerCase()) || ''
 

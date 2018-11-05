@@ -2,7 +2,7 @@
 /**
  * 检测当前环境是否为平板
  *
- * @return {boolean} true|false
+ * @return {Boolean} true|false
  */
 import isiPad from './is-iPad'
 import isAndroidTablet from './is-android-tablet'

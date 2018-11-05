@@ -1,7 +1,7 @@
 /**
  * 检测当前环境是否为 windows
  *
- * @return {boolean} true|false
+ * @return {Boolean} true|false
  */
 import appVersion from './get-appVersion'
 

@@ -1,7 +1,7 @@
 /**
  * 检测当前浏览器是否为 Chrome
  *
- * @return {boolean} true|false
+ * @return {Boolean} true|false
  */
 import userAgent from './get-userAgent'
 import vendor from './get-vendor'

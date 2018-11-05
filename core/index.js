@@ -32,6 +32,9 @@ import isWindows from './is-windows'
 import isQQBrowser from './is-qq-browser'
 import isWeiboBrowser from './is-weibo-browser'
 import uuid from './uuid'
+import type from './type'
+import clone from './clone'
+import dateFormat from './date-format'
 
 export default {
   API,
@@ -67,5 +70,8 @@ export default {
   isWindows,
   isQQBrowser,
   isWeiboBrowser,
-  uuid
+  uuid,
+  type,
+  clone,
+  dateFormat
 }

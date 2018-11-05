@@ -1,7 +1,7 @@
 /**
  * 检测当前浏览器是否为 Edge
  *
- * @return {boolean} true|false
+ * @return {Boolean} true|false
  */
 import userAgent from './get-userAgent'
 

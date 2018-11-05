@@ -1,7 +1,7 @@
 /**
  * 检测当前环境是否为 iPhoneX / iPhoneXS / iPhoneXS Max / iPhoneXR
  *
- * @return {boolean} true|false
+ * @return {Boolean} true|false
  */
 const isiPhone = require('./is-iPhone')
 

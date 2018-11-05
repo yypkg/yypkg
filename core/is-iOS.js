@@ -1,7 +1,7 @@
 /**
  * 检测当前环境是否为 iOS
  *
- * @return {boolean} true|false
+ * @return {Boolean} true|false
  */
 import isiPhone from './is-iPhone'
 import isiPad from './is-iPad'

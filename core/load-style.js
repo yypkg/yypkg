@@ -1,8 +1,8 @@
 /**
  * 动态加载样式
  *
- * @param {string} url
- * @return {promise}
+ * @param {String} url
+ * @return {Promise}
  */
 const loadStyle = function (url) {
   return new Promise((resolve, reject) => {

@@ -1,7 +1,7 @@
 /**
  * 检测当前环境是否为 Android 平板
  *
- * @return {boolean} true|false
+ * @return {Boolean} true|false
  */
 import userAgent from './get-userAgent'
 

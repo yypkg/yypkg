@@ -38,6 +38,8 @@
 - [x] 生成唯一标识码 `uuid`
 - [x] 深拷贝 `clone`（[详细](./core/clone.js)）
 - [x] 准确的类型检测 `type`（[详细](./core/type.js)）
+- [x] 简单格式化日期 `dateFormat`（[详细](./core/date-format.js)）
+- [x] 千分位逗号 `thousandsDot`（[详细](./core/thousands-dot.js)）
 
 ## 更新日志
 

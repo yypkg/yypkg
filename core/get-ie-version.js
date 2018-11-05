@@ -2,7 +2,7 @@
 /**
  * 获取IE版本
  *
- * @return {number} IE版本号，例如 IE6 则返回 6
+ * @return {Number} IE版本号，例如 IE6 则返回 6
  */
 function getIEVersion () {
   const UA = navigator.userAgent

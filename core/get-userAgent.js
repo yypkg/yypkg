@@ -1,7 +1,7 @@
 /**
  * 获取 userAgent
  *
- * @return {string} userAgent
+ * @return {String} userAgent
  */
 const USER_AGENT = window.navigator.userAgent.toLowerCase() || ''
 
