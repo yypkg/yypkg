@@ -6,6 +6,8 @@ const ensureAbsolutePath = (baseURL, url) => {
   return !URL_REG.test(url) && baseURL ? (baseURL[baseURL.length - 1] === '/' && url[0] === '/' ? `${baseURL.substr(0, baseURL.length - 1)}${url}` : `${baseURL}${url}`) : url
 }
 
+const clone = obj => JSON.parse(JSON.stringify(obj))
+
 const resolveOptions = (key, url, options) => {
   let { method, isMock, baseURL } = options
 
@@ -30,7 +32,7 @@ const resolveOptions = (key, url, options) => {
 }
 
 const Sender = function (key, url, $options, $function, $history) {
-  let options = JSON.parse(JSON.stringify($options))
+  let options = clone($options)
 
   typeof url === 'object' && (options = Object.assign(options, url))
 
@@ -53,7 +55,7 @@ const Sender = function (key, url, $options, $function, $history) {
     if (recorder) {
       recorder.key = key
       recorder.url = url
-      recorder.options = JSON.parse(JSON.stringify(options))
+      recorder.options = clone(options)
       recorder.startTime = (new Date()).getTime()
     }
 
@@ -62,7 +64,7 @@ const Sender = function (key, url, $options, $function, $history) {
 
       const errorCallback = error => {
         if (recorder) {
-          recorder.error = JSON.parse(JSON.stringify(error))
+          recorder.error = clone(error)
           recorder.responseTime = (new Date()).getTime()
           recorder.responseSpendTime = recorder.responseTime - recorder.startTime
           $history.unshift(recorder)
@@ -75,7 +77,7 @@ const Sender = function (key, url, $options, $function, $history) {
         interceptorAfter && await interceptorAfter(options, response)
 
         if (recorder) {
-          recorder.response = JSON.parse(JSON.stringify(response))
+          recorder.response = clone(response)
           recorder.responseTime = (new Date()).getTime()
           recorder.responseSpendTime = recorder.responseTime - recorder.startTime
           $history.unshift(recorder)
