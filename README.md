@@ -40,13 +40,12 @@
 - [x] 准确的类型检测 `type`（[详细](./core/type.js)）
 - [x] 简单格式化日期 `dateFormat`（[详细](./core/date-format.js)）
 - [x] 千分位逗号 `thousandsDot`（[详细](./core/thousands-dot.js)）
-- [ ] 字符串裁去空格
-- [ ] 判断某个 DOM 元素是否为另一元素的父元素
-- [ ] 随机颜色值
-- [ ] 简单对比版本号
-- [ ] 原生字符串转为 DOM 元素
-- [ ] 前缀补充零位
-- [ ] NodeJS 获取目录下文件夹
+- [x] 字符串裁去空格 `trimSpace`
+- [x] 判断某个 DOM 元素是否为另一元素的父元素 `isParentElement`（[详细](./core/is-parent-element.js)）
+- [x] 随机颜色值 `randomColor`
+- [x] 简单对比版本号 `compareVersion`（[详细](./core/compare-version.js)）
+- [x] 原生字符串转为 DOM 元素 `stringToDOMElement`（[详细](./core/string-to-domelement.js)）
+- [x] 前缀补充零位 `padZero`（[详细](./core/pad-zero.js)）
 
 ## 更新日志
 

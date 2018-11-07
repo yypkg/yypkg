@@ -36,6 +36,12 @@ import type from './type'
 import clone from './clone'
 import dateFormat from './date-format'
 import thousandsDot from './thousands-dot'
+import trimSpace from './trim-space'
+import isParentElement from './is-parent-element'
+import randomColor from './random-color'
+import compareVersion from './compare-version'
+import stringToDOMElement from './string-to-domelement'
+import padZero from './pad-zero'
 
 export default {
   API,
@@ -75,5 +81,11 @@ export default {
   type,
   clone,
   dateFormat,
-  thousandsDot
+  thousandsDot,
+  trimSpace,
+  isParentElement,
+  randomColor,
+  compareVersion,
+  stringToDOMElement,
+  padZero
 }

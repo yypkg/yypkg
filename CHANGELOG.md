@@ -1,3 +1,14 @@
+# 1.5.0
+
+## 增加
+
+* `yypkg/trimSpace` 字符串裁去空格
+* `yypkg/isParentElement` 判断某个 DOM 元素是否为另一元素的父元素
+* `yypkg/randomColor` 随机颜色值
+* `yypkg/compareVersion`简单对比版本号
+* `yypkg/stringToDOMElement` 原生字符串转为 DOM 元素
+* `yypkg/padZero` 前缀补充零位
+
 # 1.4.1
 
 ## 修复
