@@ -85,7 +85,7 @@ const Sender = function (key, url, $options, $function, $history) {
       }
 
       if (!isCustomMethod) {
-        (method !== 'jsonp' ? axios(options) : axios.jsonp(options.url)).then(async (response) => {
+        (method !== 'jsonp' ? axios(options) : axios.jsonp(options.url, options)).then(async (response) => {
           await successCallback(response)
 
           resolve(method !== 'jsonp' ? response.data : response)

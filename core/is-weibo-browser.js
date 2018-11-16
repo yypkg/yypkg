@@ -1,5 +1,5 @@
 /**
- * 检测是否在 QQ 浏览器中
+ * 检测是否在 Weibo 浏览器中
  *
  * @return {Boolean} true|false
  */

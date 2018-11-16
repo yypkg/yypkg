@@ -5,9 +5,9 @@
  * @param {String} url 需要被处理的 url，默认为当前 url
  * @return {String} 对应的参数值
  */
-function getUrlParam (name, url) {
+function getUrlParam (name, url = window.location.href) {
   const paramReg = new RegExp('[\\?&#]' + name + '=([^&#]+)', 'gi')
-  const paramMatch = decodeURIComponent(url || window.location.href).match(paramReg)
+  const paramMatch = decodeURIComponent(url).match(paramReg)
 
   if (paramMatch && paramMatch.length > 0) {
     const paramResult = (paramMatch[paramMatch.length - 1]).split('=')
