@@ -6,6 +6,8 @@ const ensureAbsolutePath = (baseURL, url) => {
   return !URL_REG.test(url) && baseURL ? (baseURL[baseURL.length - 1] === '/' && url[0] === '/' ? `${baseURL.substr(0, baseURL.length - 1)}${url}` : `${baseURL}${url}`) : url
 }
 
+const getEngineMethod = (engine, method) => (engine[method] || engine[method.toUpperCase()])
+
 const clone = obj => JSON.parse(JSON.stringify(obj))
 
 const resolveOptions = (key, url, options) => {
@@ -29,6 +31,7 @@ const resolveOptions = (key, url, options) => {
   return options
 }
 
+// TODO: 解耦 请求体内函数
 const Sender = function (key, url, $globalOptions, $function, $history) {
   let globalOptions = clone($globalOptions)
 
@@ -47,7 +50,7 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
     const afterCallbackResponse = $function['interceptor:afterCallbackResponse']
 
     if (beforeResolveOptions) {
-      const callbackResult = beforeResolveOptions(key, url, data, options, globalOptions)
+      const callbackResult = beforeResolveOptions({ key, url, data, options, globalOptions })
 
       callbackResult.options && (options = callbackResult.options)
       callbackResult.data && (data = callbackResult.data)
@@ -98,7 +101,7 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
 
       requestDiffEngines.default = async () => {
         try {
-          const response = await engine(options)
+          const response = await (getEngineMethod(engine, method) || engine)(options)
 
           await successCallback(response)
 
@@ -111,7 +114,7 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
       }
 
       requestDiffEngines.axios = () => {
-        (engine[method] || engine[method.toUpperCase()])(options.url, options).then(async (response) => {
+        getEngineMethod(engine, method)(options.url, options).then(async response => {
           await successCallback(response)
 
           resolve(response.status && response.statusText && response.headers ? response.data : response)
@@ -122,7 +125,7 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
 
       requestDiffEngines.fetch = async () => {
         try {
-          const response = await engine(options.url, options)
+          const response = await (getEngineMethod(engine, method) || engine)(options.url, options)
 
           await successCallback(response)
 

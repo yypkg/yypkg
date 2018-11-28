@@ -1,6 +1,12 @@
+# 1.6.1
+
+## 更新
+
+* `yypkg/api` 拦截器 `beforeResolveOptions` 参数优化
+
 # 1.6.0
 
-## 增加
+## 更新
 
 * `yypkg/api` [使用方法](./docs/api.md)
 

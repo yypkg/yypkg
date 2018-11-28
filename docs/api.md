@@ -22,7 +22,7 @@ await api.test()
 
 | 参数名 | 描述 | 类型 | 默认值 |
 |-|-|-|-|
-| engine | 请求核心对象 | String | `'axios'` 可选值 `'fetch'` 或者 自定义 `'$engine'`
+| engine | 请求核心对象 | String | `'axios'`
 | method | 请求方式 | String | `'POST'` |
 | isMock | 是否调用模拟接口 | Boolean | `false` |
 | isRecordHistory | 是否记录请求历史 | Boolean | `false` |
@@ -109,7 +109,7 @@ const api = new API({
 
 // 生命周期 beforeResolveOptions，处于实例调用入口最前面，在合并 options 之前调用
 // 返回 data、options 可改变调用实例时原有传入变量
-api.$on('interceptor:beforeResolveOptions', (key, url, data, options, globalOptions) => {
+api.$on('interceptor:beforeResolveOptions', ({ key, url, data, options, globalOptions }) => {
   console.log('interceptor:beforeResolveOptions')
 
   return { data, options }
@@ -151,7 +151,7 @@ await api.test()
 
 ## 自定义 Engine
 
-用于自定义请求核心对象，默认为 `axios`，还默认包括 `fetch`
+用于自定义请求核心对象，默认为 `axios`，包含 `fetch`
 
 ```js
 import API from 'yypkg/api'
