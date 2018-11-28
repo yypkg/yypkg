@@ -41,8 +41,17 @@ const Sender = function (key, url, $options, $function, $history) {
   return (data, _options_) => {
     const { error: errorHandler, engine: engines } = $function
 
-    const interceptorBefore = $function['interceptor:before']
-    const interceptorAfter = $function['interceptor:after']
+    const beforeResolveOptions = $function['interceptor:beforeResolveOptions']
+    const beforeRequest = $function['interceptor:beforeRequest']
+    const beforeCallbackResponse = $function['interceptor:beforeCallbackResponse']
+    const afterCallbackResponse = $function['interceptor:afterCallbackResponse']
+
+    if (beforeResolveOptions) {
+      const callbackResult = beforeResolveOptions(key, url, data, _options_, options)
+
+      callbackResult.options && (_options_ = callbackResult.options)
+      callbackResult.data && (data = callbackResult.data)
+    }
 
     _options_ = _options_ || {}
     _options_.data = data || {}
@@ -63,7 +72,7 @@ const Sender = function (key, url, $options, $function, $history) {
     }
 
     return new Promise(async (resolve, reject) => {
-      interceptorBefore && await interceptorBefore(options)
+      beforeRequest && await beforeRequest(options)
 
       const errorCallback = error => {
         if (recorder) {
@@ -77,7 +86,7 @@ const Sender = function (key, url, $options, $function, $history) {
       }
 
       const successCallback = async (response) => {
-        interceptorAfter && await interceptorAfter(options, response)
+        beforeCallbackResponse && await beforeCallbackResponse(options, response)
 
         if (recorder) {
           recorder.response = clone(response)
@@ -96,6 +105,8 @@ const Sender = function (key, url, $options, $function, $history) {
           await successCallback(response)
 
           resolve(response)
+
+          afterCallbackResponse && afterCallbackResponse(response)
         } catch (error) {
           errorCallback(error)
         }
@@ -106,6 +117,8 @@ const Sender = function (key, url, $options, $function, $history) {
           await successCallback(response)
 
           resolve(response.status && response.statusText && response.headers ? response.data : response)
+
+          afterCallbackResponse && afterCallbackResponse(response)
         }).catch(error => errorCallback(error))
       }
 
@@ -116,6 +129,8 @@ const Sender = function (key, url, $options, $function, $history) {
           await successCallback(response)
 
           resolve(response)
+
+          afterCallbackResponse && afterCallbackResponse(response)
         } catch (error) {
           errorCallback(error)
         }

@@ -6,7 +6,7 @@ class API {
   constructor (urls, options, $history) {
     this.$options = options
 
-    !this.$options.engine && (this.$options.engine = 'fetch')
+    !this.$options.engine && (this.$options.engine = 'axios')
     !this.$options.method && (this.$options.method = 'POST')
     !this.$options.isMock && (this.$options.isMock = false)
     !this.$options.isRecordHistory && (this.$options.isRecordHistory = false)
@@ -14,10 +14,9 @@ class API {
     this.$function = {
       'interceptor:before': void 0,
       'interceptor:after': void 0,
-      methods: {},
       engine: {
-        'fetch': window.fetch,
-        'axios': axios
+        'axios': axios,
+        'fetch': window.fetch
       },
       error: void 0
     }
@@ -30,7 +29,7 @@ class API {
   }
 
   $method (key, func) {
-    this.$function.methods[key] = func(this.$function.engine)
+    func(this.$function.engine[key])
   }
 
   $engine (key, func) {

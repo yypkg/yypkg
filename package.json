@@ -1,6 +1,6 @@
 {
   "name": "yypkg",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "",
   "main": "yypkg.min.js",
   "private": true,
@@ -36,7 +36,7 @@
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
-    "axios": "^0.18.0",
-    "path-to-regexp": "^2.4.0"
+    "axios": "0.18.0",
+    "path-to-regexp": "2.4.0"
   }
 }

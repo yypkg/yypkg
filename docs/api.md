@@ -22,6 +22,7 @@ await api.test()
 
 | 参数名 | 描述 | 类型 | 默认值 |
 |-|-|-|-|
+| Engine | 请求核心方法 | String | `'axios'` 可选值 `'fetch' 或者 自定义 '$engine'`
 | method | 请求方式 | String | `'POST'` |
 | isMock | 是否调用模拟接口 | Boolean | `false` |
 | isRecordHistory | 是否记录请求历史 | Boolean | `false` |
@@ -82,7 +83,19 @@ const api = new API({
   test: 'https://legox.org/mock/a3e67a40-863c-11e7-9085-0ba4558c07dc'
 })
 
-await api.test({method: 'GET', data: {code: 1}})
+await api.test({ code: 1 }, { method: 'GET' })
+```
+
+## URL 参数
+
+```js
+import API from 'yypkg/api'
+
+const api = new API({
+  test: 'https://legox.org/mock/:id'
+})
+
+await api.test({ code: 1 }, { keys: 'a3e67a40-863c-11e7-9085-0ba4558c07dc' })
 ```
 
 ## 拦截器
@@ -94,12 +107,27 @@ const api = new API({
   test: 'https://legox.org/mock/a3e67a40-863c-11e7-9085-0ba4558c07dc'
 })
 
-api.$on('interceptor:before', (options) => {
-  console.log('interceptor:before', options)
+// 生命周期 beforeResolveOptions，处于实例调用入口最前面，在合并 options 之前调用
+// 返回 data、options 可改变调用实例时原有传入变量
+api.$on('interceptor:beforeResolveOptions', (key, url, data, options, globalOptions) => {
+  console.log('interceptor:beforeResolveOptions')
+
+  return { data, options }
 })
 
-api.$on('interceptor:after', (options, response) => {
-  console.log('interceptor:after', response)
+// 生命周期 beforeRequest，开始请求 engine 之前调用，返回 Promise 可阻塞进程
+api.$on('interceptor:beforeRequest', (options) => {
+  console.log('interceptor:beforeRequest')
+})
+
+// 生命周期 beforeCallbackResponse，回调 response 之前调用，返回 Promise 可阻塞进程
+api.$on('interceptor:beforeCallbackResponse', (options, response) => {
+  console.log('interceptor:beforeCallbackResponse', response)
+})
+
+// 生命周期 afterCallbackResponse，回调 response 之后调用
+api.$on('interceptor:afterCallbackResponse', (options, response) => {
+  console.log('interceptor:afterCallbackResponse', response)
 })
 
 await api.test()
@@ -121,19 +149,49 @@ api.$on('error', (error) => {
 await api.test()
 ```
 
-## 自定义请求方式
+## 自定义 Engine
+
+用于自定义请求核心对象，默认为 `fetch`，内置 `axios`
 
 ```js
 import API from 'yypkg/api'
 
 const api = new API({
   test: 'https://google.com',
+  engine: 'SDK'
+})
+
+api.$engine('SDK', (options) => {
+  return new Promise(resolve => {
+    setTimeout(() => resolve({ code: 1 }), 2000)
+  })
+})
+
+await api.test()
+```
+
+## 自定义请求方式
+
+用于丰富扩展指定 Engine 的 method
+
+```js
+import API from 'yypkg/api'
+
+const api = new API({
+  test: 'https://google.com',
+  engine: 'axios',
   method: 'SDK'
 })
 
-api.$method('SDK', (options) => {
+api.$engine('SDK', (options) => {
   return new Promise(resolve => {
-    setTimeout(() => resolve({code: 1}), 2000)
+    setTimeout(() => resolve({ code: 1 }), 2000)
+  })
+})
+
+api.$method('axios', (originalEngine) => {
+  axios.SDK = () => new Promise(resolve => {
+    setTimeout(() => resolve({ code: 1 }), 2000)
   })
 })
 

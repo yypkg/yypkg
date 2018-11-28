@@ -24,10 +24,7 @@
     },
     test4: {
       url: '/mock/:id',
-      engine: 'fetch',
-      keys: {
-        id: 'a3e67a40-863c-11e7-9085-0ba4558c07dc'
-      }
+      engine: 'fetch'
     },
     testError: 'https://google.com/',
   }
@@ -42,16 +39,29 @@
 
   const api = new API(urls, options, $history)
 
-  api.$method('SDK', (engine) => engine['axios'].SDK = () => new Promise(resolve => {
+  api.$method('axios', engine => engine.SDK = () => new Promise(resolve => {
       setTimeout(() => resolve({code: 1}), 2000)
   }))
 
-  api.$on('interceptor:before', (options) => {
-    console.log('interceptor:before', options)
-  })
+  // api.$on('interceptor:beforeResolveOptions', (key, url, data, options, globalOptions) => {
+  //   options = data
+  //   data = options.data
 
-  // api.$on('interceptor:after', (options, response) => {
-  //   console.log('interceptor:after', response)
+  //   console.log('interceptor:beforeResolveOptions', options)
+
+  //   return { options, data }
+  // })
+
+  // api.$on('interceptor:beforeRequest', (options) => {
+  //   console.log('interceptor:beforeRequest', options)
+  // })
+
+  // api.$on('interceptor:beforeCallbackResponse', (options, response) => {
+  //   console.log('interceptor:beforeCallbackResponse', response)
+  // })
+
+  // api.$on('interceptor:afterCallbackResponse', (options, response) => {
+  //   console.log('interceptor:afterCallbackResponse', response)
   // })
 
   // api.$on('error', (error) => {
@@ -59,10 +69,11 @@
   // })
 
   ;(async () => {
-    console.log(await api.test1({ test: 1 }, { method: 'GET' }))
-    console.log(await api.test2())
-    console.log(await api.test3())
-    console.log(await (await api.test4()).json())
+    console.log(await api.test1({ method: 'GET', data: { test: 1 } }))
+    // console.log(await api.test1({ test: 1 }, { method: 'GET' }))
+    // console.log(await api.test2())
+    // console.log(await api.test3())
+    console.log(await (await api.test4({}, { keys: { id: 'a3e67a40-863c-11e7-9085-0ba4558c07dc' } })).json())
     // console.log(api.$history)
     // console.log($history)
     // console.log(await api.testError())
