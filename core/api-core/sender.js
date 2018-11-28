@@ -33,11 +33,11 @@ const resolveOptions = (key, url, options) => {
 
 // TODO: 解耦 请求体内函数
 const Sender = function (key, url, $globalOptions, $function, $history) {
-  let globalOptions = clone($globalOptions)
+  let namedOptions = clone($globalOptions)
 
-  typeof url === 'object' && (globalOptions = Object.assign(globalOptions, url))
+  typeof url === 'object' && (namedOptions = Object.assign(namedOptions, url))
 
-  let { isRecordHistory } = globalOptions
+  let { isRecordHistory } = namedOptions
 
   const recorder = isRecordHistory ? {} : void 0
 
@@ -50,7 +50,7 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
     const afterCallbackResponse = $function['interceptor:afterCallbackResponse']
 
     if (beforeResolveOptions) {
-      const callbackResult = beforeResolveOptions({ key, url, data, options, globalOptions })
+      const callbackResult = beforeResolveOptions({ key, url, data, options, namedOptions })
 
       callbackResult.options && (options = callbackResult.options)
       callbackResult.data && (data = callbackResult.data)
@@ -59,7 +59,7 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
     options = options || {}
     options.data = data || {}
 
-    options = resolveOptions(key, url, Object.assign(globalOptions, options))
+    options = resolveOptions(key, url, Object.assign(namedOptions, options))
 
     const { engine: engineKey, method } = options
 

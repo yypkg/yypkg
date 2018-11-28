@@ -1,8 +1,8 @@
-# 1.6.1
+# 1.6.2
 
 ## 更新
 
-* `yypkg/api` 拦截器 `beforeResolveOptions` 参数优化
+* `yypkg/api` 拦截器 `beforeResolveOptions` 参数优化 `namedOptions`
 
 # 1.6.0
 

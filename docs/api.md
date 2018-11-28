@@ -109,7 +109,7 @@ const api = new API({
 
 // 生命周期 beforeResolveOptions，处于实例调用入口最前面，在合并 options 之前调用
 // 返回 data、options 可改变调用实例时原有传入变量
-api.$on('interceptor:beforeResolveOptions', ({ key, url, data, options, globalOptions }) => {
+api.$on('interceptor:beforeResolveOptions', ({ key, url, data, options, namedOptions }) => {
   console.log('interceptor:beforeResolveOptions')
 
   return { data, options }
