@@ -29,16 +29,16 @@ const resolveOptions = (key, url, options) => {
   return options
 }
 
-const Sender = function (key, url, $options, $function, $history) {
-  let options = clone($options)
+const Sender = function (key, url, $globalOptions, $function, $history) {
+  let globalOptions = clone($globalOptions)
 
-  typeof url === 'object' && (options = Object.assign(options, url))
+  typeof url === 'object' && (globalOptions = Object.assign(globalOptions, url))
 
-  let { isRecordHistory } = options
+  let { isRecordHistory } = globalOptions
 
   const recorder = isRecordHistory ? {} : void 0
 
-  return (data, _options_) => {
+  return (data, options) => {
     const { error: errorHandler, engine: engines } = $function
 
     const beforeResolveOptions = $function['interceptor:beforeResolveOptions']
@@ -47,18 +47,16 @@ const Sender = function (key, url, $options, $function, $history) {
     const afterCallbackResponse = $function['interceptor:afterCallbackResponse']
 
     if (beforeResolveOptions) {
-      const callbackResult = beforeResolveOptions(key, url, data, _options_, options)
+      const callbackResult = beforeResolveOptions(key, url, data, options, globalOptions)
 
-      callbackResult.options && (_options_ = callbackResult.options)
+      callbackResult.options && (options = callbackResult.options)
       callbackResult.data && (data = callbackResult.data)
     }
 
-    _options_ = _options_ || {}
-    _options_.data = data || {}
+    options = options || {}
+    options.data = data || {}
 
-    _options_ && (options = Object.assign(options, _options_))
-
-    options = resolveOptions(key, url, options)
+    options = resolveOptions(key, url, Object.assign(globalOptions, options))
 
     const { engine: engineKey, method } = options
 
