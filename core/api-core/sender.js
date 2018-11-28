@@ -1,4 +1,4 @@
-import axios from 'axios'
+import pathToRegexp from 'path-to-regexp'
 
 const URL_REG = /(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-.,@?^=%&:/~+#]*[\w\-@?^=%&/~+#])?/
 
@@ -9,11 +9,7 @@ const ensureAbsolutePath = (baseURL, url) => {
 const clone = obj => JSON.parse(JSON.stringify(obj))
 
 const resolveOptions = (key, url, options) => {
-  let { method, isMock, baseURL } = options
-
-  const isCustomMethod = !axios[method.toLowerCase()]
-
-  !isCustomMethod && (method = method.toLowerCase())
+  let { isMock, baseURL, method } = options
 
   if (isMock && url.mock) {
     url = url.mock
@@ -22,11 +18,13 @@ const resolveOptions = (key, url, options) => {
     url = url.url
   }
 
+  options.keys && (url = pathToRegexp.compile(url)(options.keys))
+
   url = ensureAbsolutePath(baseURL, url)
 
   options.url = url
   options.key = key
-  options.isCustomMethod = isCustomMethod
+  options.method = method.toLowerCase()
 
   return options
 }
@@ -40,17 +38,22 @@ const Sender = function (key, url, $options, $function, $history) {
 
   const recorder = isRecordHistory ? {} : void 0
 
-  return (_options_) => {
-    const { error: errorHandler, methods: customMethods } = $function
+  return (data, _options_) => {
+    const { error: errorHandler, engine: engines } = $function
 
     const interceptorBefore = $function['interceptor:before']
     const interceptorAfter = $function['interceptor:after']
+
+    _options_ = _options_ || {}
+    _options_.data = data || {}
 
     _options_ && (options = Object.assign(options, _options_))
 
     options = resolveOptions(key, url, options)
 
-    const { isCustomMethod, method } = options
+    const { engine: engineKey, method } = options
+
+    const engine = engines[engineKey]
 
     if (recorder) {
       recorder.key = key
@@ -84,27 +87,45 @@ const Sender = function (key, url, $options, $function, $history) {
         }
       }
 
-      if (!isCustomMethod) {
-        (method !== 'jsonp' ? axios(options) : axios.jsonp(options.url, options)).then(async (response) => {
+      const requestDiffEngines = {}
+
+      requestDiffEngines.default = async () => {
+        try {
+          const response = await engine(options)
+
           await successCallback(response)
 
-          resolve(method !== 'jsonp' ? response.data : response)
-        }).catch(error => errorCallback(error))
-      } else {
-        if (customMethods[method]) {
-          try {
-            const response = await customMethods[method](options)
-
-            await successCallback(response)
-
-            resolve(response)
-          } catch (error) {
-            errorCallback(error)
-          }
-        } else {
-          throw new Error(`custom method [${method}] not found`)
+          resolve(response)
+        } catch (error) {
+          errorCallback(error)
         }
       }
+
+      requestDiffEngines.axios = () => {
+        (engine[method] || engine[method.toUpperCase()])(options.url, options).then(async (response) => {
+          await successCallback(response)
+
+          resolve(response.status && response.statusText && response.headers ? response.data : response)
+        }).catch(error => errorCallback(error))
+      }
+
+      requestDiffEngines.fetch = async () => {
+        try {
+          const response = await engine(options.url, options)
+
+          await successCallback(response)
+
+          resolve(response)
+        } catch (error) {
+          errorCallback(error)
+        }
+      }
+
+      if (!engineKey) {
+        throw new Error(`custom engine [${engineKey}] not found`)
+      }
+
+      await (requestDiffEngines[engineKey] ? requestDiffEngines[engineKey]() : requestDiffEngines['default']())
     })
   }
 }

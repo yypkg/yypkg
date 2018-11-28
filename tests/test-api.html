@@ -11,20 +11,29 @@
   const { API } = YYPKG
 
   const urls = {
-    test: {
+    test1: '/mock/a3e67a40-863c-11e7-9085-0ba4558c07dc',
+    test2: {
       method: 'JSONP',
       url: '/mock/a3e67a40-863c-11e7-9085-0ba4558c07dc',
       mock: 'https://legox.org/mock/a3e67a40-863c-11e7-9085-0ba4558c07dc',
     },
-    testCustomMethod: {
+    test3: {
       url: '/mock/a3e67a40-863c-11e7-9085-0ba4558c07dc',
       isMock: false,
       method: 'SDK'
+    },
+    test4: {
+      url: '/mock/:id',
+      engine: 'fetch',
+      keys: {
+        id: 'a3e67a40-863c-11e7-9085-0ba4558c07dc'
+      }
     },
     testError: 'https://google.com/',
   }
 
   const options = {
+    engine: 'axios',
     method: 'POST',
     isMock: true,
     isRecordHistory: true,
@@ -33,30 +42,30 @@
 
   const api = new API(urls, options, $history)
 
-  api.$method('SDK', (options) => {
-    return new Promise(resolve => {
+  api.$method('SDK', (engine) => engine['axios'].SDK = () => new Promise(resolve => {
       setTimeout(() => resolve({code: 1}), 2000)
-    })
-  })
+  }))
 
   api.$on('interceptor:before', (options) => {
     console.log('interceptor:before', options)
   })
 
-  api.$on('interceptor:after', (options, response) => {
-    console.log('interceptor:after', response)
-  })
+  // api.$on('interceptor:after', (options, response) => {
+  //   console.log('interceptor:after', response)
+  // })
 
-  api.$on('error', (error) => {
-    console.log('error', error)
-  })
+  // api.$on('error', (error) => {
+  //   console.log('error', error)
+  // })
 
   ;(async () => {
-    console.log(await api.test())
-    console.log(await api.testCustomMethod())
-    console.log(api.$history)
-    console.log($history)
-    console.log(await api.testError())
+    console.log(await api.test1({ test: 1 }, { method: 'GET' }))
+    console.log(await api.test2())
+    console.log(await api.test3())
+    console.log(await (await api.test4()).json())
+    // console.log(api.$history)
+    // console.log($history)
+    // console.log(await api.testError())
   })()
   </script>
 </body>

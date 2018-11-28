@@ -5,9 +5,9 @@
  */
 const isiPhone = require('./is-iPhone')
 
-const { width, height } = window.scrren
-
 function isiPhoneX () {
+  const { width, height } = window.screen
+
   return isiPhone() && ((width === 375 && height === 812) || (width === 414 && height === 896))
 }
 
