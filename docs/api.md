@@ -22,7 +22,7 @@ await api.test()
 
 | 参数名 | 描述 | 类型 | 默认值 |
 |-|-|-|-|
-| engine | 请求核心方法 | String | `'axios'` 可选值 `'fetch' 或者 自定义 '$engine'`
+| engine | 请求核心对象 | String | `'axios'` 可选值 `'fetch'` 或者 自定义 `'$engine'`
 | method | 请求方式 | String | `'POST'` |
 | isMock | 是否调用模拟接口 | Boolean | `false` |
 | isRecordHistory | 是否记录请求历史 | Boolean | `false` |
@@ -156,10 +156,7 @@ await api.test()
 ```js
 import API from 'yypkg/api'
 
-const api = new API({
-  test: 'https://google.com',
-  engine: 'SDK'
-})
+const api = new API({ test: 'https://google.com' }, { engine: 'SDK' })
 
 api.$engine('SDK', (options) => {
   return new Promise(resolve => {
@@ -177,19 +174,12 @@ await api.test()
 ```js
 import API from 'yypkg/api'
 
-const api = new API({
-  test: 'https://google.com',
+const api = new API({ test: 'https://google.com' }, {
   engine: 'axios',
   method: 'SDK'
 })
 
-api.$engine('SDK', (options) => {
-  return new Promise(resolve => {
-    setTimeout(() => resolve({ code: 1 }), 2000)
-  })
-})
-
-api.$method('axios', (originalEngine) => {
+api.$method('axios', (axios) => {
   axios.SDK = () => new Promise(resolve => {
     setTimeout(() => resolve({ code: 1 }), 2000)
   })
