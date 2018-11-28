@@ -11,6 +11,8 @@ class API {
     !this.$options.isMock && (this.$options.isMock = false)
     !this.$options.isRecordHistory && (this.$options.isRecordHistory = false)
 
+    this.$axios = axios
+
     this.$function = {
       'interceptor:before': void 0,
       'interceptor:after': void 0,
