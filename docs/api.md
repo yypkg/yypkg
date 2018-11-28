@@ -22,7 +22,7 @@ await api.test()
 
 | 参数名 | 描述 | 类型 | 默认值 |
 |-|-|-|-|
-| Engine | 请求核心方法 | String | `'axios'` 可选值 `'fetch' 或者 自定义 '$engine'`
+| engine | 请求核心方法 | String | `'axios'` 可选值 `'fetch' 或者 自定义 '$engine'`
 | method | 请求方式 | String | `'POST'` |
 | isMock | 是否调用模拟接口 | Boolean | `false` |
 | isRecordHistory | 是否记录请求历史 | Boolean | `false` |
@@ -151,7 +151,7 @@ await api.test()
 
 ## 自定义 Engine
 
-用于自定义请求核心对象，默认为 `fetch`，内置 `axios`
+用于自定义请求核心对象，默认为 `axios`，还默认包括 `fetch`
 
 ```js
 import API from 'yypkg/api'
@@ -172,7 +172,7 @@ await api.test()
 
 ## 自定义请求方式
 
-用于丰富扩展指定 Engine 的 method
+用于丰富扩展指定 engine 的 `method`
 
 ```js
 import API from 'yypkg/api'
