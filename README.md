@@ -46,6 +46,8 @@
 - [x] 简单对比版本号 `compareVersion`（[详细](./core/compare-version.js)）
 - [x] 原生字符串转为 DOM 元素 `stringToDOMElement`（[详细](./core/string-to-domelement.js)）
 - [x] 前缀补充零位 `padZero`（[详细](./core/pad-zero.js)）
+- [x] CSS 文本插入文档 Style 元素 `loadStyleText`
+- [x] Mocha 测试 `mocha` （[详细](./docs/mocha.md)）
 
 ## 更新日志
 

@@ -42,6 +42,8 @@ import randomColor from './random-color'
 import compareVersion from './compare-version'
 import stringToDOMElement from './string-to-domelement'
 import padZero from './pad-zero'
+import loadStyleText from './load-style-text'
+import mocha from './mocha'
 
 export default {
   API,
@@ -87,5 +89,7 @@ export default {
   randomColor,
   compareVersion,
   stringToDOMElement,
-  padZero
+  padZero,
+  loadStyleText,
+  mocha
 }

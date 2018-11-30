@@ -1,3 +1,10 @@
+# 1.7.0
+
+## 增加
+
+* `yypkg/loadStyleText` CSS 文本插入文档 Style 元素
+* `yypkg/mocha` Mocha 测试（[详细](./docs/mocha.md)）
+
 # 1.6.9
 
 ## 修复
