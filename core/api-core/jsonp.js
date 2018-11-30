@@ -93,17 +93,16 @@ let jsonp = {
   },
 
   // Promise
-  init (url, data, options = {}) {
+  init (url, noUse, options = {}) {
     return new Promise((resolve, reject) => {
-      data && (options.data = data)
-
-      data = jsonp.objectToURI(options.data)
+      let data = jsonp.objectToURI(options.data)
       let params = jsonp.objectToURI(options.params)
 
-      if (data) params += data
+      if (data) params += `&${data}`
       if (params) url += '?' + params
 
       if (!options.timeout) options.timeout = 30000
+
       jsonp.getRequest(url, options, (err, data) => {
         if (err) {
           reject(err)
