@@ -116,7 +116,7 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
       requestDiffEngines.axios = () => {
         const defaultSupportMethod = [ 'get', 'delete', 'head', 'options', 'post', 'put', 'patch' ]
 
-        defaultSupportMethod.indexOf(method) >= 0 ? engine(options) : (getEngineMethod(engine, method)(options.url, options.data, options)).then(async response => {
+        ;(defaultSupportMethod.indexOf(method) >= 0 ? engine(options) : (getEngineMethod(engine, method)(options.url, options.data, options))).then(async response => {
           await successCallback(response)
 
           resolve(response.status && response.statusText && response.headers ? response.data : response)
