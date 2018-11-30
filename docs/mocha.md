@@ -7,17 +7,17 @@ Mocha 是一个出名的 **测试框架**，对于一些前端 Web 项目，我�
 ```js
 import mocha from 'yypkg/mocha'
 
-function add(x, y) {
-  return x + y;
+function add (x, y) {
+  return x + y
 }
 
 mocha(async function () {
   const { expect } = chai
 
-  describe('加法函数的测试', function () {
-    it('1 加 1 应该等于 2', function () {
+  describe('加法函数的测试', () => {
+    it('1 加 1 应该等于 2', () => {
       expect(add(1, 1)).to.be.equal(2)
-    });
+    })
   })
 })
 ```
