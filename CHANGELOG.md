@@ -1,9 +1,10 @@
-# 1.6.4
+# 1.6.5
 
 ## 修复
 
 * `yypkg/api` axios engine，POST - options.data 兼容
 * `yypkg/api` axios engine，JOSNP - options.data 兼容
+* `yypkg/api` history recorder
 
 # 1.6.2
 

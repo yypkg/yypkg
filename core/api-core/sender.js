@@ -39,9 +39,9 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
 
   let { isRecordHistory } = namedOptions
 
-  const recorder = isRecordHistory ? {} : void 0
-
   return (data, options) => {
+    const recorder = isRecordHistory ? {} : void 0
+
     const { error: errorHandler, engine: engines } = $function
 
     const beforeResolveOptions = $function['interceptor:beforeResolveOptions']

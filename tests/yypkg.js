@@ -1,8 +1,8 @@
 /*!
  * yypkg.min.js
  * 
- * Version: 1.6.3
- * Time: 2018-11-30 13:10
+ * Version: 1.6.4
+ * Time: 2018-11-30 15:19
  * Document: https://github.com/yypkg/yypkg
  * (c) 2018 YY.PKG
  * Released under the MIT License.
