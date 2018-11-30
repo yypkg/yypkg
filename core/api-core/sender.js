@@ -65,15 +65,15 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
 
     const engine = engines[engineKey]
 
-    if (recorder) {
-      recorder.key = key
-      recorder.url = url
-      recorder.options = clone(options)
-      recorder.startTime = (new Date()).getTime()
-    }
-
     return new Promise(async (resolve, reject) => {
       beforeRequest && await beforeRequest(options)
+
+      if (recorder) {
+        recorder.key = key
+        recorder.url = url
+        recorder.options = clone(options)
+        recorder.startTime = (new Date()).getTime()
+      }
 
       const errorCallback = error => {
         if (recorder) {
