@@ -1,3 +1,9 @@
+# 1.6.3
+
+## 修复
+
+* `yypkg/api` axios engine，options.data 兼容
+
 # 1.6.2
 
 ## 更新

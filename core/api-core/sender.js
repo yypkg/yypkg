@@ -114,7 +114,7 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
       }
 
       requestDiffEngines.axios = () => {
-        getEngineMethod(engine, method)(options.url, options).then(async response => {
+        getEngineMethod(engine, method)(options.url, options.data, options).then(async response => {
           await successCallback(response)
 
           resolve(response.status && response.statusText && response.headers ? response.data : response)

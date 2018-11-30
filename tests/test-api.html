@@ -31,7 +31,7 @@
 
   const options = {
     engine: 'axios',
-    method: 'POST',
+    method: 'GET',
     isMock: true,
     isRecordHistory: true,
     baseURL: 'https://legox.org',
@@ -43,14 +43,14 @@
       setTimeout(() => resolve({code: 1}), 2000)
   }))
 
-  // api.$on('interceptor:beforeResolveOptions', (key, url, data, options, globalOptions) => {
-  //   options = data
-  //   data = options.data
+  api.$on('interceptor:beforeResolveOptions', ({ key, url, data, options, namedOptions }) => {
+    options = JSON.parse(JSON.stringify(data))
+    data = options.data
 
-  //   console.log('interceptor:beforeResolveOptions', options)
+    console.log('interceptor:beforeResolveOptions', options)
 
-  //   return { options, data }
-  // })
+    return { options, data }
+  })
 
   // api.$on('interceptor:beforeRequest', (options) => {
   //   console.log('interceptor:beforeRequest', options)
@@ -69,12 +69,12 @@
   // })
 
   ;(async () => {
-    console.log(await api.test1({ method: 'GET', data: { test: 1 } }))
+    console.log(await api.test1({ method: 'POST', data: { test: 1 } }))
     // console.log(await api.test1({ test: 1 }, { method: 'GET' }))
     // console.log(await api.test2())
     // console.log(await api.test3())
-    console.log(await (await api.test4({}, { keys: { id: 'a3e67a40-863c-11e7-9085-0ba4558c07dc' } })).json())
-    // console.log(api.$history)
+    // console.log(await (await api.test4({}, { keys: { id: 'a3e67a40-863c-11e7-9085-0ba4558c07dc' } })).json())
+    console.log(api.$history)
     // console.log($history)
     // console.log(await api.testError())
   })()
