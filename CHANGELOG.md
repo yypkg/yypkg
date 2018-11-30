@@ -1,8 +1,9 @@
-# 1.6.3
+# 1.6.4
 
 ## 修复
 
-* `yypkg/api` axios engine，options.data 兼容
+* `yypkg/api` axios engine，POST - options.data 兼容
+* `yypkg/api` axios engine，JOSNP - options.data 兼容
 
 # 1.6.2
 

@@ -52,8 +52,8 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
     if (beforeResolveOptions) {
       const callbackResult = beforeResolveOptions({ key, url, data, options, namedOptions })
 
-      callbackResult.options && (options = callbackResult.options)
-      callbackResult.data && (data = callbackResult.data)
+      callbackResult.hasOwnProperty('options') && (options = callbackResult.options)
+      callbackResult.hasOwnProperty('data') && (data = callbackResult.data)
     }
 
     options = options || {}

@@ -93,9 +93,11 @@ let jsonp = {
   },
 
   // Promise
-  init (url, options = { }) {
+  init (url, data, options = {}) {
     return new Promise((resolve, reject) => {
-      let data = jsonp.objectToURI(options.data)
+      data && (options.data = data)
+
+      data = jsonp.objectToURI(options.data)
       let params = jsonp.objectToURI(options.params)
 
       if (data) params += data
