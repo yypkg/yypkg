@@ -25,6 +25,7 @@ await api.test()
 | engine | 请求核心对象 | String | `'axios'`
 | method | 请求方式 | String | `'POST'` |
 | isMock | 是否调用模拟接口 | Boolean | `false` |
+| throttle | 节流时间 | Number | `0` |
 | isRecordHistory | 是否记录请求历史 | Boolean | `false` |
 | ..... | 其他 axios 配置项 | [config](https://github.com/axios/axios#request-config) | - |
 

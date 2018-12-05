@@ -39,6 +39,8 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
 
   let { isRecordHistory } = namedOptions
 
+  let throttleTimer = false
+
   return (data, options) => {
     const recorder = isRecordHistory ? {} : void 0
 
@@ -65,7 +67,17 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
 
     const engine = engines[engineKey]
 
-    return new Promise(async (resolve, reject) => {
+    const doRequest = async (resolve, reject) => {
+      if (options.throttle) {
+        if (throttleTimer) {
+          return void 0
+        } else {
+          throttleTimer = true
+
+          setTimeout(() => (throttleTimer = false), options.throttle)
+        }
+      }
+
       beforeRequest && await beforeRequest(options)
 
       if (recorder) {
@@ -144,7 +156,9 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
       }
 
       await (requestDiffEngines[engineKey] ? requestDiffEngines[engineKey]() : requestDiffEngines['default']())
-    })
+    }
+
+    return new Promise(doRequest)
   }
 }
 
