@@ -1,3 +1,9 @@
+# 1.9.0
+
+## 更新
+
+* `yypkg/api` 增加 `RESTful` 配置项（[详细](./docs/api.md#RESTful-调用)）
+
 # 1.8.0
 
 ## 更新
