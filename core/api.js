@@ -9,6 +9,7 @@ class API {
     !this.$options.engine && (this.$options.engine = 'axios')
     !this.$options.method && (this.$options.method = 'POST')
     !this.$options.isMock && (this.$options.isMock = false)
+    !this.$options.RESTful && (this.$options.RESTful = false)
     !this.$options.isRecordHistory && (this.$options.isRecordHistory = false)
 
     this.$axios = axios

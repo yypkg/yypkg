@@ -27,6 +27,7 @@ await api.test()
 | isMock | 是否调用模拟接口 | Boolean | `false` |
 | throttle | 节流时间 | Number | `0` |
 | isRecordHistory | 是否记录请求历史 | Boolean | `false` |
+| RESTful | 是否开启 RESTful 调用 | Boolean | `false` |
 | ..... | 其他 axios 配置项 | [config](https://github.com/axios/axios#request-config) | - |
 
 ## 使用局部配置
@@ -84,6 +85,7 @@ const api = new API({
   test: 'https://legox.org/mock/a3e67a40-863c-11e7-9085-0ba4558c07dc'
 })
 
+// api.test(data, options)
 await api.test({ code: 1 }, { method: 'GET' })
 ```
 
@@ -97,6 +99,25 @@ const api = new API({
 })
 
 await api.test({ code: 1 }, { keys: 'a3e67a40-863c-11e7-9085-0ba4558c07dc' })
+```
+
+## RESTful 调用
+
+```js
+import API from 'yypkg/api'
+
+const api = new API({ test: '//xxx.com/xxx'}, { RESTful: true })
+
+// await api.test.GET()
+await api.test.get()
+// await api.test.POST()
+await api.test.post()
+// await api.test.PUT()
+await api.test.put()
+// await api.test.PATCH()
+await api.test.patch()
+// await api.test.DELETE()
+await api.test.delete()
 ```
 
 ## 拦截器
@@ -159,7 +180,7 @@ import API from 'yypkg/api'
 
 const api = new API({ test: 'https://google.com' }, { engine: 'SDK' })
 
-api.$engine('SDK', (options) => {
+api.$engine('SDK', options => {
   return new Promise(resolve => {
     setTimeout(() => resolve({ code: 1 }), 2000)
   })
@@ -180,7 +201,7 @@ const api = new API({ test: 'https://google.com' }, {
   method: 'SDK'
 })
 
-api.$method('axios', (axios) => {
+api.$method('axios', axios => {
   axios.SDK = () => new Promise(resolve => {
     setTimeout(() => resolve({ code: 1 }), 2000)
   })

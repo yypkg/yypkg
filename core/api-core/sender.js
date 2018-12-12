@@ -2,6 +2,8 @@ import pathToRegexp from 'path-to-regexp'
 
 const URL_REG = /(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-.,@?^=%&:/~+#]*[\w\-@?^=%&/~+#])?/
 
+const RESTfulMethod = [ 'GET', 'POST', 'PUT', 'PATCH', 'DELETE' ]
+
 const ensureAbsolutePath = (baseURL, url) => {
   return !URL_REG.test(url) && baseURL ? (baseURL[baseURL.length - 1] === '/' && url[0] === '/' ? `${baseURL.substr(0, baseURL.length - 1)}${url}` : `${baseURL}${url}`) : url
 }
@@ -37,11 +39,11 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
 
   typeof url === 'object' && (namedOptions = Object.assign(namedOptions, url))
 
-  let { isRecordHistory } = namedOptions
+  let { isRecordHistory, RESTful } = namedOptions
 
   let throttleTimer = false
 
-  return (data, options) => {
+  const sender = function (data, options) {
     const recorder = isRecordHistory ? {} : void 0
 
     const { error: errorHandler, engine: engines } = $function
@@ -60,6 +62,11 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
 
     options = options || {}
     options.data = data || {}
+
+    // this scope
+    if (typeof this === 'object' && this.RESTfulMethod) {
+      options.method = this.RESTfulMethod
+    }
 
     options = resolveOptions(key, url, Object.assign(namedOptions, options))
 
@@ -160,6 +167,16 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
 
     return new Promise(doRequest)
   }
+
+  if (!RESTful) {
+    return sender
+  }
+
+  RESTfulMethod.forEach(method => {
+    sender[method] = sender[method.toLowerCase()] = sender.bind({ RESTfulMethod: method })
+  })
+
+  return sender
 }
 
 export default Sender

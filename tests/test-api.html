@@ -36,6 +36,7 @@
     isMock: true,
     isRecordHistory: true,
     baseURL: 'https://legox.org',
+    RESTful: true
   }
 
   const api = new API(urls, options, $history)
@@ -82,15 +83,21 @@
   })()
 
   async function clickBtn1 () {
-    console.log(await api.test1())
+    console.log(await api.test1.post())
+    // console.log(await api.test1())
   }
 
   async function clickBtn2 () {
     console.log(await api.test2())
   }
+
+  function showHistory () {
+    console.log($history)
+  }
   </script>
 
   <button onclick="clickBtn1()">test 1</button>
   <button onclick="clickBtn2()">test 2</button>
+  <button onclick="showHistory()">$history</button>
 </body>
 </html>
