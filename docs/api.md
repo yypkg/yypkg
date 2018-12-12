@@ -37,7 +37,7 @@ import API from 'yypkg/api'
 
 const urls = {
   test: {
-    url: 'https://legox.org/mock/a3e67a40-863c-11e7-9085-0ba4558c07dc',
+    url: '//xxx.com/xxx',
     method: 'JSONP'
   }
 }
@@ -60,16 +60,12 @@ import API from 'yypkg/api'
 
 const urls = {
   test: {
-    url: 'https://google.com',
-    mock: 'https://legox.org/mock/a3e67a40-863c-11e7-9085-0ba4558c07dc'
+    url: '//xxx.com/xxx',
+    mock: '//yyy.com/yyy'
   }
 }
 
-const options = {
-  isMock: true
-}
-
-const api = new API(urls, options)
+const api = new API(urls, { isMock: true })
 
 await api.test()
 ```
@@ -82,7 +78,7 @@ await api.test()
 import API from 'yypkg/api'
 
 const api = new API({
-  test: 'https://legox.org/mock/a3e67a40-863c-11e7-9085-0ba4558c07dc'
+  test: '//xxx.com/xxx'
 })
 
 // api.test(data, options)
@@ -125,9 +121,7 @@ await api.test.delete()
 ```js
 import API from 'yypkg/api'
 
-const api = new API({
-  test: 'https://legox.org/mock/a3e67a40-863c-11e7-9085-0ba4558c07dc'
-})
+const api = new API({ test: '//xxx.com/xxx' })
 
 // 生命周期 beforeResolveOptions，处于实例调用入口最前面，在合并 options 之前调用
 // 返回 data、options 可改变调用实例时原有传入变量
@@ -160,9 +154,7 @@ await api.test()
 ```js
 import API from 'yypkg/api'
 
-const api = new API({
-  test: 'https://google.com'
-})
+const api = new API({ test: '//xxx.com/xxx' })
 
 api.$on('error', (error) => {
   console.log('error', error)
@@ -178,7 +170,7 @@ await api.test()
 ```js
 import API from 'yypkg/api'
 
-const api = new API({ test: 'https://google.com' }, { engine: 'SDK' })
+const api = new API({ test: '//xxx.com/xxx' }, { engine: 'SDK' })
 
 api.$engine('SDK', options => {
   return new Promise(resolve => {
@@ -196,7 +188,7 @@ await api.test()
 ```js
 import API from 'yypkg/api'
 
-const api = new API({ test: 'https://google.com' }, {
+const api = new API({ test: '//xxx.com/xxx' }, {
   engine: 'axios',
   method: 'SDK'
 })
@@ -215,11 +207,7 @@ await api.test()
 ```js
 import API from 'yypkg/api'
 
-const api = new API({
-  test: 'https://google.com'
-}, {
-  isRecordHistory: true
-})
+const api = new API({ test: '//xxx.com/xxx' }, { isRecordHistory: true })
 
 await api.test()
 
