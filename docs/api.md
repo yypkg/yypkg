@@ -53,6 +53,19 @@ await api.test() // method: JSONP
 
 局部配置项与全局配置项参数一致，但优先级大于全局配置项
 
+## 设置请求时配置参数
+
+```js
+import API from 'yypkg/api'
+
+const api = new API({
+  test: '//xxx.com/xxx'
+})
+
+// api.test(data, options)
+await api.test({ code: 1 }, { method: 'GET' })
+```
+
 ## 使用 Mock
 
 ```js
@@ -71,19 +84,6 @@ await api.test()
 ```
 
 如果请求接口没有配置 `mock 地址` 则请求真实地址
-
-## 设置请求时配置参数
-
-```js
-import API from 'yypkg/api'
-
-const api = new API({
-  test: '//xxx.com/xxx'
-})
-
-// api.test(data, options)
-await api.test({ code: 1 }, { method: 'GET' })
-```
 
 ## URL 参数
 
