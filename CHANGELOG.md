@@ -1,3 +1,9 @@
+# 1.9.1
+
+## 修复
+
+* `yypkg/api` response statusText 为空
+
 # 1.9.0
 
 ## 更新

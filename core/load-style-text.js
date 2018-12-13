@@ -1,5 +1,5 @@
 /**
- * 动态插件 CSS 文本样式
+ * 动态插入 CSS 文本样式
  *
  * @param {String} CSS 文本样式
  * @return {Null}

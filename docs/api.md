@@ -102,16 +102,20 @@ await api.test({ code: 1 }, { keys: 'a3e67a40-863c-11e7-9085-0ba4558c07dc' })
 ```js
 import API from 'yypkg/api'
 
-const api = new API({ test: '//xxx.com/xxx'}, { RESTful: true })
+const api = new API({ test: '//xxx.com/xxx' }, { RESTful: true })
 
 // await api.test.GET()
 await api.test.get()
+
 // await api.test.POST()
 await api.test.post()
+
 // await api.test.PUT()
 await api.test.put()
+
 // await api.test.PATCH()
 await api.test.patch()
+
 // await api.test.DELETE()
 await api.test.delete()
 ```

@@ -2,7 +2,7 @@ import pathToRegexp from 'path-to-regexp'
 
 const URL_REG = /(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-.,@?^=%&:/~+#]*[\w\-@?^=%&/~+#])?/
 
-const RESTfulMethod = [ 'GET', 'POST', 'PUT', 'PATCH', 'DELETE' ]
+const RESTfulMethods = [ 'GET', 'POST', 'PUT', 'PATCH', 'DELETE' ]
 
 const ensureAbsolutePath = (baseURL, url) => {
   return !URL_REG.test(url) && baseURL ? (baseURL[baseURL.length - 1] === '/' && url[0] === '/' ? `${baseURL.substr(0, baseURL.length - 1)}${url}` : `${baseURL}${url}`) : url
@@ -138,7 +138,7 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
         ;(defaultSupportMethod.indexOf(method) >= 0 ? engine(options) : (getEngineMethod(engine, method)(options.url, options.data, options))).then(async response => {
           await successCallback(response)
 
-          resolve(response.status && response.statusText && response.headers ? response.data : response)
+          resolve(typeof response.status !== 'undefined' && typeof response.statusText !== 'undefined' && typeof response.headers !== 'undefined' ? response.data : response)
 
           afterCallbackResponse && afterCallbackResponse(response)
         }).catch(error => errorCallback(error))
@@ -172,7 +172,7 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
     return sender
   }
 
-  RESTfulMethod.forEach(method => {
+  RESTfulMethods.forEach(method => {
     sender[method] = sender[method.toLowerCase()] = sender.bind({ RESTfulMethod: method })
   })
 
