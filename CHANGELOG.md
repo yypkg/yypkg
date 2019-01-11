@@ -1,8 +1,9 @@
-# 1.9.2
+# 1.9.3
 
 ## 修复
 
 * `yypkg/api` options 设置默认值
+* `yypkg/api` beforeResolveOptions 无回调报错问题
 
 # 1.9.1
 
