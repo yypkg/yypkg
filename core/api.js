@@ -3,7 +3,7 @@ import './api-core/jsonp'
 import Sender from './api-core/sender.js'
 
 class API {
-  constructor (urls, options, $history) {
+  constructor (urls, options = {}, $history) {
     this.$options = options
 
     !this.$options.engine && (this.$options.engine = 'axios')
