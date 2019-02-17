@@ -48,6 +48,8 @@
 - [x] 前缀补充零位 `padZero`（[详细](./core/pad-zero.js)）
 - [x] CSS 文本插入文档 Style 元素 `loadStyleText`
 - [x] Mocha 测试 `mocha` （[详细](./docs/mocha.md)）
+- [x] 资源加载器 `source-loader` （[详细](./docs/source-loader.md)）
+- [x] 进度控制器 `progress-controller` （[详细](./docs/progress-controller.md)）
 
 ## 更新日志
 
