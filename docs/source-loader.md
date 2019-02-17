@@ -23,26 +23,27 @@ loader.$on('error', (url) => {
 })
 ```
 
-## 配置项 `options`
+## 配置项
 
 | 参数名 | 描述 | 类型 | 默认值 |
 |-|-|-|-|
-| url | 需要加载的资源url | String 或 Array | `''` |
-| retry | 加载失败时的重试次数 | Number | `3` |
-| autoStart | 是否在实例化时自动执行start() | Boolean | `false` |
+| `url` | 需要加载的资源url | String 或 Array | `''` |
+| `retry` | 加载失败时的重试次数 | Number | `3` |
+| `autoStart` | 是否在实例化时自动执行start() | Boolean | `false` |
 
 ## 方法
 
 | 方法名 | 描述 | 参数 |
 |-|-|-|
-| start | 开始触发资源加载 | 无 |
+| `start` | 开始触发资源加载 | 无 |
+| `$on` | 事件监听方法 | `eventName`: 事件名称，String，见下表 <br> `callback`: 回调函数 |
 
 
 ## 事件
 
-| 事件名 | 描述 | 参数 |
+| 事件名 | 描述 | 回调函数参数 |
 |-|-|-|
-| process | 资源加载过程中 | total：资源总数 <br> count：当前加载资源的索引值 <br> url：当前加载资源的url  |
-| complete | 资源加载完毕（无论加载失败还是成功） | total：资源总数  |
-| error | 资源加载失败（retry不触发）| url：加载失败的资源url |
+| `process` | 资源加载过程中 | `total`：资源总数 <br> `count`：当前加载资源的索引值 <br> `url`：当前加载资源的url  |
+| `complete` | 资源加载完毕（无论加载失败还是成功） | `total`：资源总数  |
+| `error` | 资源加载失败（retry不触发）| `url`：加载失败的资源url |
 

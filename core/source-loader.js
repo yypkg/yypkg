@@ -29,7 +29,7 @@ let SourceLoader = class SourceLoader {
       retry: 3,
       autoStart: false,
     }
-    this.configs = this.extend(defaults, config)
+    this.configs = Object.assign(defaults, config)
     this.configs.autoStart && this.start()
   }
 
@@ -157,6 +157,7 @@ let SourceLoader = class SourceLoader {
 
     // 通过监听loadData.count判断加载状态
     Object.defineProperty(loadData, 'count', {
+      configurable: true,
       get () {
         return tmpCount
       },
@@ -174,28 +175,6 @@ let SourceLoader = class SourceLoader {
 
   $on (type, fun) {
     $onEvent[type] = fun
-  }
-
-  /**
-   * 对象合并
-   *
-   * @param {object} target 原对象
-   * @param {object} options 新对象
-   * @return {object} 合并后的对象
-   */
-  extend (target, options) {
-    let copy = null
-    for (var name in options) {
-      copy = options[name]
-
-      //防止循环调用
-      if (target === copy) continue
-
-      //防止附加未定义值
-      if (typeof copy === 'undefined') continue
-      target[name] = copy
-    }
-    return target
   }
 }
 
