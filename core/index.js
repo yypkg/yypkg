@@ -44,6 +44,8 @@ import stringToDOMElement from './string-to-domelement'
 import padZero from './pad-zero'
 import loadStyleText from './load-style-text'
 import mocha from './mocha'
+import SourceLoader from './source-loader'
+import ProgressController from './progress-controller'
 
 export default {
   API,
@@ -91,5 +93,7 @@ export default {
   stringToDOMElement,
   padZero,
   loadStyleText,
-  mocha
+  mocha,
+  SourceLoader,
+  ProgressController
 }
