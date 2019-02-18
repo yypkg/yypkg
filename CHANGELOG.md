@@ -1,3 +1,10 @@
+# 1.9.5
+
+## 增加
+
+* `yypkg/source-loader` 新增资源加载器
+* `yypkg/progress-controller` 新增进度控制器
+
 # 1.9.3
 
 ## 修复
