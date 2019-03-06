@@ -46,6 +46,7 @@ import loadStyleText from './load-style-text'
 import mocha from './mocha'
 import SourceLoader from './source-loader'
 import ProgressController from './progress-controller'
+import WXJSSDK from './wxjssdk'
 
 export default {
   API,
@@ -95,5 +96,6 @@ export default {
   loadStyleText,
   mocha,
   SourceLoader,
-  ProgressController
+  ProgressController,
+  WXJSSDK
 }
