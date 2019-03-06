@@ -31,7 +31,7 @@ WXJSSDK({
 ```js
 import WXJSSDK from 'yypkg/wxjssdk'
 
-await WXJSSDK.share({
+WXJSSDK.share({
   title: '分享标题',
   desc: '分享描述',
   link: 'xxx', // 默认值为 window.location.href
