@@ -9,11 +9,13 @@
     (async () => {
       const { WXJSSDK } = YYPKG
 
-      // const wx = await WXJSSDK({ debug: true })
+      const wx = await WXJSSDK({ debug: true })
+
+      console.log(wx)
 
       // wx.ready(function () { alert('ok') })
 
-      await WXJSSDK.share({ title: '1', desc: '2', imgUrl: 'https://avatars0.githubusercontent.com/u/12247242?s=460&v=4' })
+      // await WXJSSDK.share({ title: '1', desc: '2', imgUrl: 'https://avatars0.githubusercontent.com/u/12247242?s=460&v=4' })
     })()
   </script>
 </body>

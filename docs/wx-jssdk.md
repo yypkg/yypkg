@@ -21,7 +21,7 @@ import WXJSSDK from 'yypkg/wxjssdk'
 ```js
 WXJSSDK({
   debug: true, // 是否开启微信调试 debug 模式
-  api: 'xxx', // 更换 签名 api 接口地址，默认为 //api.yoyiapp.com/wx/jssdk/signature
+  signatureApiURL: 'xxx', // 更换 签名服务接口地址，默认为 //api.yoyiapp.com/wx/jssdk/signature
   jsApiList: [], // 微信 API 申请列表，默认为 ['onMenuShareTimeline', 'onMenuShareAppMessage']
 })
 ```
