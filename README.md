@@ -51,6 +51,7 @@
 - [x] 资源加载器 `source-loader` （[详细](./docs/source-loader.md)）
 - [x] 进度控制器 `progress-controller` （[详细](./docs/progress-controller.md)）
 - [x] 微信 JSSDK `wxjssdk` （[详细](./docs/wx-jssdk.md)）
+- [x] 设置数值范围并返回结果 `numberRange` （[详细](./core/number-range.js)）
 
 ## 更新日志
 
