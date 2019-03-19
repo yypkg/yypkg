@@ -52,6 +52,8 @@
 - [x] 进度控制器 `progress-controller` （[详细](./docs/progress-controller.md)）
 - [x] 微信 JSSDK `wxjssdk` （[详细](./docs/wx-jssdk.md)）
 - [x] 设置数值范围并返回结果 `numberRange` （[详细](./core/number-range.js)）
+- [x] 获取当前 URL 路径（不带参数）`getUrlPath`
+- [x] 微信里刷新页面 `WXReload` （[详细](./core/wx-reload.js)）
 
 ## 更新日志
 

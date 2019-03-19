@@ -47,6 +47,9 @@ import mocha from './mocha'
 import SourceLoader from './source-loader'
 import ProgressController from './progress-controller'
 import WXJSSDK from './wxjssdk'
+import numberRange from './number-range'
+import getUrlPath from './get-url-path'
+import WXReload from './wx-reload'
 
 export default {
   API,
@@ -97,5 +100,8 @@ export default {
   mocha,
   SourceLoader,
   ProgressController,
-  WXJSSDK
+  WXJSSDK,
+  numberRange,
+  getUrlPath,
+  WXReload
 }
