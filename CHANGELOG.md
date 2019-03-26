@@ -1,3 +1,11 @@
+# 1.11.0
+
+## 增加
+
+* `yypkg/number-range` 设置数值范围并返回结果
+* `yypkg/get-url-path` 获取当前 URL 路径（不带参数）
+* `yypkg/wx-reload` 微信里刷新页面
+
 # 1.10.1
 
 ## 增加
