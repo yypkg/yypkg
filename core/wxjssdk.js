@@ -51,8 +51,8 @@ const WXJSSDK = function (options = {}) {
       }
 
       if (!options.signatureApiURL) {
-        const URL1 = `${window.location.protocol === 'http:' ? 'https:' : 'https:'}//api-test.yoyiapp.com/wx/jssdk/signature`
-        const URL2 = `${window.location.protocol === 'http:' ? 'https:' : 'https:'}//api.yoyiapp.com/wx/jssdk/signature`
+        const URL1 = `${window.location.protocol === 'http:' ? 'http:' : 'https:'}//api-test.yoyiapp.com/wx/jssdk/signature`
+        const URL2 = `${window.location.protocol === 'http:' ? 'http:' : 'https:'}//api.yoyiapp.com/wx/jssdk/signature`
 
         requestSignature(URL1).then(successReturn).catch(() => {
           requestSignature(URL2).then(successReturn).catch(failReturn)
