@@ -3,7 +3,7 @@
  *
  * @return {Boolean} true|false
  */
-const isiPhone = require('./is-iPhone')
+import isiPhone from './is-iPhone'
 
 function isiPhoneX () {
   const { width, height } = window.screen

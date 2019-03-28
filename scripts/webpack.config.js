@@ -10,7 +10,7 @@ const banner =
 Version: ${version}
 Time: ${moment().format('YYYY-MM-DD HH:mm')}
 Document: https://github.com/yypkg/yypkg
-(c) 2018 YY.PKG
+(c) 2019 YY.PKG
 Released under the MIT License.`
 
 const rootPath = path.resolve(__dirname, '../')
