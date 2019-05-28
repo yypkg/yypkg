@@ -44,6 +44,7 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
   let throttleTimer = false
 
   const sender = function (data, options) {
+    const cloneByNamedOptions = clone(namedOptions)
     const recorder = isRecordHistory ? {} : void 0
 
     const { error: errorHandler, engine: engines } = $function
@@ -54,7 +55,7 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
     const afterCallbackResponse = $function['interceptor:afterCallbackResponse']
 
     if (beforeResolveOptions) {
-      const callbackResult = beforeResolveOptions({ key, url, data, options, namedOptions })
+      const callbackResult = beforeResolveOptions({ key, url, data, options, namedOptions: cloneByNamedOptions })
 
       callbackResult && callbackResult.hasOwnProperty('options') && (options = callbackResult.options)
       callbackResult && callbackResult.hasOwnProperty('data') && (data = callbackResult.data)
@@ -68,7 +69,7 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
       options.method = this.RESTfulMethod
     }
 
-    options = resolveOptions(key, url, Object.assign(namedOptions, options))
+    options = resolveOptions(key, url, Object.assign({}, namedOptions, options))
 
     const { engine: engineKey, method } = options
 
@@ -175,6 +176,8 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
   RESTfulMethods.forEach(method => {
     sender[method] = sender[method.toLowerCase()] = sender.bind({ RESTfulMethod: method })
   })
+
+  sender.options = namedOptions
 
   return sender
 }

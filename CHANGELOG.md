@@ -1,3 +1,10 @@
+# 1.11.3
+
+## 改变
+
+* API 拦截器 `interceptor:beforeResolveOptions` 独立局部 `namedOptions`
+* API 实例 Sender 保留 `options` 配置
+
 # 1.11.2
 
 ## 修复

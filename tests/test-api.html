@@ -83,7 +83,9 @@
   })()
 
   async function clickBtn1 () {
-    console.log(await api.test1.post())
+    console.log(api.test1.get(null, {params: {test:1}}))
+    console.log(api.test1.get(null, {params: {test:2}}))
+    // console.log( api.test1.post())
     // console.log(await api.test1())
   }
 
