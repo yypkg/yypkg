@@ -51,8 +51,8 @@ const WXJSSDK = function (options = {}) {
       }
 
       if (!options.signatureApiURL) {
-        const url1 = !options.isFimo ? '//server.yoyiapp.com/wxjssdk/' : '//server.yoyiapp.com/fimo-wxjssdk/'
-        const url2 = !options.isFimo ? '//server-test.yoyiapp.com/wxjssdk/' : '//server-test.yoyiapp.com/fimo-wxjssdk/'
+        const url1 = !options.isFIMO ? '//server.yoyiapp.com/wxjssdk/' : '//server.yoyiapp.com/fimo-wxjssdk/'
+        const url2 = !options.isFIMO ? '//server-test.yoyiapp.com/wxjssdk/' : '//server-test.yoyiapp.com/fimo-wxjssdk/'
 
         const URL1 = `${window.location.protocol === 'http:' ? 'http:' : 'https:'}${url1}`
         const URL2 = `${window.location.protocol === 'http:' ? 'http:' : 'https:'}${url2}`
@@ -77,7 +77,7 @@ WXJSSDK.share = function ({ title, desc, link = window.location.href, imgUrl }) 
 }
 
 WXJSSDK.FIMOShare = function ({ title, desc, link = window.location.href, imgUrl }) {
-  WXJSSDK({ isFimo: true }).then(wx => {
+  WXJSSDK({ isFIMO: true }).then(wx => {
     wx.ready(function () {
       wx.onMenuShareTimeline({ title, desc, link, imgUrl })
       wx.onMenuShareAppMessage({ title, desc, link, imgUrl })
