@@ -37,6 +37,14 @@ WXJSSDK.share({
   link: 'xxx', // 默认值为 window.location.href
   imgUrl: '缩略图'
 })
+
+// FIMO 服务号主体分享
+WXJSSDK.FIMOShare({
+  title: '分享标题',
+  desc: '分享描述',
+  link: 'xxx', // 默认值为 window.location.href
+  imgUrl: '缩略图'
+})
 ```
 
 ## 支持域名

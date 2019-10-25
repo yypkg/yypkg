@@ -1,9 +1,8 @@
 {
   "name": "yypkg",
-  "version": "1.11.4",
+  "version": "1.12.1",
   "description": "",
   "main": "yypkg.min.js",
-  "private": true,
   "scripts": {
     "test": "concurrently --kill-others \"npx webpack --config ./scripts/webpack.config.js --env.test\" \"node ./scripts/http-server.js\"",
     "release": "node ./scripts/release.js"
