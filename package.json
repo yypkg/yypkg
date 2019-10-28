@@ -1,6 +1,6 @@
 {
   "name": "yypkg",
-  "version": "1.12.2",
+  "version": "1.12.4",
   "description": "",
   "main": "yypkg.min.js",
   "scripts": {

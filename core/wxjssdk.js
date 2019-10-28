@@ -32,7 +32,7 @@ const requestSignature = url => {
 
 const WXJSSDK = function (options = {}) {
   return new Promise((resolve, reject) => {
-    loadScript('https://res.wx.qq.com/open/js/jweixin-1.2.0.js').then(() => {
+    loadScript('//res.wx.qq.com/open/js/jweixin-1.4.0.js').then(() => {
       const successReturn = data => {
         window.wx.config({
           debug: options.debug || false,
