@@ -136,6 +136,10 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
       requestDiffEngines.axios = () => {
         const defaultSupportMethod = [ 'get', 'delete', 'head', 'options', 'post', 'put', 'patch' ]
 
+        if (method === 'get') {
+          options.params = options.data
+        }
+
         ;(defaultSupportMethod.indexOf(method) >= 0 ? engine(options) : (getEngineMethod(engine, method)(options.url, options.data, options))).then(async response => {
           await successCallback(response)
 
