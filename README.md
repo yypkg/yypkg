@@ -54,6 +54,7 @@
 - [x] 设置数值范围并返回结果 `numberRange` （[详细](./core/number-range.js)）
 - [x] 获取当前 URL 路径（不带参数）`getUrlPath`
 - [x] 微信里刷新页面 `WXReload` （[详细](./core/wx-reload.js)）
+- [x] 回到顶部 `scrollToTop`
 
 ## 更新日志
 
