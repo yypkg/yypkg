@@ -160,11 +160,16 @@ import API from 'yypkg/api'
 
 const api = new API({ test: '//xxx.com/xxx' })
 
-api.$on('error', (error) => {
+api.$on('error', (error, options, throwError) => {
   console.log('error', error)
+  throwError('test throw error')
 })
 
-await api.test()
+try {
+  await api.test()
+} catch (error) {
+  console.log(error) // test throw error
+}
 ```
 
 ## 自定义 Engine

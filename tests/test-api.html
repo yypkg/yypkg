@@ -27,7 +27,7 @@
       url: '/mock/:id',
       engine: 'fetch'
     },
-    testError: 'https://google.com/',
+    testError: 'https://mango.yy.com/test/fimo/work/excellent?time=202004',
   }
 
   const options = {
@@ -65,9 +65,10 @@
   //   console.log('interceptor:afterCallbackResponse', response)
   // })
 
-  // api.$on('error', (error) => {
-  //   console.log('error', error)
-  // })
+  api.$on('error', (error, options, throwError) => {
+    // console.log('error', error)
+    throwError(error)
+  })
 
   ;(async () => {
     // console.log(api.test1)
@@ -90,7 +91,11 @@
   }
 
   async function clickBtn2 () {
-    console.log(await api.test2())
+    try {
+      await api.testError()
+    } catch (error) {
+      console.log(123, error)
+    }
   }
 
   function showHistory () {

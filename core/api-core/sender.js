@@ -95,6 +95,8 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
         recorder.startTime = (new Date()).getTime()
       }
 
+      const throwError = error => reject(error)
+
       const errorCallback = error => {
         if (recorder) {
           recorder.error = clone(error)
@@ -102,8 +104,7 @@ const Sender = function (key, url, $globalOptions, $function, $history) {
           recorder.responseSpendTime = recorder.responseTime - recorder.startTime
           $history.unshift(recorder)
         }
-
-        errorHandler && errorHandler(error, options)
+        errorHandler && errorHandler(error, options, throwError)
       }
 
       const successCallback = async (response) => {
