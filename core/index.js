@@ -50,6 +50,7 @@ import WXJSSDK from './wxjssdk'
 import numberRange from './number-range'
 import getUrlPath from './get-url-path'
 import WXReload from './wx-reload'
+import scrollToTop from './scroll-to-top'
 
 export default {
   API,
@@ -103,5 +104,6 @@ export default {
   WXJSSDK,
   numberRange,
   getUrlPath,
-  WXReload
+  WXReload,
+  scrollToTop
 }
