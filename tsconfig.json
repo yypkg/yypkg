@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "core/*": ["./core/*"]
+    },
+    "target": "es6",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": false,
+    "strict": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "noImplicitThis": false,
+    "jsx": "preserve"
+  },
+  "include": [
+    "core",
+    // "src",
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

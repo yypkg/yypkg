@@ -6,10 +6,11 @@
 
 函数去抖，将触发频繁的事件合并成一次执行，例如防止 `input` 事件短时间内重复触发
 
+* `@version since 1.0.0`
 * `@param {Function} fn 回调函数`
 * `@param {Number} time 等待多长时间之后执行，单位毫秒`
 
-```JavaScript
+```js
 import debounce from 'yypkg/debounce'
 
 element.addEventListener('click', debounce(submit, 200), false)
@@ -21,10 +22,11 @@ function submit(e) { }
 
 函数节流，设置一个阀值，在阀值内，将触发的事件合并成一次执行；且当到达阀值，必定执行一次事件。常用于 `resize`、`scroll` 等事件
 
+* `@version since 1.0.0`
 * `@param {Function} fn 回调函数`
 * `@param {Number} time 每隔多长时间执行一次，单位毫秒`
 
-```JavaScript
+```js
 import throttle from 'yypkg/throttle'
 
 document.body.addEventListener('scroll', throttle(scroll, 200), false)
@@ -36,9 +38,10 @@ function scroll(e) { }
 
 Promise 版的 setTimeout
 
+* `@version since 1.0.0`
 * `@param {Number} time 等待多长时间，单位毫秒`
 
-```JavaScript
+```js
 import sleep from 'yypkg/sleep'
 
 await sleep(500)
@@ -49,10 +52,11 @@ await sleep(500)
 
 深拷贝
 
+* `@version since 1.0.0`
 * `@param {Any} x 需要拷贝的对象`
 * `@return {Any} number / array / function / ...`
 
-```JavaScript
+```js
 import clone from 'yypkg/clone'
 
 clone(x)
@@ -62,11 +66,12 @@ clone(x)
 
 类型检测，弥补typeof获取类型不准确的问题
 
+* `@version since 1.0.0`
 * `@param {Any} x 需要检测的对象`
 * `@param {Boolean} strict 是否严格模式`
 * `@return {String} number / array / function / ...`
 
-```JavaScript
+```js
 import type from 'yypkg/type'
 
 type(x)
@@ -79,11 +84,12 @@ type(x)
 
 获取 URL 上参数
 
+* `@version since 1.0.0`
 * `@param {String} name 需要获取的参数名`
 * `@param {String} url 需要被处理的 url，默认为当前 url`
 * `@return {String} 对应的参数字符串`
 
-```JavaScript
+```js
 import getUrlParam from 'yypkg/get-url-param'
 
 const version = getUrlParam('v')
@@ -92,13 +98,14 @@ consle.log(version)
 // => '666'
 ```
 
-###  `getUrlPath(name, url)`
+###  `getUrlPath()`
 
 获取当前 URL 路径（不带参数）
 
+* `@version since 1.0.0`
 * `@return {String} 当前url`
 
-```JavaScript
+```js
 import getUrlPath from 'yypkg/get-url-path'
 
 const path = getUrlPath()
@@ -111,10 +118,11 @@ consle.log(path)
 
 根据相对路径获取绝对路径
 
+* `@version since 1.0.0`
 * `@param {String} url 相对路径`
 * `@return {String} 当前绝对路径`
 
-```JavaScript
+```js
 import getAbsoluteUrl from 'yypkg/get-absolute-url'
 
 const absUrl = getAbsoluteUrl('/img/logo.png')
@@ -130,9 +138,10 @@ consle.log(absUrl)
 
 获取浏览器设置的第一语言
 
+* `@version since 1.0.0`
 * `@return {String} 浏览器第一语言名称，未知返回 'unknown'`
 
-```JavaScript
+```js
 import getFirstBrowserLanguage from 'yypkg/get-first-browser-language'
 
 const lang = getFirstBrowserLanguage()
@@ -144,9 +153,10 @@ consle.log(lang)
 
 获取IE浏览器的版本号
 
+* `@version since 1.0.0`
 * `@return {Number} IE浏览器的版本号，获取失败返回 -1`
 
-```JavaScript
+```js
 import getIEVersion from 'yypkg/get-ie-version'
 
 const ie = getIEVersion()
@@ -161,10 +171,11 @@ consle.log(ie)
 
 生成随机的唯一标识号
 
+* `@version since 1.0.0`
 * `@param {Number} n 标识号的位数`
 * `@return {String} 唯一标识号`
 
-```JavaScript
+```js
 import uuid from 'yypkg/uuid'
 
 const uid = uuid(12)
@@ -176,9 +187,10 @@ consle.log(uid)
 
 生成随机的Hex颜色值
 
+* `@version since 1.0.0`
 * `@return {String} Hex颜色值，六位，不带井号`
 
-```JavaScript
+```js
 import randomColor from 'yypkg/random-color'
 
 const color = randomColor()
@@ -190,10 +202,11 @@ consle.log(color)
 
 字符串裁去空格
 
+* `@version since 1.0.0`
 * `@param {String} str 被处理的字符串`
 * `@return {String}`
 
-```JavaScript
+```js
 import trimSpace from 'yypkg/trim-space'
 
 const strings = trimSpace('Java Script')
@@ -205,11 +218,12 @@ consle.log(strings)
 
 简易的时间格式化
 
+* `@version since 1.4.0`
 * `@param {Date} date 时间`
 * `@param {String} format 格式模板`
 * `@return {String}`
 
-```JavaScript
+```js
 import dateFormat from 'yypkg/date-format'
 
 const now = new Date()
@@ -222,10 +236,11 @@ consle.log(dataTime)
 
 对数字进行千分位逗号的格式化
 
+* `@version since 1.4.1`
 * `@param {Number} num 数字`
 * `@return {String}`
 
-```JavaScript
+```js
 import thousandsDot from 'yypkg/thousands-dot'
 
 const price = thousandsDot(1234567890)
@@ -237,11 +252,12 @@ consle.log(price)
 
 对数字的前缀补充零位
 
+* `@version since 1.4.1`
 * `@param {Number} num 需要处理的数字`
 * `@param {Number} digits 位数`
 * `@return {String}`
 
-```JavaScript
+```js
 import padZero from 'yypkg/pad-zero'
 
 const count = padZero(6, 3)
@@ -253,11 +269,12 @@ consle.log(count)
 
 设置数值范围并返回结果
 
+* `@version since 1.11.0`
 * `@param {Number} num 需要处理的数值`
 * `@param {Object} options 配置选项`
 * `@return {Number}`
 
-```JavaScript
+```js
 import numberRange from 'yypkg/number-range'
 
 const range = numberRange(6, { min: 7 })
@@ -285,12 +302,13 @@ consle.log(range3)
 如 a = b, 返回 0；
 如 a < b, 返回 -1；
 
+* `@version since 1.4.1`
 * `@param {String} a 版本号1`
 * `@param {String} b 版本号2`
 * `@return {Number}`
 
 
-```JavaScript
+```js
 import compareVersion from 'yypkg/compare-version'
 
 const isUpate = compareVersion('1.2.0', '1.4.5')
@@ -302,10 +320,11 @@ consle.log(isUpate)
 
 原生字符串转为 DOM 元素
 
+* `@version since 1.4.1`
 * `@param {String} string 字符串`
 * `@return {DOMElement}`
 
-```JavaScript
+```js
 import stringToDOMElement from 'yypkg/string-to-domelement'
 
 const element = stringToDOMElement('test')
@@ -316,19 +335,20 @@ consle.log(element)
 
 ## 微信 WeChat
 
-###  `WXJSSDK(options)`
+###  `wechatSDK(options)`
 
 微信JS SDK
 
+* `@version since 1.11.4`
 * `@param {Object} options 配置选项`
 * `@return {Promise}`
 
 #### `options` 参数配置
 
-```JavaScript
-import WXJSSDK from 'yypkg/wxjssdk'
+```js
+import wechatSDK from 'yypkg/wechat-sdk'
 
-WXJSSDK({
+wechatSDK({
   debug: true, // 是否开启微信调试 debug 模式
   signatureApiURL: 'xxx', // 更换 签名服务接口地址，默认为 //api.yoyiapp.com/wx/jssdk/signature
   jsApiList: [], // 微信 API 申请列表，默认为 ['onMenuShareTimeline', 'onMenuShareAppMessage']
@@ -337,10 +357,10 @@ WXJSSDK({
 
 #### `share` 分享方法
 
-```JavaScript
-import WXJSSDK from 'yypkg/wxjssdk'
+```js
+import wechatSDK from 'yypkg/wechat-sdk'
 
-WXJSSDK.share({
+wechatSDK.share({
   title: '分享标题',
   desc: '分享描述',
   link: 'xxx', // 默认值为 window.location.href
@@ -350,11 +370,11 @@ WXJSSDK.share({
 
 #### [wx](https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421141115) 实例对象
 
-```JavaScript
-import WXJSSDK from 'yypkg/wxjssdk'
+```js
+import wechatSDK from 'yypkg/wechat-sdk'
 
 (async () => {
-  const wx = await WXJSSDK()
+  const wx = await wechatSDK()
 
   wx.ready(function () {
     alert('ok')
@@ -368,15 +388,18 @@ import WXJSSDK from 'yypkg/wxjssdk'
 * `*.yoyiapp.com`
 
 
-###  `WXReload()`
+###  `resetWechatFontSize()`
 
-微信刷新页面。背景：微信内web缓存比较顽固，用自带的刷新有时也不能按预期生效。故强制在url带上随机参数进行刷新
+微信禁止缩放网页字体
 
-```JavaScript
-import WXReload from 'yypkg/wx-reload'
+* `@version since 2.0.0`
 
-WXReload()
+```js
+import resetWechatFontSize from 'yypkg/reset-wechat-font-size'
+
+resetWechatFontSize()
 ```
+
 
 ## 资源 Resources
 
@@ -384,11 +407,12 @@ WXReload()
 
 动态加载JavaScript脚本
 
+* `@version since 1.4.1`
 * `@param {String} url 脚本的url`
 * `@param {Integer} retry 加载失败时重试的次数，大于等于1的正整数`
 * `@return {Promise} true 为最终加载成功，false 为最终加载失败`
 
-```JavaScript
+```js
 import loadScript from 'yypkg/load-script'
 
 (async () => {
@@ -402,11 +426,12 @@ import loadScript from 'yypkg/load-script'
 
 动态加载CSS样式表
 
+* `@version since 1.4.1`
 * `@param {String} url CSS样式表的url`
 * `@param {Integer} retry 加载失败时重试的次数，大于等于1的正整数`
 * `@return {Promise} true 为最终加载成功，false 为最终加载失败`
 
-```JavaScript
+```js
 import loadStyle from 'yypkg/load-style'
 
 (async () => {
@@ -416,30 +441,33 @@ import loadStyle from 'yypkg/load-style'
 })
 ```
 
-###  `insertStyleText(cssText)`
+###  `loadStyleText(cssText)`
 
 动态插入 CSS 文本样式
 
+* `@version since 1.4.1`
 * `@param {String} cssText 文本样式`
 
-```JavaScript
-import insertStyleText from 'yypkg/insert-style-text'
+```js
+import loadStyleText from 'yypkg/load-style-text'
 
 const cssText = `
 .content {
   font-size: 20px;
 }
 `
-insertStyleText(cssText)
+loadStyleText(cssText)
 ```
 
 ###  `sourceLoader(opotions)`
 
 资源加载器，常用于资源预加载，支持的资源有：css、js、img（jpg、jpeg、png、gif、webp、mbp）、svga
 
+* `@version since 1.10.0`
+
 #### 基本使用
 
-```JavaScript
+```js
 import SourceLoader from 'yypkg/source-loader'
 
 const resources = ['./demo.css', './demo.js']
@@ -466,6 +494,7 @@ loader.$on('error', (url) => {
 
 进度控制器，常用于更灵活控制页面加载的进度百分比，可模拟逼真的web页面加载进度
 
+* `@version since 1.10.0`
 * `@param {Number || Array} from 设置进度起始位置`
 * `@param {Number || Array} to 设置进度结束位置`
 * `@param {Number || Array} increment 每次更新的递增量`
@@ -517,10 +546,24 @@ progress.$on('process', (currentProgress)=>{
 👉 **点击查看** [详细文档](./progress-controller.md)
 
 
+###  `forceReload()`
+
+强制刷新页面。背景：在某些浏览器内web缓存比较顽固，用自带的刷新有时也不能按预期生效。故强制在url带上随机参数进行刷新
+
+* `@version since 2.0.0`
+
+```js
+import forceReload from 'yypkg/force-reload'
+
+forceReload()
+```
+
+
 ###  `mocha`
 
 Mocha 是一个出名的 **测试框架**，对于一些前端 Web 项目，我们可以通过 Mocha 进行基本的 BDD 测试
 
+* `@version since 1.4.0`
 
 ```js
 import mocha from 'yypkg/mocha'
@@ -550,6 +593,7 @@ mocha(async function () {
 
 判断是否为微信浏览器
 
+* `@version since 1.0.0`
 * `@return {Boolean} true | false`
 
 
@@ -564,6 +608,7 @@ console.log( isWechatBrowser() )
 
 判断是否为 QQ 浏览器
 
+* `@version since 1.0.0`
 * `@return {Boolean} true | false`
 
 
@@ -578,6 +623,7 @@ console.log( isQQBrowser() )
 
 判断是否为微博浏览器
 
+* `@version since 1.0.0`
 * `@return {Boolean} true | false`
 
 
@@ -593,6 +639,7 @@ console.log( isWeiboBrowser() )
 
 判断是否为 Android 系统
 
+* `@version since 1.0.0`
 * `@return {Boolean} true | false`
 
 
@@ -607,6 +654,7 @@ console.log( isAndroid() )
 
 判断是否为 Android 系统的手机设备
 
+* `@version since 1.0.0`
 * `@return {Boolean} true | false`
 
 
@@ -621,6 +669,7 @@ console.log( isAndroidPhone() )
 
 判断是否为 Android 系统的平板设备
 
+* `@version since 1.0.0`
 * `@return {Boolean} true | false`
 
 
@@ -635,11 +684,12 @@ console.log( isAndroidTablet() )
 
 判断是否为 iOS 系统
 
+* `@version since 1.0.0`
 * `@return {Boolean} true | false`
 
 
 ```js
-import isiOS from 'yypkg/is-iOS'
+import isiOS from 'yypkg/is-ios'
 
 console.log( isiOS() )
 // => true
@@ -649,11 +699,12 @@ console.log( isiOS() )
 
 判断是否 iOS 系统的 iphone 手机设备
 
+* `@version since 1.0.0`
 * `@return {Boolean} true | false`
 
 
 ```js
-import isiPhone from 'yypkg/is-iPhone'
+import isiPhone from 'yypkg/is-iphone'
 
 console.log( isiPhone() )
 // => true
@@ -663,11 +714,12 @@ console.log( isiPhone() )
 
 判断是否为 iPhoneX
 
+* `@version since 1.1.0`
 * `@return {Boolean} true | false`
 
 
 ```js
-import isiPhoneX from 'yypkg/is-iPhoneX'
+import isiPhoneX from 'yypkg/is-iphonex'
 
 console.log( isiPhoneX() )
 // => false
@@ -677,11 +729,12 @@ console.log( isiPhoneX() )
 
 判断是否为 iPad
 
+* `@version since 1.0.0`
 * `@return {Boolean} true | false`
 
 
 ```js
-import isiPad from 'yypkg/is-iPad'
+import isiPad from 'yypkg/is-ipad'
 
 console.log( isiPad() )
 // => false
@@ -691,11 +744,12 @@ console.log( isiPad() )
 
 判断是否为 iPod
 
+* `@version since 1.0.0`
 * `@return {Boolean} true | false`
 
 
 ```js
-import isiPod from 'yypkg/is-iPod'
+import isiPod from 'yypkg/is-ipod'
 
 console.log( isiPod() )
 // => false
@@ -705,6 +759,7 @@ console.log( isiPod() )
 
 判断是否为黑莓设备
 
+* `@version since 1.0.0`
 * `@return {Boolean} true | false`
 
 
@@ -719,6 +774,7 @@ console.log( isBlackberry() )
 
 判断是否为移动手机设备
 
+* `@version since 1.0.0`
 * `@return {Boolean} true | false`
 
 
@@ -733,6 +789,7 @@ console.log( isMobile() )
 
 判断是否为平板设备
 
+* `@version since 1.0.0`
 * `@return {Boolean} true | false`
 
 
@@ -747,6 +804,7 @@ console.log( isTablet() )
 
 判断是否为 Windows 手机
 
+* `@version since 1.0.0`
 * `@return {Boolean} true | false`
 
 
@@ -761,6 +819,7 @@ console.log( isWindowsPhone() )
 
 判断是否为 Windows 平板
 
+* `@version since 1.0.0`
 * `@return {Boolean} true | false`
 
 
@@ -775,6 +834,7 @@ console.log( isWindowsTablet() )
 
 判断是否为 Chrome 浏览器
 
+* `@version since 1.0.0`
 * `@return {Boolean} true | false`
 
 
@@ -789,6 +849,7 @@ console.log( isChrome() )
 
 判断是否为 Edge 浏览器
 
+* `@version since 1.0.0`
 * `@return {Boolean} true | false`
 
 
@@ -803,6 +864,7 @@ console.log( isEdge() )
 
 判断是否为 IE 浏览器
 
+* `@version since 1.0.0`
 * `@return {Boolean} true | false`
 
 
@@ -817,6 +879,7 @@ console.log( isIE() )
 
 判断是否为 Safari 浏览器
 
+* `@version since 1.0.0`
 * `@return {Boolean} true | false`
 
 
@@ -831,12 +894,13 @@ console.log( isSafari() )
 
 判断某个 DOM 元素是否为另一元素的父元素
 
+* `@version since 1.10.0`
 * `@param {DOMElement} parent 父级元素`
 * `@param {DOMElement} child 子元素`
 * `@return {Boolean}`
 
 ```js
-import isParentElement from 'yypkg/is-weibo-browser'
+import isParentElement from 'yypkg/is-parent-element'
 
 console.log( isParentElement(parent, child) )
 // => true
