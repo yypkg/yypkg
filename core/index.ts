@@ -35,7 +35,7 @@ import isWindows from './is-windows'
 import loadScript from './load-script'
 import loadStyleText from './load-style-text'
 import loadStyle from './load-style'
-import mochaTest from './mocha-test'
+import mocha from './mocha'
 import numberRange from './number-range'
 import padZero from './pad-zero'
 import ProgressController from './progress-controller'
@@ -92,7 +92,7 @@ const yypkg = {
   loadScript,
   loadStyleText,
   loadStyle,
-  mochaTest,
+  mocha,
   numberRange,
   padZero,
   ProgressController,

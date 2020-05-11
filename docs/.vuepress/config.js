@@ -1,7 +1,7 @@
 module.exports = {
   title: 'YYPKG',
   description: 'YYPKG使用文档',
-  base: '/assets/lab/liudawei/yypkg/',
+  base: '/',
   themeConfig: {
     sidebar: 'auto',
     nav: [

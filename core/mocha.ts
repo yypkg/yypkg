@@ -10,7 +10,7 @@ import loadStyle from './load-style'
 import loadScript from './load-script'
 import loadStyleText from './load-style-text'
 
-const mochaTest = async (testcases: any): Promise<any> => {
+const mocha = async (testcases: any): Promise<any> => {
   document.body.appendChild(stringToDOMElement('<main id="mocha"><i class="close"></i></main>'))
 
   loadStyleText(`main#mocha {padding-top:45px;position:fixed;top:0;left:0;z-index:999;width:100%;height:100%;margin:0;font-size:14px;background-color:rgba(255, 255, 255, .95);}main#mocha .suite h1 {font-weight:600;}main#mocha i.close {position:absolute;right:20px;bottom:65px;width:40px;height:40px;z-index:1;cursor:pointer;border:3px solid #333}main#mocha i.close::after{position:absolute;right:0;left:0;margin:auto;top:1px;font-size:40px;display:inline-block;content:"×";color:#333;width:30px;height:30px;line-height:30px;text-align:center}`)
@@ -32,4 +32,4 @@ const mochaTest = async (testcases: any): Promise<any> => {
   window.mocha.run()
 }
 
-export default mochaTest
+export default mocha

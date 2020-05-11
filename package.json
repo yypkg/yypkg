@@ -1,6 +1,6 @@
 {
   "name": "yypkg",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "yypkg是一个实用的JavaScript工具函数集合，快速处理各种常见的通用性问题。使用极其简单，支持整体引入和模块化引入。",
   "main": "yypkg.min.js",
   "scripts": {
@@ -10,8 +10,10 @@
     "standard:check": "eslint './core**/*.{js,ts}'",
     "standard:fix": "eslint './core**/*.{js,ts}' --fix",
     "release": "node ./shell/release.js",
-    "test": "jest --verbose",
-    "publish": "node ./shell/publish.js"
+    "publish": "node ./shell/publish.js",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "test": "jest --verbose"
   },
   "repository": {
     "type": "git",
@@ -51,6 +53,7 @@
     "rollup-plugin-terser": "^5.3.0",
     "rollup-plugin-typescript": "^1.0.1",
     "shelljs": "^0.8.4",
-    "tslib": "^1.10.0"
+    "tslib": "^1.10.0",
+    "vuepress": "^1.4.1"
   }
 }

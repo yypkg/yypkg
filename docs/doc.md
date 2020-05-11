@@ -2,6 +2,10 @@
 
 ## 通用 Common
 
+### `API()`
+
+基于 [axios](https://github.com/axios/axios) 的 API 管理模块，[`👉详细文档`](./api.md)
+
 ### `debounce(fn, delay)`
 
 函数去抖，将触发频繁的事件合并成一次执行，例如防止 `input` 事件短时间内重复触发
@@ -134,6 +138,21 @@ consle.log(absUrl)
 
 ## 浏览器 Browser
 
+###  `getUserAgent()`
+
+获取浏览器用户代理字符串，返回小写
+
+* `@version since 2.0.0`
+* `@return {String} 浏览器userAgent`
+
+```js
+import getUserAgent from 'yypkg/get-user-agent'
+
+const ua = getUserAgent()
+consle.log(ua)
+// => 'mozilla/5.0 (macintosh; intel mac os x 10_15_4) applewebkit/537.36 (khtml, like gecko) chrome/81.0.4044.138 safari/537.36'
+```
+
 ###  `getFirstBrowserLanguage()`
 
 获取浏览器设置的第一语言
@@ -164,21 +183,36 @@ consle.log(ie)
 // => 10
 ```
 
+###  `getVendor()`
+
+获取浏览器供应商的名称
+
+* `@version since 2.0.0`
+* `@return {string} 浏览器供应商的名称`
+
+```js
+import getVendor from 'yypkg/get-vendor'
+
+const vendor = getVendor()
+consle.log(vendor)
+// => 'google inc.'
+```
+
 
 ## 格式化 Format
 
-###  `uuid(n)`
+###  `createUUID(n)`
 
-生成随机的唯一标识号
+生成随机的唯一标识号uuid
 
-* `@version since 1.0.0`
+* `@version since 2.0.0`
 * `@param {Number} n 标识号的位数`
 * `@return {String} 唯一标识号`
 
 ```js
-import uuid from 'yypkg/uuid'
+import createUUID from 'yypkg/create-uuid'
 
-const uid = uuid(12)
+const uid = createUUID(12)
 consle.log(uid)
 // => 'emXApUrWb4Lk'
 ```
@@ -388,16 +422,16 @@ import wechatSDK from 'yypkg/wechat-sdk'
 * `*.yoyiapp.com`
 
 
-###  `resetWechatFontSize()`
+###  `wechatResetFontSize()`
 
 微信禁止缩放网页字体
 
 * `@version since 2.0.0`
 
 ```js
-import resetWechatFontSize from 'yypkg/reset-wechat-font-size'
+import wechatResetFontSize from 'yypkg/reset-wechat-font-size'
 
-resetWechatFontSize()
+wechatResetFontSize()
 ```
 
 
@@ -507,29 +541,11 @@ loader.$on('error', (url) => {
 import ProgressController from 'yypkg/progress-controller'
 
 // 初始配置
-let config = {
-  from: 0,
-  to: 100,
+let progress = new ProgressController()
+
+progress.start({
   increment: 1,
-  rate: 100,
-}
-let stepOption = {
-  step1: {
-    progress: 85,
-    rate: [100, 120], // 在100-120ms之间随机更新频率
-  },
-  step2: {
-    progress: 92,
-    rate: [800, 1200],
-  }
-}
-let progress = new ProgressController(config)
-
-// 进度阶段1
-progress.go(stepOption.step1, ()=>{
-
-  // 进度阶段2
-  progress.add(stepOption.step2)
+  rate: 30,
 })
 
 // 设置进度到100%
@@ -588,8 +604,9 @@ mocha(async function () {
 
 ## 检测 Detect
 
+**`is` 开头的检测类都是使用变量调用，返回 `boolean`**
 
-###  `isWechatBrowser()`
+###  `isWechatBrowser`
 
 判断是否为微信浏览器
 
@@ -600,11 +617,11 @@ mocha(async function () {
 ```js
 import isWechatBrowser from 'yypkg/is-wechat-browser'
 
-console.log( isWechatBrowser() )
+console.log( isWechatBrowser )
 // => true
 ```
 
-###  `isQQBrowser()`
+###  `isQQBrowser`
 
 判断是否为 QQ 浏览器
 
@@ -615,11 +632,11 @@ console.log( isWechatBrowser() )
 ```js
 import isQQBrowser from 'yypkg/is-qq-browser'
 
-console.log( isQQBrowser() )
+console.log( isQQBrowser )
 // => true
 ```
 
-###  `isWeiboBrowser()`
+###  `isWeiboBrowser`
 
 判断是否为微博浏览器
 
@@ -630,12 +647,12 @@ console.log( isQQBrowser() )
 ```js
 import isWeiboBrowser from 'yypkg/is-weibo-browser'
 
-console.log( isWeiboBrowser() )
+console.log( isWeiboBrowser )
 // => true
 ```
 
 
-###  `isAndroid()`
+###  `isAndroid`
 
 判断是否为 Android 系统
 
@@ -646,11 +663,11 @@ console.log( isWeiboBrowser() )
 ```js
 import isAndroid from 'yypkg/is-android'
 
-console.log( isAndroid() )
+console.log( isAndroid )
 // => true
 ```
 
-###  `isAndroidPhone()`
+###  `isAndroidPhone`
 
 判断是否为 Android 系统的手机设备
 
@@ -661,11 +678,11 @@ console.log( isAndroid() )
 ```js
 import isAndroidPhone from 'yypkg/is-android-phone'
 
-console.log( isAndroidPhone() )
+console.log( isAndroidPhone )
 // => true
 ```
 
-###  `isAndroidTablet()`
+###  `isAndroidTablet`
 
 判断是否为 Android 系统的平板设备
 
@@ -676,11 +693,11 @@ console.log( isAndroidPhone() )
 ```js
 import isAndroidTablet from 'yypkg/is-android-tablet'
 
-console.log( isAndroidTablet() )
+console.log( isAndroidTablet )
 // => false
 ```
 
-###  `isiOS()`
+###  `isiOS`
 
 判断是否为 iOS 系统
 
@@ -691,11 +708,11 @@ console.log( isAndroidTablet() )
 ```js
 import isiOS from 'yypkg/is-ios'
 
-console.log( isiOS() )
+console.log( isiOS )
 // => true
 ```
 
-###  `isiPhone()`
+###  `isiPhone`
 
 判断是否 iOS 系统的 iphone 手机设备
 
@@ -706,11 +723,11 @@ console.log( isiOS() )
 ```js
 import isiPhone from 'yypkg/is-iphone'
 
-console.log( isiPhone() )
+console.log( isiPhone )
 // => true
 ```
 
-###  `isiPhoneX()`
+###  `isiPhoneX`
 
 判断是否为 iPhoneX
 
@@ -721,11 +738,11 @@ console.log( isiPhone() )
 ```js
 import isiPhoneX from 'yypkg/is-iphonex'
 
-console.log( isiPhoneX() )
+console.log( isiPhoneX )
 // => false
 ```
 
-###  `isiPad()`
+###  `isiPad`
 
 判断是否为 iPad
 
@@ -736,11 +753,11 @@ console.log( isiPhoneX() )
 ```js
 import isiPad from 'yypkg/is-ipad'
 
-console.log( isiPad() )
+console.log( isiPad )
 // => false
 ```
 
-###  `isiPod()`
+###  `isiPod`
 
 判断是否为 iPod
 
@@ -751,11 +768,11 @@ console.log( isiPad() )
 ```js
 import isiPod from 'yypkg/is-ipod'
 
-console.log( isiPod() )
+console.log( isiPod )
 // => false
 ```
 
-###  `isBlackberry()`
+###  `isBlackberry`
 
 判断是否为黑莓设备
 
@@ -766,11 +783,11 @@ console.log( isiPod() )
 ```js
 import isBlackberry from 'yypkg/is-blackberry'
 
-console.log( isBlackberry() )
+console.log( isBlackberry )
 // => false
 ```
 
-###  `isMobile()`
+###  `isMobile`
 
 判断是否为移动手机设备
 
@@ -781,11 +798,11 @@ console.log( isBlackberry() )
 ```js
 import isMobile from 'yypkg/is-mobile'
 
-console.log( isMobile() )
+console.log( isMobile )
 // => false
 ```
 
-###  `isTablet()`
+###  `isTablet`
 
 判断是否为平板设备
 
@@ -796,11 +813,11 @@ console.log( isMobile() )
 ```js
 import isTablet from 'yypkg/is-tablet'
 
-console.log( isTablet() )
+console.log( isTablet )
 // => false
 ```
 
-###  `isWindowsPhone()`
+###  `isWindowsPhone`
 
 判断是否为 Windows 手机
 
@@ -811,11 +828,11 @@ console.log( isTablet() )
 ```js
 import isWindowsPhone from 'yypkg/is-windows-phone'
 
-console.log( isWindowsPhone() )
+console.log( isWindowsPhone )
 // => false
 ```
 
-###  `isWindowsTablet()`
+###  `isWindowsTablet`
 
 判断是否为 Windows 平板
 
@@ -826,11 +843,11 @@ console.log( isWindowsPhone() )
 ```js
 import isWindowsTablet from 'yypkg/is-windows-phone'
 
-console.log( isWindowsTablet() )
+console.log( isWindowsTablet )
 // => false
 ```
 
-###  `isChrome()`
+###  `isChrome`
 
 判断是否为 Chrome 浏览器
 
@@ -841,11 +858,11 @@ console.log( isWindowsTablet() )
 ```js
 import isChrome from 'yypkg/is-chrome'
 
-console.log( isChrome() )
+console.log( isChrome )
 // => true
 ```
 
-###  `isEdge()`
+###  `isEdge`
 
 判断是否为 Edge 浏览器
 
@@ -856,11 +873,11 @@ console.log( isChrome() )
 ```js
 import isEdge from 'yypkg/is-edge'
 
-console.log( isEdge() )
+console.log( isEdge )
 // => true
 ```
 
-###  `isIE()`
+###  `isIE`
 
 判断是否为 IE 浏览器
 
@@ -871,11 +888,11 @@ console.log( isEdge() )
 ```js
 import isIE from 'yypkg/is-ie'
 
-console.log( isIE() )
+console.log( isIE )
 // => true
 ```
 
-###  `isSafari()`
+###  `isSafari`
 
 判断是否为 Safari 浏览器
 
@@ -886,32 +903,25 @@ console.log( isIE() )
 ```js
 import isSafari from 'yypkg/is-safari'
 
-console.log( isSafari() )
+console.log( isSafari )
 // => true
 ```
 
-###  `isParentElement(parent, child)`
 
-判断某个 DOM 元素是否为另一元素的父元素
+## 交互 UX
 
-* `@version since 1.10.0`
-* `@param {DOMElement} parent 父级元素`
-* `@param {DOMElement} child 子元素`
-* `@return {Boolean}`
+###  `scrollToTop`
+
+滑动返回顶部
+
+* `@version since 1.14.0`
+* `@param {Number} scrollY 获取顶部的距离，默认值 0`
+* `@param {Number} time 动画时长，默认值 200 毫秒`
+* `@return {Null}`
 
 ```js
-import isParentElement from 'yypkg/is-parent-element'
+import scrollToTop from 'yypkg/scroll-to-top'
 
-console.log( isParentElement(parent, child) )
+scrollToTop()
 // => true
 ```
-
-
-
-
-
-
-
-
-
-
