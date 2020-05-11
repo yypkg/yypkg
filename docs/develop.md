@@ -17,7 +17,23 @@ $ yarn start
 使用 rollup 将 TypeScript 模块编译打包到 release 目录，并生成 TypeScript 声明文件和 umd 模块风格的主文件 `yypkg.min.js`
 
 ```sh
-$ yarn release
+$ yarn pkg:release
+```
+
+## 编写文档
+
+在 `docs` 目录下使用 `md` 编写文档，使用 `vuepress` 编译成 `html`
+
+```sh
+$ yarn docs:dev
+```
+
+## 发布文档
+
+文档编写完成后，发布到 https://yypkg.github.io/（需要配置GitHub SSH）
+
+```sh
+$ yarn docs:publish
 ```
 
 ## 单元测试
@@ -32,12 +48,12 @@ $ yarn test
 
 1. 修改 package.json 版本号；
 2. 编写更新日志 CHANGELOG.md；
-3. 登录 npm 平台 `yarn login`；
-4. 发布到 npm 平台 `yarn run publish`（注意：不是 `yarn publish`）；
+3. 登录 npm 平台 `npm login`；
+4. 发布到 npm 平台 `yarn pkg:publish`；
 
 ```sh
-$ yarn login // 登录
-$ yarn run publish // 拷贝 package.json 和 CHANGELOG.md 到 release 目录，并发布到 npm 平台
+$ npm login // 登录
+$ yarn pkg:publish // 拷贝 package.json 和 CHANGELOG.md 到 release 目录，并发布到 npm 平台
 ```
 
 ## 工作流文档
