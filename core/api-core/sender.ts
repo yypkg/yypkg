@@ -43,7 +43,7 @@ const Sender = function (key: string, url: any, $globalOptions: any, $function: 
 
   let throttleTimer = false
 
-  const sender: any = function (data: any, options: any): Promise<any> {
+  const sender: any = function (this: any, data: any, options: any): Promise<any> {
     const cloneByNamedOptions = clone(namedOptions)
     const recorder: any = isRecordHistory ? {} : void 0
 

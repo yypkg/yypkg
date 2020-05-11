@@ -6,10 +6,10 @@
  * @return {Function}
  */
 
-const debounce = (fun: Function, delay: number): Function => {
+const debounce = function(fun: Function, delay: number): any {
   let last: any
 
-  return function () {
+  return function (this: any) {
     const ctx = this
     const args = arguments
 

@@ -6,7 +6,7 @@
  * @return {Function}
  */
 
-const throttle = function (func: Function, time: number): Function {
+const throttle = function (func: Function, time: number): any {
   let context: any
   let args: any
   let timeout: any
@@ -19,7 +19,7 @@ const throttle = function (func: Function, time: number): Function {
     result = func.apply(context, args)
   }
 
-  return function () {
+  return function (this: any) {
     const now = new Date().getTime()
     const remaining = time - (now - previous)
 

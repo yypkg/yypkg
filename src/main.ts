@@ -62,9 +62,14 @@ yypkg.sleep(1000).then(()=>{
 })
 
 
-// window.addEventListener('scroll', yypkg.throttle(() => {
-//   console.log(333)
-// }, 500), false)
+window.addEventListener('scroll', yypkg.throttle(() => {
+  console.log(333)
+}, 500), false)
+
+const debounceButton: HTMLElement | null = document.querySelector('.debounce')
+debounceButton && debounceButton.addEventListener('click', yypkg.debounce(() => {
+  console.log('点击了debounce')
+}, 500), false)
 
 const scriptUrl = 'https://polyfill.io/v3/polyfill.min.js'
 const styleUrl = 'https://gstatic.gitbook.com/css/6c3c9dec9383137845be0f0ea2cf1bf4.css'

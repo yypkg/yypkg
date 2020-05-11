@@ -140,23 +140,29 @@ const cloneLoop = (x: any): any => {
 const UNIQUE_KEY = 'com.yanhaijing.jsmini.clone' + (new Date()).getTime()
 
 // weakmap：处理对象关联引用
-function SimpleWeakmap () {
-  this.cacheArray = []
-}
+class SimpleWeakmap {
+  private cacheArray: any[]
 
-SimpleWeakmap.prototype.set = function (key: any, value: any): void {
-  this.cacheArray.push(key)
-  key[UNIQUE_KEY] = value
-}
-SimpleWeakmap.prototype.get = function (key: any): void {
-  return key[UNIQUE_KEY]
-}
-SimpleWeakmap.prototype.clear = function () {
-  for (let i = 0; i < this.cacheArray.length; i++) {
-    let key = this.cacheArray[i]
-    delete key[UNIQUE_KEY]
+  public constructor() {
+    this.cacheArray = []
   }
-  this.cacheArray.length = 0
+
+  public set(key: any, value: any): void {
+    this.cacheArray.push(key)
+    key[UNIQUE_KEY] = value
+  }
+
+  public get(key: any): any {
+    return key[UNIQUE_KEY]
+  }
+
+  public clear(): void {
+    for (let i = 0; i < this.cacheArray.length; i++) {
+      let key = this.cacheArray[i]
+      delete key[UNIQUE_KEY]
+    }
+    this.cacheArray.length = 0
+  }
 }
 
 function getWeakMap () {
@@ -167,7 +173,7 @@ function getWeakMap () {
       return result
     }
   }
-  result = new (SimpleWeakmap as any)()
+  result = new SimpleWeakmap()
 
   return result
 }

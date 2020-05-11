@@ -923,5 +923,4 @@ console.log( isSafari )
 import scrollToTop from 'yypkg/scroll-to-top'
 
 scrollToTop()
-// => true
 ```
