@@ -36,7 +36,7 @@ const clone = function (x: any): any {
     }
   } else if (t === 'object') {
     res = {}
-    for (let key in x) {
+    for (const key in x) {
       if (hasOwnProp(x, key)) {
         // 避免一层死循环 a.b = a
         res[key] = x[key] === x ? res : clone(x[key])
@@ -48,7 +48,7 @@ const clone = function (x: any): any {
 }
 
 // 通过JSON深拷贝
-const cloneJSON = (x: any, errOrDef: boolean = true): any => {
+const cloneJSON = (x: any, errOrDef = true): any => {
   if (!isClone(x)) return x
 
   try {
@@ -114,7 +114,7 @@ const cloneLoop = (x: any): any => {
         }
       }
     } else if (tt === 'object') {
-      for (let k in data) {
+      for (const k in data) {
         if (hasOwnProp(data, k)) {
           // 避免一层死循环 a.b = a
           if (data[k] === data) {
@@ -158,7 +158,7 @@ class SimpleWeakmap {
 
   public clear(): void {
     for (let i = 0; i < this.cacheArray.length; i++) {
-      let key = this.cacheArray[i]
+      const key = this.cacheArray[i]
       delete key[UNIQUE_KEY]
     }
     this.cacheArray.length = 0
@@ -217,7 +217,7 @@ const cloneForce = (x: any): any => {
     // 复杂数据需要缓存操作
     if (isClone(source)) {
       // 命中缓存，直接返回缓存数据
-      let uniqueTarget = uniqueData.get(source)
+      const uniqueTarget = uniqueData.get(source)
       if (uniqueTarget) {
         parent[key] = uniqueTarget
         continue // 中断本次循环
@@ -241,7 +241,7 @@ const cloneForce = (x: any): any => {
         }
       }
     } else if (tt === 'object') {
-      for (let k in source) {
+      for (const k in source) {
         if (hasOwnProp(source, k)) {
           if (k === UNIQUE_KEY) continue
           if (isClone(source[k])) {

@@ -16,7 +16,7 @@ function resetFontSize () {
 
 const wechatResetFontSize = (): void => {
   if (typeof window.WeixinJSBridge === 'undefined') {
-    document.addEventListener('WeixinJSBridgeReady', (e) => {
+    document.addEventListener('WeixinJSBridgeReady', () => {
       resetFontSize()
     })
   } else {

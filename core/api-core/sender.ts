@@ -13,7 +13,7 @@ const getEngineMethod = (engine: any, method: any): any => (engine[method] || en
 const clone = (obj: any): any => JSON.parse(JSON.stringify(obj))
 
 const resolveOptions = (key: string, url: any, options: any): any => {
-  let { isMock, baseURL, method } = options
+  const { isMock, baseURL, method } = options
 
   if (isMock && url.mock) {
     url = url.mock
@@ -39,7 +39,7 @@ const Sender = function (key: string, url: any, $globalOptions: any, $function: 
 
   typeof url === 'object' && (namedOptions = Object.assign(namedOptions, url))
 
-  let { isRecordHistory, RESTful } = namedOptions
+  const { isRecordHistory, RESTful } = namedOptions
 
   let throttleTimer = false
 

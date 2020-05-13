@@ -6,17 +6,17 @@
  * @return {Null}
  */
 
-const scrollToTop = (scrollY: number = 0, time: number = 200): any => {
+const scrollToTop = (scrollY = 0, time = 200): void => {
   if (!time) {
     document.body.scrollTop = document.documentElement.scrollTop = scrollY
-    return scrollY
+    return
   }
   const spacingTime = 20
   let spacingInex = time / spacingTime
   let nowTop = document.body.scrollTop + document.documentElement.scrollTop
-  let everTop = (scrollY - nowTop) / spacingInex
+  const everTop = (scrollY - nowTop) / spacingInex
 
-  let scrollTimer = setInterval(() => {
+  const scrollTimer = setInterval(() => {
     if (spacingInex > 0) {
       spacingInex--
       scrollToTop(nowTop += everTop, 0)

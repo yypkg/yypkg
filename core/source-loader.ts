@@ -7,13 +7,14 @@
  * @return {Function} SourceLoader
  */
 
-let loadData: any = {}
+const loadData: any = {}
 
 // 事件定义
-const $onEvent: {[key: string]: any} = {
-  process: () => {},
-  complete: () => {},
-  error: () => {},
+const emptyFn = () => 0
+const $onEvent: {[key: string]: Function} = {
+  process: emptyFn,
+  complete: emptyFn,
+  error: emptyFn,
 }
 
 class SourceLoader {
@@ -26,7 +27,7 @@ class SourceLoader {
 
   private init (config: any) {
     // 默认配置
-    let defaults = {
+    const defaults = {
       url: [],
       retry: 3,
       autoStart: false,
@@ -87,7 +88,7 @@ class SourceLoader {
    * @return {Funtion} 事件处理函数
    */
   private loadendEvent (node: any, url: string, type: string, requestCounts: number) {
-    let error = node.onerror = () => {
+    const error = node.onerror = () => {
       // 加载失败则重试
       if (requestCounts <= this.configs.retry) {
         requestCounts++
@@ -99,11 +100,11 @@ class SourceLoader {
     node.onload = () => {
       let onload = null
       if (type !== 'svga') {
-        onload = this.successHandle(url)
+        onload = this.successHandle()
         return onload
       }
       if ((node.status >= 200 && node.status < 300) || node.status === 304) {
-        onload = this.successHandle(url)
+        onload = this.successHandle()
         return onload
       } else {
         error()
@@ -117,7 +118,7 @@ class SourceLoader {
     ++loadData.count
   }
 
-  private successHandle (url: string) {
+  private successHandle () {
     ++loadData.count
   }
 
@@ -126,7 +127,7 @@ class SourceLoader {
     let urlsArray: any[] = []
     let tmpCount = 0
     typeof urls === 'string' ? urlsArray.push(urls) : urlsArray = urls
-    urlsArray.forEach((item, index) => {
+    urlsArray.forEach((item) => {
       let extName = item.split('.').pop().toLowerCase()
       if (extName.indexOf('?') > -1) {
         extName = extName.split('?')[0].toLowerCase()

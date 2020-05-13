@@ -5,7 +5,7 @@
  */
 
 const getFirstBrowserLanguage = (): string => {
-  const navigator:any = window.navigator
+  const navigator: any = window.navigator
   const browserLanguagePropertyKeys = ['language', 'browserLanguage', 'systemLanguage', 'userLanguage']
   let i = 0
   let language = 'unknown'

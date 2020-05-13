@@ -1,8 +1,8 @@
 {
   "name": "yypkg",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "yypkg是一个实用的JavaScript工具函数集合，快速处理各种常见的通用性问题。使用极其简单，支持整体引入和模块化引入。",
-  "main": "yypkg.min.js",
+  "main": "index.js",
   "scripts": {
     "start": "lf-engine dev",
     "dev": "lf-engine dev",
@@ -10,7 +10,7 @@
     "standard:check": "eslint './core**/*.{js,ts}'",
     "standard:fix": "eslint './core**/*.{js,ts}' --fix",
     "pkg:release": "node ./shell/release.js",
-    "pkg:publish": "node ./shell/publish.js",
+    "pkg:publish": "cd ./release && npm publish",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "docs:publish": "./shell/publish-docs.sh",
@@ -26,14 +26,21 @@
     "url": "https://github.com/yypkg/yypkg/issues"
   },
   "homepage": "https://github.com/yypkg/yypkg",
+  "private": true,
   "dependencies": {
     "axios": "0.19.0",
-    "jquery": "^3.4.1",
     "path-to-regexp": "2.4.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
+    "@rollup/plugin-babel": "^5.0.0",
+    "@rollup/plugin-commonjs": "^11.1.0",
+    "@rollup/plugin-json": "^4.0.3",
+    "@rollup/plugin-node-resolve": "^7.1.3",
+    "@rollup/plugin-typescript": "^4.1.1",
+    "@typescript-eslint/eslint-plugin": "^2.32.0",
+    "@typescript-eslint/parser": "^2.32.0",
     "art-template": "^4.13.2",
     "art-template-loader": "^1.4.3",
     "babel-eslint": "^10.1.0",
@@ -48,11 +55,11 @@
     "fs-extra": "^9.0.0",
     "husky": "^2.2.0",
     "jest": "^26.0.0",
+    "jquery": "^3.5.1",
     "legoflow-engine": "^3.0.0-alpha.15",
     "rollup": "^2.8.2",
     "rollup-plugin-multi-input": "^1.1.1",
     "rollup-plugin-terser": "^5.3.0",
-    "rollup-plugin-typescript": "^1.0.1",
     "shelljs": "^0.8.4",
     "tslib": "^1.10.0",
     "vuepress": "^1.4.1"

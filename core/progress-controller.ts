@@ -11,14 +11,15 @@
 let timer: any = 0
 
 // 事件定义
-const $onEvent: {[key: string]: any} = {
-  process: () => {},
-  complete: () => {},
-  pause: () => {},
-  stop: () => {},
-  reset: () => {},
-  beforeDestroy: () => {},
-  destroyed: () => {}
+const emptyFn = () => 0
+const $onEvent: {[key: string]: Function} = {
+  process: emptyFn,
+  complete: emptyFn,
+  pause: emptyFn,
+  stop: emptyFn,
+  reset: emptyFn,
+  beforeDestroy: emptyFn,
+  destroyed: emptyFn
 }
 
 class ProgressController {
@@ -31,13 +32,13 @@ class ProgressController {
 
   private init (config: any) {
     // 默认配置
-    let defaults = {
+    const defaults = {
       from: 0,
       to: 100,
       increment: 1,
       rate: 100
     }
-    let configs = this.config = Object.assign(defaults, config)
+    const configs = this.config = Object.assign(defaults, config)
     this.data = {
       from: configs.from,
       next: {
@@ -51,10 +52,10 @@ class ProgressController {
     }
   }
 
-  private progress (option: any, callback?: any) {
-    let data = this.data
-    let currentFrom = data.from
-    let optionFrom = option.from
+  private progress (option: any, callback?: Function) {
+    const data = this.data
+    const currentFrom = data.from
+    const optionFrom = option.from
     timer = setTimeout(() => {
       if (currentFrom + option.increment >= optionFrom) {
         data.from = optionFrom
@@ -73,12 +74,12 @@ class ProgressController {
     }, option.rate)
   }
 
-  public add (option: any, callback?: any) {
-    let config = this.config
-    let data = this.data
-    let next = data.next
+  public add (option: any, callback?: Function) {
+    const config = this.config
+    const data = this.data
+    const next = data.next
     option = this.randomOption(option)
-    let prevFrom = option.from
+    const prevFrom = option.from
 
     // ended
     if (data.status === 1) return
@@ -99,7 +100,7 @@ class ProgressController {
     next.rate = option.rate || config.rate
     next.status = 0
 
-    let nextOption = {
+    const nextOption = {
       from: next.from,
       increment: next.increment,
       rate: next.rate
@@ -110,8 +111,8 @@ class ProgressController {
     }
   }
 
-  public go (option: any, callback?: any) {
-    let data = this.data
+  public go (option: any, callback?: Function) {
+    const data = this.data
     option = this.randomOption(option)
     option.from -= data.from
     this.add(option, callback)
@@ -119,7 +120,7 @@ class ProgressController {
 
   // 开始
   public start (option: any) {
-    let opts = [
+    const opts = [
       {
         from: this.randomNumber(80, 88),
         rate: 1000 / 35
@@ -131,14 +132,14 @@ class ProgressController {
     ]
     opts[0] = Object.assign(opts[0], option)
     this.go(opts[0], () => {
-      this.add(opts[1], null)
+      this.add(opts[1], undefined)
     })
   }
 
   // 完成
-  public complete (callback?: any) {
-    let { increment } = this.data.next
-    let option = {
+  public complete (callback?: Function) {
+    const { increment } = this.data.next
+    const option = {
       from: 100,
       increment,
       rate: 1000 / 35
@@ -149,16 +150,16 @@ class ProgressController {
   }
 
   // 终止
-  public stop (callback?: any) {
-    let currentProgress = this.data.from
+  public stop (callback?: Function) {
+    const currentProgress = this.data.from
     this.data.status = 1
     window.clearTimeout(timer)
     $onEvent.stop(currentProgress)
     callback && callback(currentProgress)
   }
 
-  public reset (callback?: any) {
-    let config = this.config
+  public reset (callback?: Function) {
+    const config = this.config
     window.clearTimeout(timer)
     this.data = {
       from: config.from,
@@ -177,7 +178,7 @@ class ProgressController {
     callback && callback(this.data.from)
   }
 
-  public destroy (callback?: any) {
+  public destroy (callback?: Function) {
     $onEvent.beforeDestroy(this.data.from)
     window.clearTimeout(timer)
     callback && callback()
@@ -188,10 +189,10 @@ class ProgressController {
   }
 
   private randomOption (option: any) {
-    for (let i in option) {
+    for (const i in option) {
       if (typeof option[i] === 'object') {
-        let times = option[i][1] - option[i][0]
-        let offset = option[i][0]
+        const times = option[i][1] - option[i][0]
+        const offset = option[i][0]
         option[i] = Math.random() * times + offset
       }
     }

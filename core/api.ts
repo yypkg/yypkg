@@ -33,7 +33,7 @@ class API {
 
     this.$history = $history || []
 
-    for (let key in urls) {
+    for (const key in urls) {
       (this as any)[key] = Sender(key, urls[key], this.$options, this.$function, this.$history)
     }
   }

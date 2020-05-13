@@ -2,16 +2,15 @@
  * JSONP for axios
  */
 
-let count: number = 0
-let jsonp: any = {
+let count = 0
+const jsonp = {
   
   // 对象转URI
   objectToURI (obj: any) {
     if (!obj) return ''
-    let data, key, value
-    data = (function () {
-      let results
-      results = []
+    let key, value
+    const data = (function () {
+      const results  = []
       for (key in obj) {
         value = obj[key]
         results.push(encodeURIComponent(key) + '=' + encodeURIComponent(value))
@@ -43,31 +42,22 @@ let jsonp: any = {
       opts = {}
     }
 
-    let prefix = opts.prefix || 'jsonp'
+    const prefix = opts.prefix || 'jsonp'
 
-    let id = opts.name || (prefix + (count++))
+    const id = opts.name || (prefix + (count++))
 
-    let param = opts.param || 'callback'
-    let timeout = opts.timeout != null ? opts.timeout : 30000
-    let target: any = document.getElementsByTagName('script')[0] || document.head
-    let script: any
-    let timer: any
-
-    if (timeout) {
-      timer = setTimeout(function () {
-        cleanup()
-        if (fn) {
-          fn(new Error('请求超时'))
-        }
-      }, timeout)
-    }
+    const param = opts.param || 'callback'
+    const timeout = opts.timeout != null ? opts.timeout : 30000
+    const target: any = document.getElementsByTagName('script')[0] || document.head
+    let script: any = null
+    let timer: any = null
 
     function cleanup () {
       // if (script.parentNode) script.parentNode.removeChild(script)
       if (script) {
         script.remove()
       }
-      (window as any)[id] = noop
+      (window as any)[id] = null
       if (timer) {
         clearTimeout(timer)
       }
@@ -77,6 +67,15 @@ let jsonp: any = {
       if (window[id]) {
         cleanup()
       }
+    }
+
+    if (timeout) {
+      timer = setTimeout(function () {
+        cleanup()
+        if (fn) {
+          fn(new Error('请求超时'))
+        }
+      }, timeout)
     }
 
     (window as any)[id] = function (data: any) {
@@ -104,7 +103,7 @@ let jsonp: any = {
   // Promise
   init (url: string, options: any = {}) {
     return new Promise((resolve, reject) => {
-      let data = jsonp.objectToURI(options.data)
+      const data = jsonp.objectToURI(options.data)
       let params = jsonp.objectToURI(options.params)
 
       if (data) {
@@ -128,7 +127,5 @@ let jsonp: any = {
     })
   }
 }
-
-function noop () {}
 
 export default jsonp.init

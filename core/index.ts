@@ -106,8 +106,7 @@ const yypkg = {
   trimSpace,
   type,
   wechatResetFontSize,
-  wechatSDK,
+  wechatSDK
 }
 
 export default yypkg
-

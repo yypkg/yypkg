@@ -10,10 +10,10 @@ const throttle = function (func: Function, time: number): any {
   let context: any
   let args: any
   let timeout: any
-  let result: any
-  let previous: number = 0
+  let result: Function
+  let previous = 0
 
-  let later = function () {
+  const later = function () {
     previous = new Date().getTime()
     timeout = null
     result = func.apply(context, args)
@@ -24,6 +24,7 @@ const throttle = function (func: Function, time: number): any {
     const remaining = time - (now - previous)
 
     context = this
+    // eslint-disable-next-line prefer-rest-params
     args = arguments
 
     if (remaining <= 0) {

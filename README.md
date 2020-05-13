@@ -39,10 +39,6 @@ await sleep(1000)
 通过该方式引入模块，可大大减少引用体积。
 
 
-::: warning
-注意：需要把安装后的 `node_modules/yypkg` 包含在工作流 Babel 编译 include 范围内。
-:::
-
 ## API 目录
 
 **通用 Common**

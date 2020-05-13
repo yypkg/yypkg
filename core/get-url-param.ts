@@ -6,7 +6,7 @@
  * @return {String} 对应的参数值
  */
 
-const getUrlParam = (name: string, url: string = window.location.href): any => {
+const getUrlParam = (name: string, url: string = window.location.href): string | undefined => {
   const paramReg = new RegExp('[\\?&#]' + name + '=([^&#]+)', 'gi')
   const paramMatch = decodeURIComponent(url).match(paramReg)
 

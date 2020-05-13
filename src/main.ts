@@ -57,19 +57,19 @@ console.log('“赏  味期 限 ”去除空格：', yypkg.trimSpace('赏  味�
 
 yypkg.wechatResetFontSize()
 
-yypkg.sleep(1000).then(()=>{
+yypkg.sleep(3000).then(()=>{
   console.log('sleep完毕')
 })
 
 
 window.addEventListener('scroll', yypkg.throttle(() => {
   console.log(333)
-}, 500), false)
+}, 1000), false)
 
 const debounceButton: HTMLElement | null = document.querySelector('.debounce')
 debounceButton && debounceButton.addEventListener('click', yypkg.debounce(() => {
   console.log('点击了debounce')
-}, 500), false)
+}, 1000), false)
 
 const scriptUrl = 'https://polyfill.io/v3/polyfill.min.js'
 const styleUrl = 'https://gstatic.gitbook.com/css/6c3c9dec9383137845be0f0ea2cf1bf4.css'

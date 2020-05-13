@@ -5,7 +5,7 @@
  * @return {Promise}
  */
 
-const sleep = (delay: number): Promise<any> => {
+const sleep = (delay: number): Promise<object> => {
   return new Promise(resolve => setTimeout(resolve, delay))
 }
 

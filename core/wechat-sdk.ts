@@ -7,7 +7,7 @@
  */
 import loadScript from './load-script'
 
-const requestSignature = (url: string): Promise<any> => {
+const requestSignature = (url: string): Promise<object> => {
   return new Promise((resolve, reject) => {
     const xhr = new window.XMLHttpRequest()
     xhr.open('POST', url, true)

@@ -16,7 +16,7 @@
  */
 
 const numberRange = (num: number, options: any): number => {
-  let value = +num
+  const value = +num
   let min = -Infinity
   let max = Infinity
   if (options) {

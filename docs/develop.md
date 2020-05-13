@@ -14,7 +14,7 @@ $ yarn start
 
 ## 编译打包
 
-使用 rollup 将 TypeScript 模块编译打包到 release 目录，并生成 TypeScript 声明文件和 umd 模块风格的主文件 `yypkg.min.js`
+使用 rollup 将 TypeScript 模块编译打包到 release 目录，并生成 TypeScript 声明文件
 
 ```sh
 $ yarn pkg:release
@@ -52,8 +52,8 @@ $ yarn test
 4. 发布到 npm 平台 `yarn pkg:publish`；
 
 ```sh
-$ npm login // 登录
-$ yarn pkg:publish // 拷贝 package.json 和 CHANGELOG.md 到 release 目录，并发布到 npm 平台
+$ npm login
+$ yarn pkg:publish
 ```
 
 ## 工作流文档

@@ -5,7 +5,7 @@
  * @return {DOMElement}
  */
 
-const stringToDOMElement = (string: any): any => {
+const stringToDOMElement = (string: string): any => {
   const frame: HTMLIFrameElement = document.createElement('iframe')
   frame.style.display = 'none'
   document.body.appendChild(frame)
