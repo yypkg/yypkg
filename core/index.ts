@@ -7,6 +7,7 @@ import debounce from './debounce'
 import forceReload from './force-reload'
 import getAbsoluteUrl from './get-absolute-url'
 import getFirstBrowserLanguage from './get-first-browser-language'
+import getBilingual from './get-bilingual'
 import getIEVersion from './get-ie-version'
 import getUrlParam from './get-url-param'
 import getUrlPath from './get-url-path'
@@ -64,6 +65,7 @@ const yypkg = {
   forceReload,
   getAbsoluteUrl,
   getFirstBrowserLanguage,
+  getBilingual,
   getIEVersion,
   getUrlParam,
   getUrlPath,

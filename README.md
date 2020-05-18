@@ -62,6 +62,7 @@ await sleep(1000)
 
 - `getUserAgent` 获取浏览器用户代理字符串， [`👉去使用`](https://yypkg.github.io/doc.html#getuseragent)
 - `getFirstBrowserLanguage` 获取浏览器第一语言， [`👉去使用`](https://yypkg.github.io/doc.html#getfirstbrowserlanguage)
+- `getBilingual` 获取中英文双语情景下的浏览器语言， [`👉去使用`](https://yypkg.github.io/doc.html#getBilingual)
 - `getIEVersion` 获取 IE 浏览器版本号， [`👉去使用`](https://yypkg.github.io/doc.html#getieversion)
 - `getVendor` 获取浏览器供应商的名称， [`👉去使用`](https://yypkg.github.io/doc.html#getvendor)
 

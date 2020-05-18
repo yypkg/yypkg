@@ -168,6 +168,21 @@ consle.log(lang)
 // => 'zh'
 ```
 
+###  `getBilingual()`
+
+获取中英文双语情景下的浏览器语言，跟 `getFirstBrowserLanguage()` 不同的是，该方法返回结果只有两种，中文（含繁体）统一返回 `zh`，其他情况（含获取到未知）统一返回 `en`；
+
+* `@version since 2.0.4`
+* `@return {String} 中文（含繁体）统一返回 'zh'，其他情况（含获取到未知）统一返回 'en'`
+
+```js
+import getBilingual from 'yypkg/get-bilingual'
+
+const lang = getBilingual()
+consle.log(lang)
+// => 'zh'
+```
+
 ###  `getIEVersion()`
 
 获取IE浏览器的版本号
