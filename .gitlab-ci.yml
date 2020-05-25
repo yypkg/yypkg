@@ -1,0 +1,31 @@
+image: harbor.yy.com/front_end/node:12.7.0
+
+stages:
+  - build
+
+# 安装依赖
+before_script:
+  - cp -r /data/lfx-vue-pre-installed/node_modules ./node_modules
+  - cp /data/lfx-vue-pre-installed/yarn.lock ./yarn.lock
+  - yarn install --registry https://npm-registry.yy.com
+
+build:
+  stage: build
+  tags:
+    - webfe
+  artifacts:
+    expire_in: 1 week
+    paths:
+    - dist/
+    - gitlog
+    - package.json
+  after_script:
+    - git log -1 --pretty=medium >> gitlog
+  only:
+    - master
+    - test
+  script:
+    # 构建
+    - npm run build
+    # 删除 sourceMap 文件
+    - find ./dist -name '*.map' -type f -print -exec rm -rf {} \;

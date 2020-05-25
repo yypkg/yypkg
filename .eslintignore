@@ -1,3 +1,5 @@
 dist
-tests/yypkg.js
 release
+shell
+test
+node_modules

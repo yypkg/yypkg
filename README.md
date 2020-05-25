@@ -1,73 +1,19 @@
-# YY.PKG
+# YYPKG
 
-常用工具库集合，包括
+## 介绍
 
-- [x] 基于 [axios](https://github.com/axios/axios) 的 API 管理模块（[详细](./docs/api.md)）
-- [x] 去抖 `debounce`（[详细](./core/debounce.js)）
-- [x] 节流 `throttle`（[详细](./core/throttle.js)）
-- [x] `sleep`（[详细](./core/sleep.js)）
-- [x] 获取 URL 上参数 `getUrlParam`（[详细](./core/get-url-param.js)）
-- [x] 动态加载 JS 脚本 `loadScript`（[详细](./core/load-script.js)）
-- [x] 动态加载 Style 样式 `loadStyle`（[详细](./core/load-style.js)）
-- [x] 获取 URL 绝对路径 `getAbsoluteUrl`
-- [x] 获取 navigator appVersion `getAppVersion`
-- [x] 获取 IE 浏览器版本号 `getIEVersion`
-- [x] 获取 navigator userAgent `getUserAgent`
-- [x] 获取 navigator vendor `getVendor`
-- [x] 判断是否安卓手机 `isAndroidPhone`
-- [x] 判断是否安卓平板 `isAndroidTablet`
-- [x] 判断是否安卓设备 `isAndroid`
-- [x] 判断是否黑莓设备 `isBlackberry`
-- [x] 判断是否 Chrome 浏览器 `isChrome`
-- [x] 判断是否 Edge 浏览器 `isEdge`
-- [x] 判断是否 IE 浏览器 `isIE`（[详细](./core/is-ie.js)）
-- [x] 判断是否 iOS 设备 `isiOS`
-- [x] 判断是否 iPad `isiPad`
-- [x] 判断是否 iPhone `isiPhone`
-- [x] 判断是否 iPhoneX+ `isiPhoneX`（[详细](./core/is-iPhoneX.js)）
-- [x] 判断是否 iPod `isiPod`
-- [x] 判断是否手机设备 `isMobile`
-- [x] 判断是否平板设备 `isTablet`
-- [x] 判断是否 Safari 浏览器 `isSafari`
-- [x] 判断是否 Windows 手机 `isWindowsPhone`
-- [x] 判断是否 Windows 平板 `isWindowsTablet`
-- [x] 判断是否 Windows 设备 `isWindows`
-- [x] 判断是否微信浏览器 `isWechatBrowser`
-- [x] 判断是否 QQ 浏览器 `isQQBrowser`
-- [x] 判断是否微博浏览器 `isWeiboBrowser`
-- [x] 生成唯一标识码 `uuid`
-- [x] 深拷贝 `clone`（[详细](./core/clone.js)）
-- [x] 准确的类型检测 `type`（[详细](./core/type.js)）
-- [x] 简单格式化日期 `dateFormat`（[详细](./core/date-format.js)）
-- [x] 千分位逗号 `thousandsDot`（[详细](./core/thousands-dot.js)）
-- [x] 字符串裁去空格 `trimSpace`
-- [x] 判断某个 DOM 元素是否为另一元素的父元素 `isParentElement`（[详细](./core/is-parent-element.js)）
-- [x] 随机颜色值 `randomColor`
-- [x] 简单对比版本号 `compareVersion`（[详细](./core/compare-version.js)）
-- [x] 原生字符串转为 DOM 元素 `stringToDOMElement`（[详细](./core/string-to-domelement.js)）
-- [x] 前缀补充零位 `padZero`（[详细](./core/pad-zero.js)）
-- [x] CSS 文本插入文档 Style 元素 `loadStyleText`
-- [x] Mocha 测试 `mocha` （[详细](./docs/mocha.md)）
-- [x] 资源加载器 `source-loader` （[详细](./docs/source-loader.md)）
-- [x] 进度控制器 `progress-controller` （[详细](./docs/progress-controller.md)）
-- [x] 微信 JSSDK `wxjssdk` （[详细](./docs/wx-jssdk.md)）
-- [x] 设置数值范围并返回结果 `numberRange` （[详细](./core/number-range.js)）
-- [x] 获取当前 URL 路径（不带参数）`getUrlPath`
-- [x] 微信里刷新页面 `WXReload` （[详细](./core/wx-reload.js)）
-- [x] 回到顶部 `scrollToTop`
+yypkg是一个实用的JavaScript工具函数集合，快速处理各种常见的通用性问题。使用极其简单，支持整体引入和模块化引入。
 
-## 更新日志
-
-[CHANGELOG](./CHANGELOG.md)
+[`👉查看API 文档`](https://yypkg.github.io)
 
 ## 安装
 
 ```sh
-npm i yypkg
+yarn add yypkg
 
 # or
 
-yarn add yypkg
+npm i yypkg
 ```
 
 ## 使用
@@ -76,23 +22,113 @@ yarn add yypkg
 
 ```js
 import { sleep } from 'yypkg'
+
+// 等待1秒
+await sleep(1000)
 ```
 
 ### Tree-Shaking
 
 ```js
 import sleep from 'yypkg/sleep'
+
+// 等待1秒
+await sleep(1000)
 ```
 
 通过该方式引入模块，可大大减少引用体积。
 
-但注意，需要把安装后的 `node_modules/yypkg` 包含在工作流 Babel 编译 include 范围内。
 
-## 发布版本
+## API 目录
 
-```sh
-npm run release
-```
+**通用 Common**
+
+- `api` 基于 [axios](https://github.com/axios/axios) 的 API 管理模块， [`👉去使用`](https://yypkg.github.io/api.html)
+- `debounce` 函数去抖， [`👉去使用`](https://yypkg.github.io/doc.html#debounce-fn-delay)
+- `throttle` 函数节流， [`👉去使用`](https://yypkg.github.io/doc.html#throttle-fn-time)
+- `sleep` Promise 版的 setTimeout， [`👉去使用`](https://yypkg.github.io/doc.html#sleep-time)
+- `clone` 深拷贝， [`👉去使用`](https://yypkg.github.io/doc.html#clone-x)
+- `type` 准确的类型检测， [`👉去使用`](https://yypkg.github.io/doc.html#type-x-strict)
+
+
+**路径 URL**
+
+- `getUrlParam` 获取 URL 上参数， [`👉去使用`](https://yypkg.github.io/doc.html#geturlparam-name-url)
+- `getUrlPath` 获取当前 URL 路径（不带参数），[`👉去使用`](https://yypkg.github.io/doc.html#geturlpath)
+- `getAbsoluteUrl` 获取 URL 绝对路径， [`👉去使用`](https://yypkg.github.io/doc.html#getabsoluteurl-url)
+
+
+**浏览器 Browser**
+
+- `getUserAgent` 获取浏览器用户代理字符串， [`👉去使用`](https://yypkg.github.io/doc.html#getuseragent)
+- `getFirstBrowserLanguage` 获取浏览器第一语言， [`👉去使用`](https://yypkg.github.io/doc.html#getfirstbrowserlanguage)
+- `getBilingual` 获取中英文双语情景下的浏览器语言， [`👉去使用`](https://yypkg.github.io/doc.html#getBilingual)
+- `getIEVersion` 获取 IE 浏览器版本号， [`👉去使用`](https://yypkg.github.io/doc.html#getieversion)
+- `getVendor` 获取浏览器供应商的名称， [`👉去使用`](https://yypkg.github.io/doc.html#getvendor)
+
+
+**格式化 Format**
+
+- `createUUID` 生成唯一标识码， [`👉去使用`](https://yypkg.github.io/doc.html#createuuid-n)
+- `randomColor` 生成随机颜色值， [`👉去使用`](https://yypkg.github.io/doc.html#randomcolor)
+- `trimSpace` 字符串裁去空格， [`👉去使用`](https://yypkg.github.io/doc.html#trimspace-str)
+- `dateFormat` 简单格式化日期， [`👉去使用`](https://yypkg.github.io/doc.html#dateformat-date-format)
+- `thousandsDot` 千分位逗号， [`👉去使用`](https://yypkg.github.io/doc.html#thousandsdot-num)
+- `padZero` 前缀补充零位， [`👉去使用`](https://yypkg.github.io/doc.html#padzero-num-digits)
+- `numberRange` 设置数值范围并返回结果， [`👉去使用`](https://yypkg.github.io/doc.html#numberrange-num-options)
+- `compareVersion` 简单对比版本号， [`👉去使用`](https://yypkg.github.io/doc.html#compareversion-a-b)
+- `stringToDOMElement` 原生字符串转为 DOM 元素， [`👉去使用`](https://yypkg.github.io/doc.html#stringtodomelement-string)
+
+
+**微信 WeChat**
+
+- `wechatSDK` 微信 JS SDK， [`👉去使用`](https://yypkg.github.io/doc.html#wechatsdk-options)
+- `wechatResetFontSize` 微信重置字体大小（禁用字体缩放）， [`👉去使用`](https://yypkg.github.io/doc.html#wechatresetfontsize)
+
+
+**资源 Resources**
+
+- `loadScript` 动态加载 JS 脚本， [`👉去使用`](https://yypkg.github.io/doc.html#loadscript-url-retry)
+- `loadStyle` 动态加载 Style 样式， [`👉去使用`](https://yypkg.github.io/doc.html#loadstyle-url-retry)
+- `loadStyleText` CSS 文本插入文档 Style 元素， [`👉去使用`](https://yypkg.github.io/doc.html#loadstyletext-csstext)
+- `SourceLoader` 资源加载器 ， [`👉去使用`](https://yypkg.github.io/source-loader.html)
+- `ProgressController` 进度控制器， [`👉去使用`](https://yypkg.github.io/progress-controller.html)
+- `mocha` Mocha 测试， [`👉去使用`](https://yypkg.github.io/mocha.html)
+
+
+**检测 Detect**
+
+- `isWechatBrowser` 判断是否为微信浏览器， [`👉去使用`](https://yypkg.github.io/doc.html#iswechatbrowser)
+- `isQQBrowser` 判断是否为 QQ 浏览器， [`👉去使用`](https://yypkg.github.io/doc.html#isqqbrowser)
+- `isWeiboBrowser` 判断是否为微博浏览器， [`👉去使用`](https://yypkg.github.io/doc.html#isweibobrowser)
+- `isAndroid` 判断是否为安卓设备， [`👉去使用`](https://yypkg.github.io/doc.html#isandroid)
+- `isAndroidPhone` 判断是否为安卓手机， [`👉去使用`](https://yypkg.github.io/doc.html#isandroidphone)
+- `isAndroidTablet` 判断是否为安卓平板， [`👉去使用`](https://yypkg.github.io/doc.html#isandroidtablet)
+- `isiOS` 判断是否为 iOS 设备， [`👉去使用`](https://yypkg.github.io/doc.html#isios)
+- `isiPhone` 判断是否为 iPhone， [`👉去使用`](https://yypkg.github.io/doc.html#isiphone)
+- `isiPhoneX` 判断是否为 iPhoneX+， [`👉去使用`](https://yypkg.github.io/doc.html#isiphonex)
+- `isiPad` 判断是否为 iPad， [`👉去使用`](https://yypkg.github.io/doc.html#isipad)
+- `isiPod` 判断是否为 iPod， [`👉去使用`](https://yypkg.github.io/doc.html#isipod)
+- `isBlackberry` 判断是否为黑莓设备， [`👉去使用`](https://yypkg.github.io/doc.html#isblackberry)
+- `isMobile` 判断是否为手机设备， [`👉去使用`](https://yypkg.github.io/doc.html#ismobile)
+- `isTablet` 判断是否为平板设备， [`👉去使用`](https://yypkg.github.io/doc.html#istablet)
+- `isWindowsPhone` 判断是否为 Windows 手机， [`👉去使用`](https://yypkg.github.io/doc.html#iswindowsphone)
+- `isWindowsTablet` 判断是否为 Windows 平板， [`👉去使用`](https://yypkg.github.io/doc.html#iswindowstablet)
+- `isWindows` 判断是否为 Windows 设备， [`👉去使用`](https://yypkg.github.io/doc.html#iswindows)
+- `isChrome`判断是否为 Chrome 浏览器 ， [`👉去使用`](https://yypkg.github.io/doc.html#ischrome)
+- `isEdge` 判断是否为 Edge 浏览器， [`👉去使用`](https://yypkg.github.io/doc.html#isedge)
+- `isIE` 判断是否为 IE 浏览器， [`👉去使用`](https://yypkg.github.io/doc.html#isie)
+- `isSafari` 判断是否为 Safari 浏览器， [`👉去使用`](https://yypkg.github.io/doc.html#issafari)
+
+**交互 UX**
+
+- `scrollToTop` 滑动返回顶部， [`👉去使用`](https://yypkg.github.io/doc.html#scrolltotop)
+
+
+## 更新日志
+
+[CHANGELOG](./CHANGELOG.md)
+
 
 ## 许可
 
