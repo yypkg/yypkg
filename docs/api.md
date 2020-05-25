@@ -1,5 +1,7 @@
 # API 管理模块
 
+注：axios 官方默认不使用 `ES6 Promise Polyfill`，如需兼容低版本环境，请自行添加 `ES6 Promise Polyfill`。[详见官方说明](https://github.com/axios/axios/blob/master/UPGRADE_GUIDE.md#es6-promise-polyfill)
+
 ## 简单使用
 
 ```js
