@@ -11,7 +11,7 @@ const loadData: any = {}
 
 // 事件定义
 const emptyFn = () => 0
-const $onEvent: {[key: string]: Function} = {
+const $onEvent: {[key: string]: (...options: any) => void} = {
   process: emptyFn,
   complete: emptyFn,
   error: emptyFn,

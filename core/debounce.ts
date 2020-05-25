@@ -6,7 +6,7 @@
  * @return {Function}
  */
 
-const debounce = (fun: Function, delay: number): any => {
+const debounce = (fun: any, delay: number): any => {
   let last: any
   return function (this: any) {
     // eslint-disable-next-line @typescript-eslint/no-this-alias

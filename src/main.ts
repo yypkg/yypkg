@@ -24,8 +24,40 @@ api.test().then((res: any)=>{
 console.log(createUUID())
 // console.log(isAndroid)
 
+
+const m1 = {
+  b: 56,
+  c: {
+    test: 'xyz',
+    data: 999,
+    doc: [
+      {
+        k: 34,
+        y: 90
+      }
+    ]
+  }
+}
+const m2 = {
+  b: 436,
+  c: {
+    test: 'mm3',
+    kiss: 888,
+    doc: [
+      {
+        k: 88,
+        ppp: 90
+      },
+      {
+        k: 8888,
+        y: 6666
+      }
+    ]
+  }
+}
 console.log(yypkg)
 console.log('版本比较：', yypkg.compareVersion('1.2', '3'))
+console.log('deepMerge', yypkg.deepMerge(m1, m2))
 console.log('生成uuid：', yypkg.createUUID())
 console.log('日期格式：', yypkg.dateFormat(new Date(), 'YYYY/MM/DD hh:mm:ss'))
 console.log('第一语言：', yypkg.getFirstBrowserLanguage())

@@ -8,8 +8,6 @@
  * 参考：https://github.com/jsmini/type
  */
 
-const toString: Function = Object.prototype.toString
-
 const type = (x: any, strict?: boolean): any => {
   strict = !!strict
 
@@ -28,7 +26,7 @@ const type = (x: any, strict?: boolean): any => {
   let cls
   let clsLow
   try {
-    cls = toString.call(x).slice(8, -1)
+    cls = Object.prototype.toString.call(x).slice(8, -1)
     clsLow = cls.toLowerCase()
   } catch (e) {
     // ie下的 activex对象

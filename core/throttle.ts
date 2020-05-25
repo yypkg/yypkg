@@ -6,11 +6,11 @@
  * @return {Function}
  */
 
-const throttle = function (func: Function, time: number): any {
+const throttle = function (func: any, time: number): any {
   let context: any
   let args: any
   let timeout: any
-  let result: Function
+  let result: any
   let previous = 0
 
   const later = function () {

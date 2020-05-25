@@ -8,7 +8,7 @@ class API {
   private $axios: any
   private $function: any
   private $history: any
-  public constructor (urls: any, options: object = {}, $history?: any) {
+  public constructor (urls: Record<string, unknown>, options: Record<string, unknown> = {}, $history?: any[]) {
     this.$options = options
 
     !this.$options.engine && (this.$options.engine = 'axios')
@@ -38,15 +38,15 @@ class API {
     }
   }
 
-  public $method (key: string, func: (...options: any) => void) {
+  public $method (key: string, func: (...options: any) => void): void {
     func(this.$function.engine[key])
   }
 
-  public $engine (key: string, func: (...options: any) => void) {
+  public $engine (key: string, func: (...options: any) => void): void {
     this.$function.engine[key] = func
   }
 
-  public $on (key: string, func: (...options: any) => void) {
+  public $on (key: string, func: (...options: any) => void): void {
     this.$function[key] = func
   }
 }

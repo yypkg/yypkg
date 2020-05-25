@@ -2,6 +2,7 @@ import API from './api'
 import compareVersion from './compare-version'
 import dateFormat from './date-format'
 import { clone, cloneJSON, cloneLoop, cloneForce } from './clone'
+import deepMerge from './deep-merge'
 import createUUID from './create-uuid'
 import debounce from './debounce'
 import forceReload from './force-reload'
@@ -60,6 +61,7 @@ const yypkg = {
   cloneJSON,
   cloneLoop,
   cloneForce,
+  deepMerge,
   createUUID,
   debounce,
   forceReload,

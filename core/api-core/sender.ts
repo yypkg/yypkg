@@ -34,7 +34,7 @@ const resolveOptions = (key: string, url: any, options: any): any => {
 }
 
 // TODO: 解耦 请求体内函数
-const Sender = function (key: string, url: any, $globalOptions: any, $function: any, $history: any): any  {
+const Sender = function (key: string, url: unknown, $globalOptions: Record<string, unknown>, $function: any, $history: any[]): any  {
   let namedOptions = clone($globalOptions)
 
   typeof url === 'object' && (namedOptions = Object.assign(namedOptions, url))
@@ -75,7 +75,7 @@ const Sender = function (key: string, url: any, $globalOptions: any, $function: 
 
     const engine = engines[engineKey]
 
-    const doRequest = async (resolve: Function, reject: Function) => {
+    const doRequest = async (resolve: (value: any) => void, reject: (reason: any) => void) => {
       if (options.throttle) {
         if (throttleTimer) {
           return void 0
@@ -141,7 +141,7 @@ const Sender = function (key: string, url: any, $globalOptions: any, $function: 
           options.params = options.data
         }
 
-        ;(defaultSupportMethod.indexOf(method) >= 0 ? engine(options) : (getEngineMethod(engine, method)(options.url, options.data, options))).then(async (response: any) => {
+        (defaultSupportMethod.indexOf(method) >= 0 ? engine(options) : (getEngineMethod(engine, method)(options.url, options.data, options))).then(async (response: any) => {
           await successCallback(response)
 
           resolve(typeof response.status !== 'undefined' && typeof response.statusText !== 'undefined' && typeof response.headers !== 'undefined' ? response.data : response)

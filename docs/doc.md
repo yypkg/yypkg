@@ -66,6 +66,26 @@ import clone from 'yypkg/clone'
 clone(x)
 ```
 
+
+### `deepMerge(target, source)`
+
+对象深度合并
+
+* `@version since 2.0.5`
+* `@param {Object} target 对象1`
+* `@param {Object} source 对象2`
+* `@return {Object} 合并后的对象`
+
+```js
+import deepMerge from 'yypkg/clone'
+
+const m1 = { a: 123, b: 456 }
+const m2 = { a: 666 }
+deepMerge(m1, m2)
+// { a: 666, b: 456 }
+```
+
+
 ###  `type(x, strict)`
 
 类型检测，弥补typeof获取类型不准确的问题
@@ -386,7 +406,7 @@ consle.log(element)
 
 ###  `wechatSDK(options)`
 
-微信JS SDK
+微信JS SDK。V2.0.5 移除 yoyi 域名签名服务，默认使用 fimo 签名
 
 * `@version since 1.11.4`
 * `@param {Object} options 配置选项`
@@ -399,7 +419,7 @@ import wechatSDK from 'yypkg/wechat-sdk'
 
 wechatSDK({
   debug: true, // 是否开启微信调试 debug 模式
-  signatureApiURL: 'xxx', // 更换 签名服务接口地址，默认为 //api.yoyiapp.com/wx/jssdk/signature
+  signatureApiURL: 'xxx', // 更换 签名服务接口地址，默认为 //server.yoyiapp.com/fimo-wxjssdk
   jsApiList: [], // 微信 API 申请列表，默认为 ['onMenuShareTimeline', 'onMenuShareAppMessage']
 })
 ```
@@ -430,11 +450,6 @@ import wechatSDK from 'yypkg/wechat-sdk'
   })
 })
 ```
-
-#### 内置支持域名
-
-* `*.yy.com`
-* `*.yoyiapp.com`
 
 
 ###  `wechatResetFontSize()`

@@ -6,7 +6,7 @@
  * @return {Promise} true为最终加载成功，false为最终加载失败
  */
 
-const fetch = (url: string, resolve: Function, retry?: number): void => {
+const fetch = (url: string, resolve: (value: any) => void, retry?: number): void => {
   const script: any = document.createElement('script')
   script.src = url
   script.onload = ()=> {

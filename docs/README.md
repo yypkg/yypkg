@@ -46,6 +46,7 @@ await sleep(1000)
 - `throttle` 函数节流， [`👉去使用`](./doc.html#throttle-fn-time)
 - `sleep` Promise 版的 setTimeout， [`👉去使用`](./doc.html#sleep-time)
 - `clone` 深拷贝， [`👉去使用`](./doc.html#clone-x)
+- `deepMerge` 深度合并对象， [`👉去使用`](./doc.html#deepmerge-target-source)
 - `type` 准确的类型检测， [`👉去使用`](./doc.html#type-x-strict)
 
 

@@ -7,7 +7,7 @@
  */
 import loadScript from './load-script'
 
-const requestSignature = (url: string): Promise<object> => {
+const requestSignature = (url: string): Promise<unknown> => {
   return new Promise((resolve, reject) => {
     const xhr = new window.XMLHttpRequest()
     xhr.open('POST', url, true)
@@ -30,7 +30,7 @@ const requestSignature = (url: string): Promise<object> => {
   })
 }
 
-const wechatSDK = (options: any = {}) => {
+const wechatSDK = (options: any = {}): Promise<unknown> => {
   return new Promise((resolve, reject) => {
     loadScript('//res.wx.qq.com/open/js/jweixin-1.4.0.js').then(() => {
       const successReturn = (data: any) => {
@@ -50,9 +50,10 @@ const wechatSDK = (options: any = {}) => {
         reject(error)
       }
 
+      // 默认使用 fimo 的微信签名
       if (!options.signatureApiURL) {
-        const url1 = !options.isFIMO ? '//server.yoyiapp.com/wxjssdk/' : '//server.yoyiapp.com/fimo-wxjssdk/'
-        const url2 = !options.isFIMO ? '//server-test.yoyiapp.com/wxjssdk/' : '//server-test.yoyiapp.com/fimo-wxjssdk/'
+        const url1 = '//server.yoyiapp.com/fimo-wxjssdk/'
+        const url2 = '//server-test.yoyiapp.com/fimo-wxjssdk/'
 
         const URL1 = `${window.location.protocol === 'http:' ? 'http:' : 'https:'}${url1}`
         const URL2 = `${window.location.protocol === 'http:' ? 'http:' : 'https:'}${url2}`
@@ -67,17 +68,8 @@ const wechatSDK = (options: any = {}) => {
   })
 }
 
-wechatSDK.share = ({ title = '', desc = '', link = window.location.href, imgUrl = '' }) => {
+wechatSDK.share = ({ title = '', desc = '', link = window.location.href, imgUrl = '' }): void => {
   wechatSDK().then((wx: any) => {
-    wx.ready(function () {
-      wx.onMenuShareTimeline({ title, desc, link, imgUrl })
-      wx.onMenuShareAppMessage({ title, desc, link, imgUrl })
-    })
-  })
-}
-
-wechatSDK.FIMOShare = function ({ title = '', desc = '', link = window.location.href, imgUrl = '' }) {
-  wechatSDK({ isFIMO: true }).then((wx: any) => {
     wx.ready(function () {
       wx.onMenuShareTimeline({ title, desc, link, imgUrl })
       wx.onMenuShareAppMessage({ title, desc, link, imgUrl })

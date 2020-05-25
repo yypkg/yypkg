@@ -12,7 +12,7 @@ let timer: any = 0
 
 // 事件定义
 const emptyFn = () => 0
-const $onEvent: {[key: string]: Function} = {
+const $onEvent: {[key: string]: (...options: any) => void} = {
   process: emptyFn,
   complete: emptyFn,
   pause: emptyFn,
@@ -52,7 +52,7 @@ class ProgressController {
     }
   }
 
-  private progress (option: any, callback?: Function) {
+  private progress (option: any, callback?: (...options: any) => void) {
     const data = this.data
     const currentFrom = data.from
     const optionFrom = option.from
@@ -74,7 +74,7 @@ class ProgressController {
     }, option.rate)
   }
 
-  public add (option: any, callback?: Function) {
+  public add (option: any, callback?: (...options: any) => void) {
     const config = this.config
     const data = this.data
     const next = data.next
@@ -111,7 +111,7 @@ class ProgressController {
     }
   }
 
-  public go (option: any, callback?: Function) {
+  public go (option: any, callback?: (...options: any) => void) {
     const data = this.data
     option = this.randomOption(option)
     option.from -= data.from
@@ -137,7 +137,7 @@ class ProgressController {
   }
 
   // 完成
-  public complete (callback?: Function) {
+  public complete (callback?: (...options: any) => void) {
     const { increment } = this.data.next
     const option = {
       from: 100,
@@ -150,7 +150,7 @@ class ProgressController {
   }
 
   // 终止
-  public stop (callback?: Function) {
+  public stop (callback?: (...options: any) => void) {
     const currentProgress = this.data.from
     this.data.status = 1
     window.clearTimeout(timer)
@@ -158,7 +158,7 @@ class ProgressController {
     callback && callback(currentProgress)
   }
 
-  public reset (callback?: Function) {
+  public reset (callback?: (...options: any) => void) {
     const config = this.config
     window.clearTimeout(timer)
     this.data = {
@@ -178,7 +178,7 @@ class ProgressController {
     callback && callback(this.data.from)
   }
 
-  public destroy (callback?: Function) {
+  public destroy (callback?: (...options: any) => void) {
     $onEvent.beforeDestroy(this.data.from)
     window.clearTimeout(timer)
     callback && callback()

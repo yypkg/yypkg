@@ -1,3 +1,14 @@
+# 2.0.5
+
+## 新增
+
+* 新增 `deepMerge()` 方法合并对象，支持深度合并
+* 添加 typescript-eslint 检测
+
+## 改变
+
+* `wechatSDK` 移除 `yoyi` 域名签名服务，默认使用 `fimo` 签名
+
 # 2.0.4
 
 ## 新增
