@@ -1,5 +1,7 @@
 # API 管理模块
 
+注：axios 官方默认不使用 `ES6 Promise Polyfill`，如需兼容低版本环境，请自行添加 `ES6 Promise Polyfill`。[详见官方说明](https://github.com/axios/axios/blob/master/UPGRADE_GUIDE.md#es6-promise-polyfill)
+
 ## 简单使用
 
 ```js
@@ -94,7 +96,7 @@ const api = new API({
   test: 'https://legox.org/mock/:id'
 })
 
-await api.test({ code: 1 }, { keys: 'a3e67a40-863c-11e7-9085-0ba4558c07dc' })
+await api.test({ code: 1 }, { keys: { id: 'a3e67a40-863c-11e7-9085-0ba4558c07dc' } })
 ```
 
 ## RESTful 调用

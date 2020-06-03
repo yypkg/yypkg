@@ -451,6 +451,11 @@ import wechatSDK from 'yypkg/wechat-sdk'
 })
 ```
 
+默认签名支持的域名白名单：
+* `*.fimoapp.com`
+* `*.yoyiapp.com`
+* `*.yy.com`
+
 
 ###  `wechatResetFontSize()`
 
