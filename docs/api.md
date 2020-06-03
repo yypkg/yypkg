@@ -96,7 +96,7 @@ const api = new API({
   test: 'https://legox.org/mock/:id'
 })
 
-await api.test({ code: 1 }, { keys: 'a3e67a40-863c-11e7-9085-0ba4558c07dc' })
+await api.test({ code: 1 }, { keys: { id: 'a3e67a40-863c-11e7-9085-0ba4558c07dc' } })
 ```
 
 ## RESTful 调用
