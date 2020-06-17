@@ -11,6 +11,7 @@ import getFirstBrowserLanguage from './get-first-browser-language'
 import getBilingual from './get-bilingual'
 import getIEVersion from './get-ie-version'
 import getUrlParam from './get-url-param'
+import setUrlParam from './set-url-param'
 import getUrlPath from './get-url-path'
 import getUserAgent from './get-user-agent'
 import getVendor from './get-vendor'
@@ -70,6 +71,7 @@ const yypkg = {
   getBilingual,
   getIEVersion,
   getUrlParam,
+  setUrlParam,
   getUrlPath,
   getUserAgent,
   getVendor,

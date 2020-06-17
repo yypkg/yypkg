@@ -64,6 +64,7 @@ console.log('第一语言：', yypkg.getFirstBrowserLanguage())
 console.log('双语：', yypkg.getBilingual())
 console.log('IE版本：', yypkg.getIEVersion())
 console.log('url参数：', yypkg.getUrlParam('v'))
+console.log('设置url参数：', yypkg.setUrlParam('https://www.yy.com/#/detail/4', 'share', 'app'))
 console.log('url路径：', yypkg.getUrlPath())
 console.log('userAgent：', yypkg.getUserAgent())
 console.log('浏览器厂商：', yypkg.getVendor())
@@ -95,13 +96,19 @@ yypkg.sleep(3000).then(()=>{
 })
 
 
-window.addEventListener('scroll', yypkg.throttle(() => {
-  console.log(333)
-}, 1000), false)
+// window.addEventListener('scroll', yypkg.throttle(() => {
+//   console.log(333)
+// }, 1000), false)
 
-const debounceButton: HTMLElement | null = document.querySelector('.debounce')
+const debounceButton = document.querySelector('.debounce')
+const immediate = true
 debounceButton && debounceButton.addEventListener('click', yypkg.debounce(() => {
-  console.log('点击了debounce')
+  console.log(`点击了debounce，immediate：${immediate}`)
+}, 1000, immediate), false)
+
+const throttleButton = document.querySelector('.throttle')
+throttleButton && throttleButton.addEventListener('click', yypkg.throttle(() => {
+  console.log('点击了throttle')
 }, 1000), false)
 
 const scriptUrl = 'https://polyfill.io/v3/polyfill.min.js'
