@@ -6,18 +6,20 @@
 
 基于 [axios](https://github.com/axios/axios) 的 API 管理模块，[`👉详细文档`](./api.md)
 
-### `debounce(fn, delay)`
+### `debounce(callback, wait, immediate)`
 
-函数去抖，将触发频繁的事件合并成一次执行，例如防止 `input` 事件短时间内重复触发
+函数去抖，每完成等待某个时间后去执行某函数，只希望执行一次，例如防止 `input` 事件短时间内重复触发
 
 * `@version since 1.0.0`
-* `@param {Function} fn 回调函数`
-* `@param {Number} time 等待多长时间之后执行，单位毫秒`
+* `@param {Function} callback 回调函数`
+* `@param {number} wait 等待 wait 毫秒之后才执行`
+* `@param {boolean} immediate 是否立即执行。v2.0.6 增加`
+* `@return {Function} 返回`
 
 ```js
 import debounce from 'yypkg/debounce'
 
-element.addEventListener('click', debounce(submit, 200), false)
+element.addEventListener('click', debounce(submit, 200, true), false)
 function submit(e) { }
 ```
 
@@ -120,6 +122,24 @@ const version = getUrlParam('v')
 consle.log(version)
 // https://yy.com/?v=666
 // => '666'
+```
+
+###  `setUrlParam(name, url)`
+
+设置/追加 URL 参数
+
+* `@version since 2.0.6`
+* `@param {String} uri 需要被处理的 url`
+* `@param {String} key 需要设置或添加的参数的 key`
+* `@param {String} value 需要设置或添加的参数的 value`
+* `@return {String} 返回被处理后的新的 url`
+
+```js
+import setUrlParam from 'yypkg/set-url-param'
+
+const link = setUrlParam('https://www.yy.com/#/detail/4', 'share', 'app')
+consle.log(link)
+// => 'https://www.yy.com/?share=app#/detail/4'
 ```
 
 ###  `getUrlPath()`
