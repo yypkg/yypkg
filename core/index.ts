@@ -12,6 +12,7 @@ import getBilingual from './get-bilingual'
 import getIEVersion from './get-ie-version'
 import getUrlParam from './get-url-param'
 import setUrlParam from './set-url-param'
+import removeUrlParam from './remove-url-param'
 import getUrlPath from './get-url-path'
 import getUserAgent from './get-user-agent'
 import getVendor from './get-vendor'
@@ -72,6 +73,7 @@ const yypkg = {
   getIEVersion,
   getUrlParam,
   setUrlParam,
+  removeUrlParam,
   getUrlPath,
   getUserAgent,
   getVendor,

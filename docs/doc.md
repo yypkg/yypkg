@@ -124,7 +124,7 @@ consle.log(version)
 // => '666'
 ```
 
-###  `setUrlParam(name, url)`
+###  `setUrlParam(uri, key, value)`
 
 设置/追加 URL 参数
 
@@ -140,6 +140,27 @@ import setUrlParam from 'yypkg/set-url-param'
 const link = setUrlParam('https://www.yy.com/#/detail/4', 'share', 'app')
 consle.log(link)
 // => 'https://www.yy.com/?share=app#/detail/4'
+```
+
+###  `removeUrlParam(uri, key)`
+
+移除 url 中指定的参数（键值）
+
+* `@version since 2.0.7`
+ * `@param {String} uri 需要被处理的 url`
+ * `@param {String} key 需要移除的参数的 key`
+ * `@return {String} 返回移除指定参数后的 url`
+
+```js
+import removeUrlParam from 'yypkg/remove-url-param'
+
+const link1 = removeUrlParam('https://www.yy.com/?channel=app#/detail/6', 'channel')
+consle.log(link1)
+// => 'https://www.yy.com/#/detail/6'
+
+const link2 = removeUrlParam('https://www.yy.com/?channel=app&share=wechat#/detail/6', 'channel')
+consle.log(link2)
+// => 'https://www.yy.com/?share=wechat#/detail/6'
 ```
 
 ###  `getUrlPath()`

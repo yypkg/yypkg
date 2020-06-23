@@ -53,6 +53,8 @@ await sleep(1000)
 **路径 URL**
 
 - `getUrlParam` 获取 URL 上参数， [`👉去使用`](./doc.html#geturlparam-name-url)
+- `setUrlParam` 设置/追加 URL 参数， [`👉去使用`](./doc.html#seturlparam-uri-key-value)
+- `removeUrlParam` 移除 URL 上指定参数， [`👉去使用`](./doc.html#removeurlparam-uri-key)
 - `getUrlPath` 获取当前 URL 路径（不带参数），[`👉去使用`](./doc.html#geturlpath)
 - `getAbsoluteUrl` 获取 URL 绝对路径， [`👉去使用`](./doc.html#getabsoluteurl-url)
 
@@ -123,7 +125,7 @@ await sleep(1000)
 - `scrollToTop` 滑动返回顶部， [`👉去使用`](./doc.html#scrolltotop)
 
 
-## 更新日志
+### 更新日志
 
 [CHANGELOG](./CHANGELOG.md)
 
