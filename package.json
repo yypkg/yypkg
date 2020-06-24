@@ -9,11 +9,9 @@
     "build": "lf-engine build",
     "standard:check": "eslint './core**/*.{js,ts}'",
     "standard:fix": "eslint './core**/*.{js,ts}' --fix",
-    "pkg:release": "node ./shell/release.js",
-    "pkg:publish": "cd ./release && npm publish",
+    "release": "node ./shell/release.js",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
-    "docs:publish": "./shell/publish-docs.sh",
+    "docs:publish": "node ./shell/copy-files.js && ./shell/publish-docs.sh",
     "test": "jest --verbose"
   },
   "repository": {

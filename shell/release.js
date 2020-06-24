@@ -1,19 +1,25 @@
+const shell = require('shelljs')
 const path = require('path')
 const fs = require('fs-extra')
 const del = require('del')
-const shell = require('shelljs')
 
 const rootPath = path.resolve(__dirname, '../')
+const docsPath = path.resolve(rootPath, './docs')
 const releasePath = path.resolve(rootPath, './release')
 del.sync(releasePath)
 fs.mkdirSync(releasePath)
 
-// move files
-const movefile = ['package.json', 'README.md', 'CHANGELOG.md']
+// 从 docs 目录拷贝 md 文件到 release 目录和根目录
+const movefile = ['README.md', 'CHANGELOG.md']
 for (let file of movefile) {
-  fs.copyFileSync(path.resolve(rootPath, file), path.resolve(releasePath, file))
+  fs.copyFileSync(path.resolve(docsPath, file), path.resolve(releasePath, file))
+  fs.copyFileSync(path.resolve(docsPath, file), path.resolve(rootPath, file))
 }
-// reset package.json
+
+// 从根目录拷贝 package.json 到 release 目录
+fs.copyFileSync(path.resolve(rootPath, 'package.json'), path.resolve(releasePath, 'package.json'))
+
+// 重写修改 package.json
 const packageJson = path.resolve(releasePath, 'package.json')
 const packageJsonData = fs.readJSONSync(packageJson)
 
