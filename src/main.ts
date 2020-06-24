@@ -101,13 +101,13 @@ yypkg.sleep(3000).then(()=>{
 //   console.log(333)
 // }, 1000), false)
 
-const debounceButton = document.querySelector('.debounce')
+const debounceButton: any = document.querySelector('.debounce')
 const immediate = true
 debounceButton && debounceButton.addEventListener('click', yypkg.debounce(() => {
   console.log(`点击了debounce，immediate：${immediate}`)
 }, 1000, immediate), false)
 
-const throttleButton = document.querySelector('.throttle')
+const throttleButton: any = document.querySelector('.throttle')
 throttleButton && throttleButton.addEventListener('click', yypkg.throttle(() => {
   console.log('点击了throttle')
 }, 1000), false)
@@ -158,4 +158,16 @@ progress.complete(()=>{
   console.log('progress加载完毕')
   yypkg.scrollToTop(100, 500)
   console.log('scrollToTop完毕')
+})
+
+
+// Tween
+const tween = new yypkg.Tween({
+  from: 0,
+  to: 100,
+  duration: 1500,
+  easing: 'easeInOut'
+})
+tween.$on('process', (value: number) => {
+  throttleButton && (throttleButton.style.transform = `translate3d(${value}px, 0px, 0)`)
 })

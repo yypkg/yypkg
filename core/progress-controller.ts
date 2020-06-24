@@ -8,23 +8,21 @@
  * @return {Function} ProgressController
  */
 
-let timer: any = 0
-
-// 事件定义
-const emptyFn = () => 0
-const $onEvent: {[key: string]: (...options: any) => void} = {
-  process: emptyFn,
-  complete: emptyFn,
-  pause: emptyFn,
-  stop: emptyFn,
-  reset: emptyFn,
-  beforeDestroy: emptyFn,
-  destroyed: emptyFn
-}
-
 class ProgressController {
   private config: any
   private data: any
+  private timer: any = 0
+
+  // 事件定义
+  private $onEvent: {[key: string]: (...options: any) => void} = {
+    process: () => 0,
+    complete: () => 0,
+    pause: () => 0,
+    stop: () => 0,
+    reset: () => 0,
+    beforeDestroy: () => 0,
+    destroyed: () => 0
+  }
 
   public constructor (argument: any) {
     this.init(argument)
@@ -56,19 +54,19 @@ class ProgressController {
     const data = this.data
     const currentFrom = data.from
     const optionFrom = option.from
-    timer = setTimeout(() => {
+    this.timer = setTimeout(() => {
       if (currentFrom + option.increment >= optionFrom) {
         data.from = optionFrom
-        $onEvent.process(data.from)
-        window.clearTimeout(timer)
+        this.$onEvent.process(data.from)
+        window.clearTimeout(this.timer)
         data.next.status = 1
         if (optionFrom === 100) {
-          $onEvent.complete(data.from)
+          this.$onEvent.complete(data.from)
         }
         callback && callback(data.from)
       } else {
         data.from += option.increment
-        $onEvent.process(data.from)
+        this.$onEvent.process(data.from)
         this.progress(option, callback)
       }
     }, option.rate)
@@ -84,9 +82,9 @@ class ProgressController {
     // ended
     if (data.status === 1) return
 
-    window.clearTimeout(timer)
+    window.clearTimeout(this.timer)
     if (next.status === 0) {
-      $onEvent.pause(data)
+      this.$onEvent.pause(data)
       next.status = 1
     }
 
@@ -145,7 +143,7 @@ class ProgressController {
       rate: 1000 / 35
     }
     this.data.status = 2
-    window.clearTimeout(timer)
+    window.clearTimeout(this.timer)
     this.go(option, callback)
   }
 
@@ -153,14 +151,14 @@ class ProgressController {
   public stop (callback?: (...options: any) => void) {
     const currentProgress = this.data.from
     this.data.status = 1
-    window.clearTimeout(timer)
-    $onEvent.stop(currentProgress)
+    window.clearTimeout(this.timer)
+    this.$onEvent.stop(currentProgress)
     callback && callback(currentProgress)
   }
 
   public reset (callback?: (...options: any) => void) {
     const config = this.config
-    window.clearTimeout(timer)
+    window.clearTimeout(this.timer)
     this.data = {
       from: config.from,
       next: {
@@ -172,20 +170,20 @@ class ProgressController {
       },
       status: 0
     }
-    timer = 0
-    $onEvent.reset(this.data.from)
-    // $onEvent.process(this.data)
+    this.timer = 0
+    this.$onEvent.reset(this.data.from)
+    // this.$onEvent.process(this.data)
     callback && callback(this.data.from)
   }
 
   public destroy (callback?: (...options: any) => void) {
-    $onEvent.beforeDestroy(this.data.from)
-    window.clearTimeout(timer)
+    this.$onEvent.beforeDestroy(this.data.from)
+    window.clearTimeout(this.timer)
     callback && callback()
     this.config = null
     this.data = null
-    timer = 0
-    $onEvent.destroyed()
+    this.timer = 0
+    this.$onEvent.destroyed()
   }
 
   private randomOption (option: any) {
@@ -204,7 +202,7 @@ class ProgressController {
   }
 
   public $on (type: string, fun: (...options: any) => void) {
-    $onEvent[type] = fun
+    this.$onEvent[type] = fun
   }
 }
 

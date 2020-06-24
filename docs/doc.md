@@ -1000,3 +1000,33 @@ import scrollToTop from 'yypkg/scroll-to-top'
 
 scrollToTop()
 ```
+
+
+###  `Tween`
+
+线性运动函数，按指定的动画线性过渡类型的频率返回运动位置
+
+* `@version since 2.0.8`
+* `@param {number} options.from 起始`
+* `@param {number} options.to 截止`
+* `@param {number} options.duration 持续时间，ms`
+* `@param {string} options.easing 线性过渡类型，可选有：linear、easeIn、easeOut、easeInOut`
+* `@method Tween.$on('process', (value) => {}) 动画过程持续触发，返回当前运动位置`
+* `@method Tween.$on('complete', (value) => {}) 动画结束时触发，返回当前运动位置`
+* `@return void`
+
+```js
+import Tween from 'yypkg/tween'
+
+const testTween = new Tween({
+  from: 0,
+  to: 100,
+  duration: 1500,
+  easing: 'easeInOut'
+})
+testTween.$on('process', (value: number) => {
+  button.style.transform = `translate3d(${value}px, 0px, 0)`
+})
+```
+
+

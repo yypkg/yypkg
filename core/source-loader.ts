@@ -7,18 +7,17 @@
  * @return {Function} SourceLoader
  */
 
-const loadData: any = {}
-
-// 事件定义
-const emptyFn = () => 0
-const $onEvent: {[key: string]: (...options: any) => void} = {
-  process: emptyFn,
-  complete: emptyFn,
-  error: emptyFn,
-}
-
 class SourceLoader {
   private configs: any
+
+  // 事件定义
+  private $onEvent: {[key: string]: (...options: any) => void} = {
+    process: () => 0,
+    complete: () => 0,
+    error: () => 0,
+  }
+
+  private loadData: any = {}
 
   public constructor (argument: any) {
     this.configs = {}
@@ -114,12 +113,12 @@ class SourceLoader {
 
   private errorHandle (url: string) {
     console.error(`${url} load fail`)
-    $onEvent.error(url)
-    ++loadData.count
+    this.$onEvent.error(url)
+    ++this.loadData.count
   }
 
   private successHandle () {
-    ++loadData.count
+    ++this.loadData.count
   }
 
   public start () {
@@ -159,25 +158,25 @@ class SourceLoader {
     })
 
     // 通过监听loadData.count判断加载状态
-    Object.defineProperty(loadData, 'count', {
+    Object.defineProperty(this.loadData, 'count', {
       configurable: true,
-      get () {
+      get: () => {
         return tmpCount
       },
-      set (value) {
+      set: (value) => {
         tmpCount = value
         if (tmpCount === urlsArray.length) {
-          $onEvent.complete(tmpCount)
+          this.$onEvent.complete(tmpCount)
         }
         else {
-          $onEvent.process(urlsArray.length, tmpCount, urlsArray[tmpCount])
+          this.$onEvent.process(urlsArray.length, tmpCount, urlsArray[tmpCount])
         }
       }
     })
   }
 
   public $on (type: string, fun: (...options: any) => void) {
-    $onEvent[type] = fun
+    this.$onEvent[type] = fun
   }
 }
 

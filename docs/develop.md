@@ -32,7 +32,10 @@ $ yarn docs:dev
 
 ## Step 3：编译打包
 
-执行以下命令，将使用 rollup 将 TypeScript 模块编译打包到 `release` 目录，并生成 TypeScript 声明文件；
+1. 如代码有变动，先修改 package.json 版本号；
+2. 执行以下命令编译打包；
+
+将使用 rollup 将 TypeScript 模块编译打包到 `release` 目录，并生成 TypeScript 声明文件；
 自动拷贝 `docs/README.md`、`docs/CHANGELOG.md` 和 `package.json` 到 `release` 目录;
 自动拷贝 `docs/README.md`、`docs/CHANGELOG.md` 到根目录;
 
@@ -43,10 +46,7 @@ $ yarn release
 
 ## Step 4：发布到 npm
 
-发布前会自动拷贝 `docs/README.md` 和 `docs/CHANGELOG.md` 到 项目根目录和 `release` 目录，并且拷贝根目录的 `package.json` 到 `release` 目录
-
-1. 修改 package.json 版本号；
-2. 登录 npm 平台，并发布；
+登录 npm 平台，并发布；
 
 ```sh
 $ npm login

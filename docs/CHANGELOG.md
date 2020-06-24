@@ -1,5 +1,15 @@
 # 更新日志
 
+## v2.0.8
+
+### 新增
+
+* 新增 `Tween` 线性运动函数
+
+### 优化
+
+* 优化 `SourceLoader`、 `ProgressController` 源码
+
 ## v2.0.7
 
 ### 新增

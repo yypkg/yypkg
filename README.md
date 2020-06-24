@@ -127,6 +127,7 @@ await sleep(1000)
 **交互 UX**
 
 - `scrollToTop` 滑动返回顶部， [`👉去使用`](https://yypkg.github.io/doc.html#scrolltotop)
+- `Tween` 线性运动函数， [`👉去使用`](https://yypkg.github.io/doc.html#tween)
 
 
 ## 更新日志

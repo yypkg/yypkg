@@ -45,6 +45,7 @@ import padZero from './pad-zero'
 import ProgressController from './progress-controller'
 import randomColor from './random-color'
 import scrollToTop from './scroll-to-top'
+import Tween from './tween'
 import sleep from './sleep'
 import SourceLoader from './source-loader'
 import stringToDOMElement from './string-to-dom-element'
@@ -106,6 +107,7 @@ const yypkg = {
   ProgressController,
   randomColor,
   scrollToTop,
+  Tween,
   sleep,
   SourceLoader,
   stringToDOMElement,
