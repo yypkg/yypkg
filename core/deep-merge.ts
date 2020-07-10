@@ -58,7 +58,7 @@ function mergeObject (target: Map, source: Map, optionsArgument?: Map): Record<s
   return destination
 }
 
-function deepMerge (target: Record<string, unknown> | any[], source: Record<string, unknown> | any[], optionsArgument?: Map): Record<string, unknown> | any[] {
+function deepMerge (target: any, source: any, optionsArgument?: Map): any {
   const array = Array.isArray(source)
   const options = optionsArgument || { arrayMerge: defaultArrayMerge }
   const arrayMerge = options.arrayMerge || defaultArrayMerge
