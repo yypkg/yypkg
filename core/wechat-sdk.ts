@@ -32,7 +32,7 @@ const requestSignature = (url: string): Promise<unknown> => {
 
 const wechatSDK = (options: any = {}): Promise<unknown> => {
   return new Promise((resolve, reject) => {
-    loadScript('//res.wx.qq.com/open/js/jweixin-1.4.0.js').then(() => {
+    loadScript('//res.wx.qq.com/open/js/jweixin-1.6.0.js', 3).then(() => {
       const successReturn = (data: any) => {
         window.wx.config({
           debug: options.debug || false,
@@ -40,7 +40,8 @@ const wechatSDK = (options: any = {}): Promise<unknown> => {
           timestamp: data.timestamp,
           nonceStr: data.nonceStr,
           signature: data.signature,
-          jsApiList: options.jsApiList || ['onMenuShareTimeline', 'onMenuShareAppMessage']
+          jsApiList: options.jsApiList || ['onMenuShareTimeline', 'onMenuShareAppMessage'],
+          openTagList: options.openTagList || ['wx-open-launch-app, wx-open-launch-weapp']
         })
 
         resolve(window.wx)

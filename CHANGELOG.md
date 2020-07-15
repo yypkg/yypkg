@@ -1,5 +1,17 @@
 # 更新日志
 
+## v2.0.10
+
+### 优化
+
+* 优化 `wechatSDK`，支持 `openTagList` 参数，默认为 `['wx-open-launch-app, wx-open-launch-weapp']`
+
+## v2.0.9
+
+### 优化
+
+* 优化 `deepMerge` ts 声明
+
 ## v2.0.8
 
 ### 新增
