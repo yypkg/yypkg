@@ -63,7 +63,7 @@ await sleep(500)
 * `@return {Any} number / array / function / ...`
 
 ```js
-import clone from 'yypkg/clone'
+import { clone, cloneJSON, cloneLoop, cloneForce } from 'yypkg/clone'
 
 clone(x)
 ```
@@ -462,7 +462,7 @@ wechatSDK({
   debug: true, // 是否开启微信调试 debug 模式
   signatureApiURL: 'xxx', // 更换 签名服务接口地址，默认为 //server.yoyiapp.com/fimo-wxjssdk
   jsApiList: [], // 微信 API 申请列表，默认为 ['onMenuShareTimeline', 'onMenuShareAppMessage']
-  openTagList: [] // since 2.0.11，开放标签列表，默认为 ['wx-open-launch-app, wx-open-launch-weapp']
+  openTagList: [] // since 2.0.11，开放标签列表，默认为 ['wx-open-launch-app', 'wx-open-launch-weapp']
 })
 ```
 

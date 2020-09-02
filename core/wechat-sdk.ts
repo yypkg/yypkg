@@ -41,7 +41,7 @@ const wechatSDK = (options: any = {}): Promise<unknown> => {
           nonceStr: data.nonceStr,
           signature: data.signature,
           jsApiList: options.jsApiList || ['onMenuShareTimeline', 'onMenuShareAppMessage'],
-          openTagList: options.openTagList || ['wx-open-launch-app, wx-open-launch-weapp']
+          openTagList: options.openTagList || ['wx-open-launch-app', 'wx-open-launch-weapp']
         })
 
         resolve(window.wx)

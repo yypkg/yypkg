@@ -1,10 +1,16 @@
 # 更新日志
 
+## v2.0.12
+
+### 修复
+
+* 修复 `wechatSDK` 的 `openTagList` 默认参数
+
 ## v2.0.10
 
 ### 优化
 
-* 优化 `wechatSDK`，支持 `openTagList` 参数，默认为 `['wx-open-launch-app, wx-open-launch-weapp']`
+* 优化 `wechatSDK`，支持 `openTagList` 参数，默认为 `['wx-open-launch-app', 'wx-open-launch-weapp']`
 
 ## v2.0.9
 
