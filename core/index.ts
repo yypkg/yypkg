@@ -55,6 +55,7 @@ import trimSpace from './trim-space'
 import type from './type'
 import wechatResetFontSize from './wechat-reset-font-size'
 import wechatSDK from './wechat-sdk'
+import appCall from './app-call'
 
 const yypkg = {
   API,
@@ -116,7 +117,8 @@ const yypkg = {
   trimSpace,
   type,
   wechatResetFontSize,
-  wechatSDK
+  wechatSDK,
+  appCall
 }
 
 export default yypkg

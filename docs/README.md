@@ -128,6 +128,7 @@ await sleep(1000)
 
 - `scrollToTop` 滑动返回顶部， [`👉去使用`](https://yypkg.github.io/doc.html#scrolltotop)
 - `Tween` 线性运动函数， [`👉去使用`](https://yypkg.github.io/doc.html#tween)
+- `appCall` 唤起 APP 客户端， [`👉去使用`](https://yypkg.github.io/doc.html#appcall)
 
 
 ## 更新日志

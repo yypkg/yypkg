@@ -1031,3 +1031,31 @@ testTween.$on('process', (value: number) => {
 ```
 
 
+###  `appCall`
+
+唤起 APP 客户端
+
+* `@version since 2.0.13`
+* `@param {string} links.ulink universal link`
+* `@param {string} links.schema URL Schemes`
+* `@param {string} links.fallbackUrl Android 使用的 fallback url`
+
+
+##### 唤起流程
+
+1. iOS 端 → **QQ、微博** 提示使用外部浏览器打开 → 如果不传 `ulink` 参数，则使用 RUL Schema 打开 → 否则使用 universal link 打开；
+2. Android 端的 **微信、微博** 提示使用外部浏览器打开  → 否则使用 RUL Schema 打开 → 如果打开失败，则跳转到 `fallbackUrl`
+
+
+```js
+import appCall from 'yypkg/app-call'
+
+appCall({
+  ulink: 'https://yypkg.github.io/',
+  schema: 'yypkg://',
+  fallbackUrl: 'https://yypkg.github.io/'
+})
+```
+
+
+
