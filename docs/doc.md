@@ -1035,27 +1035,27 @@ testTween.$on('process', (value: number) => {
 
 唤起 APP 客户端
 
-* `@version since 2.0.13`
-* `@param {string} links.ulink universal link`
-* `@param {string} links.schema URL Schemes`
+* `@version since 2.0.14`
+* `@param {string} links.universalLink universal links`
+* `@param {string} links.schemaUrl URL Schemes`
 * `@param {string} links.fallbackUrl Android 使用的 fallback url`
 
 
 ##### 唤起流程
 
-1. iOS 端 → **QQ、微博** 提示使用外部浏览器打开 → 如果不传 `ulink` 参数，则使用 RUL Schema 打开 → 否则使用 universal link 打开；
+1. iOS 端 → **QQ、微博** 提示使用外部浏览器打开 → 如果不传 `universalLink` 参数，则使用 RUL Schema 打开 → 否则使用 universal link 打开；
 2. Android 端的 **微信、微博** 提示使用外部浏览器打开  → 否则使用 RUL Schema 打开 → 如果打开失败，则跳转到 `fallbackUrl`
+
+
+另外，Android App Links 目前在部分手机的原生浏览器也无法打开 APP，例如华为 mate30、小米 9，所以暂不考虑加入 Android App Links 支持。
 
 
 ```js
 import appCall from 'yypkg/app-call'
 
 appCall({
-  ulink: 'https://yypkg.github.io/',
-  schema: 'yypkg://',
+  universalLink: 'https://yypkg.github.io/',
+  schemaUrl: 'yypkg://',
   fallbackUrl: 'https://yypkg.github.io/'
 })
 ```
-
-
-

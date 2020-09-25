@@ -1,8 +1,8 @@
 /**
  * 唤起 app
  *
- * @param {string} links.ulink universal link
- * @param {string} links.schema URL Schemes 
+ * @param {string} links.universalLink universal link
+ * @param {string} links.schemaUrl URL Schemes 
  * @param {string} links.fallbackUrl Android 使用的 fallback url
  * @since 2.0.13
  */
@@ -103,15 +103,15 @@ function createOpenBrowserTips () {
 }
 
 function appCall(links: {[key: string]: string}) {
-  const { ulink, schema, fallbackUrl } = links
+  const { universalLink, schemaUrl, fallbackUrl } = links
   if (isiOS) {
-    // iOS 的 QQ、微博全面禁止 ulink 和 schema，显示外部浏览器打开提示
+    // iOS 的 QQ、微博全面禁止 universal link 和 schema，显示外部浏览器打开提示
     if (isQQBrowser || isWeiboBrowser) {
       createOpenBrowserTips()
-    } else if (ulink) {
-      window.location.href = ulink
+    } else if (universalLink) {
+      window.location.href = universalLink
     } else {
-      openSchema(schema, fallbackUrl)
+      openSchema(schemaUrl, fallbackUrl)
     }
     return
   }
@@ -120,7 +120,7 @@ function appCall(links: {[key: string]: string}) {
   if (isWechatBrowser || isWeiboBrowser) {
     createOpenBrowserTips()
   } else {
-    openSchema(schema, fallbackUrl || ulink)
+    openSchema(schemaUrl, fallbackUrl || universalLink)
   }
 }
 
