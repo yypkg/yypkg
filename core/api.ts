@@ -20,13 +20,13 @@ class API {
     this.$axios = axios
     const axiosJsonp = jsonp
     this.$axios.jsonp = axiosJsonp
-
+    const fetchEngine = (typeof window !== 'undefined') ? window.fetch : {}
     this.$function = {
       'interceptor:before': void 0,
       'interceptor:after': void 0,
       engine: {
         'axios': axios,
-        'fetch': window.fetch
+        'fetch': fetchEngine
       },
       error: void 0
     }
